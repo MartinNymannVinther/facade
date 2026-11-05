@@ -247,11 +247,18 @@ export async function editMessage(ctx: OrgContext, id: string, body: string): Pr
 /** The words go at once; the row stays so a thread under it hangs together. */
 export async function deleteMessage(ctx: OrgContext, id: string): Promise<void> {
   const view = await withOrgContext(ctx, async (tx) => {
-    await ownMessage(tx, ctx, id);
+    const row = await ownMessage(tx, ctx, id);
     await tx
       .update(messages)
       .set({ body: "", attachments: [], deletedAt: new Date() })
       .where(eq(messages.id, id));
+    if (row.attachments.length)
+      await tx.delete(files).where(
+        inArray(
+          files.id,
+          row.attachments.map((a) => a.id),
+        ),
+      );
     return one(tx, id);
   });
   publish(ctx.orgId, { type: "message.changed", message: view });

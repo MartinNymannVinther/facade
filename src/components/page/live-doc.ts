@@ -5,6 +5,7 @@ import {
   removeAwarenessStates,
 } from "y-protocols/awareness";
 import * as Y from "yjs";
+import { park } from "./outbox";
 
 export type SaveState = "saved" | "saving" | "failed";
 
@@ -12,6 +13,8 @@ const fromBase64 = (data: string) => Uint8Array.from(atob(data), (c) => c.charCo
 
 const BATCH_MS = 120;
 const AWARENESS_MS = 150;
+/** Well under the server's ceiling, so a long offline stretch goes in pieces. */
+const CHUNK_BYTES = 500_000;
 
 /**
  * One open page in the browser: the Y.Doc, the wire to the server and the
@@ -44,30 +47,16 @@ export class LiveDoc {
 
   /**
    * The tab is closing or the phone is switching app, and a timer may never
-   * fire again. What is queued leaves now, on a request the browser finishes
-   * even after the page is gone; if the page lives on and it failed, it goes
-   * back in the queue.
+   * fire again. What is queued moves to the outbox, which writes it down
+   * first and sends it after.
    */
   private onLeave = () => {
     if (document.visibilityState === "visible" || this.queue.length === 0) return;
     clearTimeout(this.timer);
-    const body = Y.mergeUpdates(this.queue);
+    park(this.pageId, this.queue);
     this.queue = [];
-    const url = `/api/pages/${this.pageId}/doc?connection=${this.connection ?? ""}`;
-    void fetch(url, { method: "POST", body: body as BodyInit, keepalive: true })
-      .then((answer) => {
-        if (answer.ok) this.onState("saved");
-        else this.requeue(body);
-      })
-      .catch(() => this.requeue(body));
+    this.onState("saved");
   };
-
-  private requeue(body: Uint8Array) {
-    if (this.closed) return;
-    this.queue = [body, ...this.queue];
-    this.onState("failed");
-    this.schedule(1000);
-  }
 
   private onUpdate = (update: Uint8Array, origin: unknown) => {
     if (origin === this) return;
@@ -143,8 +132,12 @@ export class LiveDoc {
   private async flush() {
     if (this.sending || this.queue.length === 0 || this.closed) return;
     this.sending = true;
-    const batch = this.queue;
-    this.queue = [];
+    let size = 0;
+    let take = 0;
+    while (take < this.queue.length && (take === 0 || size < CHUNK_BYTES))
+      size += this.queue[take++]!.length;
+    const batch = this.queue.slice(0, take);
+    this.queue = this.queue.slice(take);
     const url = `/api/pages/${this.pageId}/doc?connection=${this.connection ?? ""}`;
     const body = Y.mergeUpdates(batch);
     // keepalive (64 kB at most) so an edit already on its way outlives the page.
@@ -190,14 +183,10 @@ export class LiveDoc {
     clearTimeout(this.awarenessTimer);
     removeAwarenessStates(this.awareness, [this.doc.clientID], "local");
     this.sendAwareness([this.doc.clientID]);
-    if (this.queue.length) {
-      const body = Y.mergeUpdates(this.queue);
-      void fetch(`/api/pages/${this.pageId}/doc`, {
-        method: "POST",
-        body: body as BodyInit,
-        keepalive: true,
-      }).catch(() => {});
-    }
+    // A batch that failed on its way out is back in the queue by now or
+    // never left; either way the outbox takes it from here.
+    park(this.pageId, this.queue);
+    this.queue = [];
     this.doc.off("update", this.onUpdate);
     this.awareness.off("update", this.onAwareness);
     this.awareness.destroy();

@@ -165,18 +165,43 @@ describe("writing on a page", () => {
   it("refuses noise, an oversized edit, and another workspace's page", async () => {
     const { id } = await page("Værn");
     await expect(appendUpdate(a, id, new Uint8Array([255, 255, 1]))).rejects.toThrow("invalid");
-    await expect(appendUpdate(a, id, new Uint8Array(1_000_001))).rejects.toThrow("invalid");
+    await expect(appendUpdate(a, id, new Uint8Array(2_000_001))).rejects.toThrow("invalid");
     const good = jsonToState(markdownToJson("hej"));
     await expect(appendUpdate(b, id, good)).rejects.toThrow("notFound");
     await expect(loadState(b, id)).rejects.toThrow("notFound");
   });
 
-  it("will not take an edit on a page in the trash", async () => {
+  it("takes words still on their way to a page that was just trashed", async () => {
     const { id } = await page("Væk");
     await trashPage(a, id);
-    await expect(appendUpdate(a, id, jsonToState(markdownToJson("hej")))).rejects.toThrow(
-      "notFound",
-    );
+    await appendUpdate(a, id, jsonToState(markdownToJson("nåede frem")));
+    await restorePage(a, id);
+    expect(textOf(docToJson(buildDoc([await loadState(a, id)])))).toContain("nåede frem");
+  });
+
+  it("is not taken down by well-formed nonsense", async () => {
+    const { id } = await page("Forgiftet", null, "Stadig her");
+    const poison = new Y.Doc();
+    poison.getArray("default").push(["ikke en blok"]);
+    await appendUpdate(a, id, Y.encodeStateAsUpdate(poison));
+
+    const deep = new Y.Doc();
+    deep.transact(() => {
+      let node: Y.XmlFragment = deep.getXmlFragment("default");
+      for (let n = 0; n < 3000; n++) {
+        const next = new Y.XmlElement("blockquote");
+        node.insert(0, [next]);
+        node = next;
+      }
+    });
+    await appendUpdate(a, id, Y.encodeStateAsUpdate(deep));
+
+    await settlePage(a, id);
+    const text = textOf(docToJson(buildDoc([await loadState(a, id)])));
+    expect(text).toContain("Stadig her");
+    await appendUpdate(a, id, typed(await loadState(a, id), "\u0000videre"));
+    await settlePage(a, id);
+    expect(textOf(docToJson(buildDoc([await loadState(a, id)])))).toContain("videre");
   });
 
   it("leaves a version on the first settle and always on a named one", async () => {
@@ -246,6 +271,8 @@ describe("search", () => {
 describe("the Markdown export", () => {
   it("writes the tree as folders, with its pictures, and nothing from elsewhere", async () => {
     const { id: proj } = await createProject(b, { name: "Bog/Plan", description: "", icon: "" });
+    const { id: sly } = await createProject(b, { name: "..", description: "", icon: "" });
+    await createPage(b, { projectId: sly, parentId: null, title: "../../flugt" });
     const top = await createPage(b, {
       projectId: proj,
       parentId: null,
@@ -264,5 +291,6 @@ describe("the Markdown export", () => {
     expect(names).toContain("Bog Plan/Kapitel/Afsnit.md");
     expect(strFromU8(zip["Bog Plan/Kapitel/Afsnit.md"]!)).toContain("Anden tekst");
     expect(names.some((n) => n.startsWith("Ukendt"))).toBe(false);
+    expect(names.filter((n) => n.split("/").includes(".."))).toEqual([]);
   });
 });

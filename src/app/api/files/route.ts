@@ -1,6 +1,7 @@
 import { Refused } from "@/core/action";
 import { requireOrgContext } from "@/core/auth/guard";
 import { crossSite } from "@/core/http/cross-site";
+import { readCapped } from "@/core/http/capped-body";
 import { rateLimit } from "@/core/rate-limit";
 import { MAX_FILE_BYTES, storeFile } from "@/modules/files/service";
 
@@ -11,9 +12,11 @@ export async function POST(request: Request) {
   if (!ctx) return new Response(null, { status: 401 });
   if (!rateLimit(`file:${ctx.userId}`, 60, 60_000).allowed)
     return new Response(null, { status: 429 });
-  if (Number(request.headers.get("content-length") ?? 0) > MAX_FILE_BYTES + 65_536)
-    return new Response(null, { status: 413 });
-  const form = await request.formData().catch(() => null);
+  const body = await readCapped(request, MAX_FILE_BYTES + 65_536);
+  if (!body) return new Response(null, { status: 413 });
+  const form = await new Response(body as BodyInit, { headers: request.headers })
+    .formData()
+    .catch(() => null);
   const file = form?.get("file");
   if (!(file instanceof File)) return new Response(null, { status: 400 });
   try {

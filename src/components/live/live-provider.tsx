@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { drain } from "@/components/page/outbox";
 import { useRouter } from "@/i18n/navigation";
 import type { LiveEvent } from "@/modules/live/events";
 
@@ -47,26 +48,39 @@ export function LiveProvider({ children }: { children: React.ReactNode }) {
       clearTimeout(refresh);
       refresh = setTimeout(() => router.refresh(), 300);
     };
-    const source = new EventSource("/api/live");
-    source.addEventListener("hello", (raw) => {
-      const hello = JSON.parse((raw as MessageEvent<string>).data) as {
-        id: string;
-        online: string[];
+    let source: EventSource;
+    let reopen: ReturnType<typeof setTimeout> | undefined;
+    const open = () => {
+      source = new EventSource("/api/live");
+      source.addEventListener("hello", (raw) => {
+        const hello = JSON.parse((raw as MessageEvent<string>).data) as {
+          id: string;
+          online: string[];
+        };
+        setConnection(hello.id);
+        setOnline(new Set(hello.online));
+        setConnected(true);
+        setGeneration((g) => g + 1);
+        void drain();
+      });
+      source.onmessage = (raw) => {
+        const event = JSON.parse(raw.data) as LiveEvent;
+        if (event.type === "presence") setOnline(new Set(event.online));
+        if (event.type === "tree" || event.type === "inbox" || event.type === "message.new")
+          redraw();
+        for (const listener of listeners.current) listener(event);
       };
-      setConnection(hello.id);
-      setOnline(new Set(hello.online));
-      setConnected(true);
-      setGeneration((g) => g + 1);
-    });
-    source.onmessage = (raw) => {
-      const event = JSON.parse(raw.data) as LiveEvent;
-      if (event.type === "presence") setOnline(new Set(event.online));
-      if (event.type === "tree" || event.type === "inbox" || event.type === "message.new") redraw();
-      for (const listener of listeners.current) listener(event);
+      source.onerror = () => {
+        setConnected(false);
+        // A 502 during a deploy closes an EventSource for good; a dropped
+        // connection does not. The first needs a hand.
+        if (source.readyState === EventSource.CLOSED) reopen = setTimeout(open, 3000);
+      };
     };
-    source.onerror = () => setConnected(false);
+    open();
     return () => {
       clearTimeout(refresh);
+      clearTimeout(reopen);
       source.close();
     };
   }, [router]);

@@ -28,6 +28,30 @@ A file removed from a page or left behind by an unsent message stays in
 `files`, counted against the workspace's 2 GB. Finding orphans means reading
 every document.
 
+## Filling the workspace
+
+One member can use up the workspace's 2 GB in minutes, and there is no way to
+delete a single file from the interface. At three colleagues that is a
+conversation, not a threat; a larger workspace needs a quota per person.
+
+## The Markdown export is built in memory
+
+`exportMarkdownZip` holds every file at once on the one process. It is rate
+limited and files are stored uncompressed, but a workspace near its 2 GB needs
+a streaming zip.
+
+## A bad update reaches open editors first
+
+Reads repair a document (ADR 0011), but a browser already on the page gets the
+update live and may have to reload. Comes with trusting members; a server that
+inspected the merged document on every edit would close it.
+
+## Text in the outbox
+
+What could not be sent stays in the browser's localStorage until the server
+takes it, for at most 14 days, also after signing out. On a shared computer
+that is somebody's half-written paragraph.
+
 ## The sidebar redraws on the server
 
 A new message or a moved page asks the server to draw the shell again, at most

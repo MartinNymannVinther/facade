@@ -1,5 +1,6 @@
 import { requireOrgContext } from "@/core/auth/guard";
 import { crossSite } from "@/core/http/cross-site";
+import { readCapped } from "@/core/http/capped-body";
 import { rateLimit } from "@/core/rate-limit";
 import { ownConnection, publishToPage } from "@/modules/live/hub";
 
@@ -19,9 +20,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   if (!connection || connection.pageId !== pageId) return new Response(null, { status: 409 });
   if (!rateLimit(`aware:${ctx.userId}`, 120, 1000 * 10).allowed)
     return new Response(null, { status: 429 });
-  const bytes = Buffer.from(await request.arrayBuffer());
-  if (bytes.length === 0 || bytes.length > MAX_BYTES) return new Response(null, { status: 413 });
-  const data = bytes.toString("base64");
+  const bytes = await readCapped(request, MAX_BYTES);
+  if (!bytes?.length) return new Response(null, { status: 413 });
+  const data = Buffer.from(bytes).toString("base64");
   publishToPage(ctx.orgId, pageId, { type: "doc.awareness", pageId, data, from: id }, id);
   return new Response(null, { status: 204 });
 }

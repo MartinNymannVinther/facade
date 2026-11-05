@@ -37,8 +37,18 @@ write a row per keystroke, each holding the document. So:
   the meta-test, with this reason.
 - `page_versions` is the row the log follows: who changed a page, at the
   grain a person asks about it.
-- `audit_redact` also removes `state`, `bytes`, `body` and `search`, so the
-  append-only log never keeps the words of a message somebody deleted.
+- `audit_redact` also removes `state`, `bytes`, `body`, `search`, `title`,
+  `topic` and `attachments`, so the append-only log never keeps the words of
+  something somebody deleted. Names of projects, channels and files stay, since
+  `name` is also what makes the foundation's rows readable.
+
+## A member's bytes are data
+
+An update can be well-formed and still not be a page: a plain value among the
+blocks, or a tree a thousand levels deep. Its shape cannot be judged from its
+bytes, because an item that continues another carries no parent. So every read
+repairs the document before anything looks at it, and a settle stores the
+repair. One bad update costs nothing but itself.
 
 ## Trade-offs accepted
 

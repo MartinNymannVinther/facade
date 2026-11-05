@@ -200,7 +200,7 @@ LANGUAGE sql IMMUTABLE AS $$
       'password', 'token', 'secret', 'backup_codes',
       'access_token', 'refresh_token', 'id_token', 'value',
       'key_hash', 'token_hash', 'api_key_cipher',
-      'state', 'bytes', 'body', 'search'
+      'state', 'bytes', 'body', 'search', 'title', 'topic', 'attachments'
     ]
   END
 $$;

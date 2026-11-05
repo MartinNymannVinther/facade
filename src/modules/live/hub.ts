@@ -102,6 +102,10 @@ export function watchPage(connection: Connection, pageId: string | null): string
   return users;
 }
 
+export function streamsOf(orgId: string, userId: string): number {
+  return inOrg(orgId).filter((c) => c.userId === userId).length;
+}
+
 export function presence(orgId: string): string[] {
   return onlineIn(orgId);
 }

@@ -121,8 +121,8 @@ async function main(): Promise<void> {
       console.log("Adgangskoden er opdateret.");
     } else {
       await pool.query(
-        `insert into accounts (id, issuer, account_id, provider_id, user_id, password, created_at, updated_at)
-         values ($1, 'local:credential', $2, 'credential', $2, $3, now(), now())`,
+        `insert into accounts (id, account_id, provider_id, user_id, password, created_at, updated_at)
+         values ($1, $2, 'credential', $2, $3, now(), now())`,
         [randomBytes(16).toString("hex"), userId, hash],
       );
       console.log("Adgangskoden er oprettet.");

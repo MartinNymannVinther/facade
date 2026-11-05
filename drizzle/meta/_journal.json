@@ -29,6 +29,13 @@
       "when": 1793896894040,
       "tag": "0003_product_rls_audit",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793899329224,
+      "tag": "0004_better_auth_account_identity",
+      "breakpoints": true
     }
   ]
 }

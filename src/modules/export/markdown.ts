@@ -1,4 +1,4 @@
-import { strToU8, zipSync } from "fflate";
+import { strToU8, zipSync, type Zippable } from "fflate";
 import { asc, eq, isNull } from "drizzle-orm";
 import { channels, files, messages, pages, projects, users } from "@/core/db/schema";
 import { withOrgContext, type OrgContext } from "@/core/db/tenant";
@@ -16,6 +16,7 @@ import { loadJson } from "@/modules/pages/sync";
 function safe(name: string, fallback: string): string {
   const clean = name
     .replace(/[/\\:*?"<>|\u0000-\u001f]/g, " ")
+    .replace(/^[\s.]+/, "")
     .trim()
     .slice(0, 80);
   return clean || fallback;
@@ -26,6 +27,16 @@ function unique(taken: Set<string>, wanted: string): string {
   for (let n = 2; taken.has(name.toLowerCase()); n++) name = `${wanted} (${n})`;
   taken.add(name.toLowerCase());
   return name;
+}
+
+/** One page that cannot be read must not cost the way out for all the others. */
+async function pageMarkdown(ctx: OrgContext, id: string): Promise<string> {
+  try {
+    return jsonToMarkdown(await loadJson(ctx, id));
+  } catch (error) {
+    console.error("export: page could not be read", id, error);
+    return "";
+  }
 }
 
 export async function exportMarkdownZip(ctx: OrgContext): Promise<Uint8Array> {
@@ -57,13 +68,15 @@ export async function exportMarkdownZip(ctx: OrgContext): Promise<Uint8Array> {
     files: await tx.select().from(files),
   }));
 
-  const zip: Record<string, Uint8Array> = {};
+  const zip: Zippable = {};
   const fileName = new Map<string, string>();
   const fileNames = new Set<string>();
   for (const file of data.files) {
     const name = unique(fileNames, safe(file.name, file.id));
     fileName.set(file.id, name);
-    zip[`filer/${name}`] = new Uint8Array(file.bytes);
+    // Stored as they are: images do not shrink, and deflating them is what
+    // would hold the one process up.
+    zip[`filer/${name}`] = [new Uint8Array(file.bytes), { level: 0 }];
   }
 
   const relink = (markdown: string, depth: number) =>
@@ -80,7 +93,7 @@ export async function exportMarkdownZip(ctx: OrgContext): Promise<Uint8Array> {
       const level = data.pages.filter((p) => p.projectId === project.id && p.parentId === parentId);
       for (const page of level) {
         const name = unique(taken, safe(page.title, "Uden titel"));
-        const body = jsonToMarkdown(await loadJson(ctx, page.id));
+        const body = await pageMarkdown(ctx, page.id);
         zip[`${folder}/${name}.md`] = strToU8(`# ${page.title}\n\n${relink(body, depth)}\n`);
         await walk(page.id, `${folder}/${name}`, depth + 1);
       }
@@ -88,6 +101,7 @@ export async function exportMarkdownZip(ctx: OrgContext): Promise<Uint8Array> {
     await walk(null, root, 1);
   }
 
+  const channelNames = new Set<string>();
   for (const channel of data.channels) {
     const said = data.messages.filter((m) => m.channelId === channel.id);
     if (!said.length) continue;
@@ -97,7 +111,9 @@ export async function exportMarkdownZip(ctx: OrgContext): Promise<Uint8Array> {
       (m) =>
         `${m.parentId ? "  ↳ " : ""}[${m.createdAt.toISOString()}] ${m.author ?? "?"}: ${plainMentions(m.body)}`,
     );
-    zip[`kanaler/${safe(label, channel.id)}.txt`] = strToU8(`${lines.join("\n")}\n`);
+    zip[`kanaler/${unique(channelNames, safe(label, channel.id))}.txt`] = strToU8(
+      `${lines.join("\n")}\n`,
+    );
   }
 
   return zipSync(zip, { level: 6 });

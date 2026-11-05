@@ -3,7 +3,7 @@ import { auth } from "@/core/auth/auth";
 import { requireOrgContext } from "@/core/auth/guard";
 import { memberships } from "@/core/db/schema";
 import { withOrgContext, type OrgContext } from "@/core/db/tenant";
-import { dropConnection, openConnection, presence } from "@/modules/live/hub";
+import { dropConnection, openConnection, presence, streamsOf } from "@/modules/live/hub";
 import type { LiveEvent } from "@/modules/live/events";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +11,9 @@ export const dynamic = "force-dynamic";
 const HEARTBEAT_MS = 20_000;
 /** How long somebody signed out or removed can keep listening, at most. */
 const RECHECK_MS = 30_000;
+/** Queued events before a browser that stopped reading is cut off; it reads again on return. */
+const SLOW_READER = 2000;
+const MAX_STREAMS_PER_PERSON = 24;
 
 /**
  * The stream outlives the request that opened it, so what was true then is
@@ -38,6 +41,8 @@ async function stillAllowed(ctx: OrgContext, headers: Headers): Promise<boolean>
 export async function GET(request: Request) {
   const ctx = await requireOrgContext();
   if (!ctx) return new Response(null, { status: 401 });
+  if (streamsOf(ctx.orgId, ctx.userId) >= MAX_STREAMS_PER_PERSON)
+    return new Response(null, { status: 429 });
 
   const encoder = new TextEncoder();
   let cleanup = () => {};
@@ -47,6 +52,7 @@ export async function GET(request: Request) {
       let closed = false;
       const write = (chunk: string) => {
         if (closed) return;
+        if ((controller.desiredSize ?? 0) < -SLOW_READER) return cleanup();
         try {
           controller.enqueue(encoder.encode(chunk));
         } catch {

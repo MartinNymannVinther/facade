@@ -35,13 +35,17 @@ export function AiPanel({
   const [busy, setBusy] = useState<Task | null>(null);
   const [proposal, setProposal] = useState<{ task: Task; text: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [selection, setSelection] = useState<{ from: number; to: number } | null>(null);
+  const [selection, setSelection] = useState<{
+    from: number;
+    to: number;
+    text: string;
+  } | null>(null);
 
   async function ask(task: Task) {
     if (!editor) return;
     const { from, to, empty } = editor.state.selection;
     const text = empty ? "" : editor.state.doc.textBetween(from, to, "\n");
-    setSelection(empty ? null : { from, to });
+    setSelection(empty ? null : { from, to, text });
     setBusy(task);
     setProposal(null);
     setError(null);
@@ -63,7 +67,13 @@ export function AiPanel({
     if (!editor || !proposal) return;
     await live.flushed();
     await markVersionAction({ id: pageId, reason: "ai" });
-    const range = replace ? selection : null;
+    // A colleague may have moved the text while the model thought. Replacing
+    // only what is still there; otherwise the proposal goes at the end.
+    const intact =
+      selection &&
+      selection.to <= editor.state.doc.content.size &&
+      editor.state.doc.textBetween(selection.from, selection.to, "\n") === selection.text;
+    const range = replace && intact ? selection : null;
     const chain = editor.chain().focus();
     if (range)
       chain

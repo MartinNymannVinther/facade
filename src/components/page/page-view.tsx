@@ -71,6 +71,7 @@ export function PageView({ page, openTalk }: { page: PageInfo; openTalk: boolean
   const { me, people, tree, aiReady } = useWorkspace();
   const { connection, generation } = useLive();
   const [save, setSave] = useState<SaveState>("saved");
+  const [doc, setDoc] = useState<LiveDoc | null>(null);
   const [live, setLive] = useState<LiveDoc | null>(null);
   const [missing, setMissing] = useState(false);
   const [here, setHere] = useState<string[]>([]);
@@ -82,44 +83,61 @@ export function PageView({ page, openTalk }: { page: PageInfo; openTalk: boolean
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const saveTitle = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const unsavedTitle = useRef<string | null>(null);
-  const loaded = useRef(0);
 
   useEffect(() => {
-    const doc = new LiveDoc(page.id, setSave);
-    let gone = false;
-    void doc.load().then((ok) => {
-      if (gone) return;
-      if (ok) setLive(doc);
-      else setMissing(true);
-    });
+    const created = new LiveDoc(page.id, setSave);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- a Y.Doc lives in the browser only, for this mount
+    setDoc(created);
     const warn = (e: BeforeUnloadEvent) => {
-      if (doc.pending) e.preventDefault();
+      if (created.pending) e.preventDefault();
     };
     window.addEventListener("beforeunload", warn);
     return () => {
-      gone = true;
       window.removeEventListener("beforeunload", warn);
+      setDoc(null);
       setLive(null);
       setEditor(null);
-      doc.destroy();
+      created.destroy();
     };
   }, [page.id]);
 
-  // On every (re)connection: join the page, and read what the gap held.
+  // On every (re)connection: first join the page, then read it. In that
+  // order, or an edit landing between the two reaches this tab by neither
+  // road, and everything after it waits behind the gap.
   useEffect(() => {
-    if (!live || !connection) return;
-    void live.attach(connection).then(setHere);
-    if (loaded.current !== 0 && loaded.current !== generation) void live.load();
-    loaded.current = generation;
-  }, [live, connection, generation]);
+    if (!doc) return;
+    let gone = false;
+    const read = () =>
+      doc.load().then((ok) => {
+        if (gone) return;
+        if (ok) setLive(doc);
+        else setMissing(true);
+      });
+    if (!connection) {
+      // The stream is late or down: the page can still be read and written.
+      const timer = setTimeout(() => void read(), 2500);
+      return () => {
+        gone = true;
+        clearTimeout(timer);
+      };
+    }
+    void doc.attach(connection).then((users) => {
+      if (gone) return;
+      setHere(users);
+      void read();
+    });
+    return () => {
+      gone = true;
+    };
+  }, [doc, connection, generation]);
 
   useLiveEvent((event) => {
-    if (event.type === "doc.update" && event.pageId === page.id) live?.receiveUpdate(event.data);
+    if (event.type === "doc.update" && event.pageId === page.id) doc?.receiveUpdate(event.data);
     else if (event.type === "doc.awareness" && event.pageId === page.id)
-      live?.receiveAwareness(event.data);
+      doc?.receiveAwareness(event.data);
     else if (event.type === "page.presence" && event.pageId === page.id) {
       setHere(event.users);
-      live?.announce();
+      doc?.announce();
     } else if (
       event.type === "page.title" &&
       event.pageId === page.id &&
@@ -217,7 +235,7 @@ export function PageView({ page, openTalk }: { page: PageInfo; openTalk: boolean
               </span>
             ))}
           </nav>
-          <div className="flex items-center -space-x-1.5" aria-label={t("hereNow")}>
+          <div role="group" className="flex items-center -space-x-1.5" aria-label={t("hereNow")}>
             {present.map((person) => (
               <span key={person.id} className="ring-background rounded-full ring-2">
                 <PersonDot person={person} size={26} />

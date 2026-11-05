@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import * as Y from "yjs";
 import { Refused } from "@/core/action";
 import {
@@ -23,9 +23,11 @@ import { buildDoc, docToJson, encodeDoc, isValidUpdate, mentionsOf, textOf } fro
  * a settle happening; an unsettled log is still the page.
  */
 
-export const MAX_UPDATE_BYTES = 1_000_000;
+export const MAX_UPDATE_BYTES = 2_000_000;
 export const VERSION_EVERY_MS = 10 * 60 * 1000;
 const SETTLE_AFTER_MS = 2500;
+/** Somebody who never pauses still gets folded. */
+const SETTLE_AT_MOST_MS = 10_000;
 const VERSIONS_KEPT = 200;
 
 type Parts = { state: Buffer | null; updates: { seq: number; update: Buffer }[] };
@@ -34,27 +36,25 @@ type Parts = { state: Buffer | null; updates: { seq: number; update: Buffer }[] 
  * The document and its log in one statement, so a settle running beside us
  * cannot have moved updates out of the log and not yet into what we read.
  */
-async function readParts(tx: AppTransaction, pageId: string): Promise<Parts | null> {
+async function readParts(
+  tx: AppTransaction,
+  pageId: string,
+  includeTrashed = false,
+): Promise<Parts | null> {
   const result = await tx.execute(sql`
     select d.state as state,
-      coalesce(
-        (select json_agg(json_build_object('seq', u.seq, 'update', encode(u.update, 'base64')) order by u.seq)
-         from page_updates u where u.page_id = g.id),
-        '[]'::json
-      ) as updates
+      (select array_agg(u.seq order by u.seq) from page_updates u where u.page_id = g.id) as seqs,
+      (select array_agg(u.update order by u.seq) from page_updates u where u.page_id = g.id) as updates
     from pages g
     left join page_documents d on d.page_id = g.id
-    where g.id = ${pageId} and g.deleted_at is null
+    where g.id = ${pageId} and (g.deleted_at is null or ${includeTrashed}::boolean)
   `);
   const row = result.rows[0] as
-    { state: Buffer | null; updates: { seq: number; update: string }[] } | undefined;
+    { state: Buffer | null; seqs: string[] | null; updates: Buffer[] | null } | undefined;
   if (!row) return null;
   return {
     state: row.state,
-    updates: row.updates.map((u) => ({
-      seq: Number(u.seq),
-      update: Buffer.from(u.update, "base64"),
-    })),
+    updates: (row.updates ?? []).map((update, i) => ({ seq: Number(row.seqs![i]), update })),
   };
 }
 
@@ -83,10 +83,9 @@ export async function appendUpdate(
 ): Promise<void> {
   if (update.length > MAX_UPDATE_BYTES || !isValidUpdate(update)) throw new Refused("invalid");
   await withOrgContext(ctx, async (tx) => {
-    const [page] = await tx
-      .select({ id: pages.id })
-      .from(pages)
-      .where(and(eq(pages.id, pageId), isNull(pages.deletedAt)));
+    // A page a colleague just trashed still takes the words on their way to
+    // it: the trash gives pages back, and they should come back whole.
+    const [page] = await tx.select({ id: pages.id }).from(pages).where(eq(pages.id, pageId));
     if (!page) throw new Refused("notFound");
     await tx.insert(pageUpdates).values({
       orgId: ctx.orgId,
@@ -100,19 +99,22 @@ export async function appendUpdate(
   scheduleSettle(ctx, pageId);
 }
 
-const store = globalThis as unknown as {
-  __facadeSettles?: Map<string, ReturnType<typeof setTimeout>>;
-};
+type Pending = { timer: ReturnType<typeof setTimeout>; since: number };
+
+const store = globalThis as unknown as { __facadeSettles?: Map<string, Pending> };
 const settles = (store.__facadeSettles ??= new Map());
 
 function scheduleSettle(ctx: OrgContext, pageId: string): void {
-  clearTimeout(settles.get(pageId));
+  const pending = settles.get(pageId);
+  if (pending) clearTimeout(pending.timer);
+  const since = pending?.since ?? Date.now();
+  const wait = Math.min(SETTLE_AFTER_MS, Math.max(0, since + SETTLE_AT_MOST_MS - Date.now()));
   const timer = setTimeout(() => {
     settles.delete(pageId);
     settlePage(ctx, pageId).catch((error) => console.error("settle failed", pageId, error));
-  }, SETTLE_AFTER_MS);
+  }, wait);
   timer.unref?.();
-  settles.set(pageId, timer);
+  settles.set(pageId, { timer, since });
 }
 
 export type SettleReason = "auto" | "restore" | "ai";
@@ -150,13 +152,12 @@ export async function settlePage(
       .insert(pageDocuments)
       .values({ pageId, orgId: ctx.orgId, ...values })
       .onConflictDoUpdate({ target: pageDocuments.pageId, set: values });
-    if (parts.updates.length)
-      await tx.delete(pageUpdates).where(
-        inArray(
-          pageUpdates.seq,
-          parts.updates.map((u) => u.seq),
-        ),
-      );
+    // Exactly the rows read. Not "up to the highest": a lower seq can commit
+    // after a higher one, and would go without having been folded in.
+    if (parts.updates.length) {
+      const seqs = `{${parts.updates.map((u) => u.seq).join(",")}}`;
+      await tx.delete(pageUpdates).where(sql`${pageUpdates.seq} = any(${seqs}::bigint[])`);
+    }
     await cutVersion(tx, ctx, pageId, state, reason);
     const known = new Set(before?.mentions ?? []);
     const fresh = mentions.filter((id) => !known.has(id) && id !== ctx.userId);

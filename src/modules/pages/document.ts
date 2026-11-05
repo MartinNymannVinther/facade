@@ -12,6 +12,11 @@ import { contentExtensions } from "./extensions";
 
 export const FRAGMENT = "default";
 
+const MAX_DEPTH = 64;
+/** What search keeps of a page; Postgres caps a tsvector at 1 MB. */
+const MAX_TEXT = 300_000;
+const MAX_MENTIONS = 200;
+
 const EMPTY: JSONContent = { type: "doc", content: [{ type: "paragraph" }] };
 
 let cached: { schema: ReturnType<typeof getSchema>; markdown: MarkdownManager } | null = null;
@@ -34,9 +39,31 @@ export function isValidUpdate(bytes: Uint8Array): boolean {
   }
 }
 
+/**
+ * Removes what a page cannot hold: a plain value among the blocks, a tree
+ * deeper than anybody writes. An update can be well-formed and still be
+ * that, and the shape of one cannot be judged from its bytes alone, so every
+ * read repairs instead: one member's bad bytes never take a page down.
+ */
+function sanitize(doc: Y.Doc): void {
+  doc.transact(() => {
+    const stack: [Y.XmlFragment, number][] = [[doc.getXmlFragment(FRAGMENT), 0]];
+    while (stack.length) {
+      const [node, depth] = stack.pop()!;
+      const children = node.toArray() as unknown[];
+      for (let i = children.length - 1; i >= 0; i--) {
+        const child = children[i];
+        if (child instanceof Y.XmlElement && depth < MAX_DEPTH) stack.push([child, depth + 1]);
+        else if (!(child instanceof Y.XmlText)) node.delete(i, 1);
+      }
+    }
+  });
+}
+
 export function buildDoc(parts: Uint8Array[]): Y.Doc {
   const doc = new Y.Doc();
   for (const part of parts) Y.applyUpdate(doc, part);
+  sanitize(doc);
   return doc;
 }
 
@@ -97,7 +124,8 @@ export function textOf(json: JSONContent): string {
   };
   walk(json);
   flush();
-  return lines.join("\n");
+  // Postgres text cannot hold a NUL, and a document can.
+  return lines.join("\n").replaceAll("\u0000", "").slice(0, MAX_TEXT);
 }
 
 /** Everybody named in a document, once each. */
@@ -108,5 +136,5 @@ export function mentionsOf(json: JSONContent): string[] {
     node.content?.forEach(walk);
   };
   walk(json);
-  return [...found];
+  return [...found].slice(0, MAX_MENTIONS);
 }

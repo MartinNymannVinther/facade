@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { requireOrgContext } from "@/core/auth/guard";
+import { rateLimit } from "@/core/rate-limit";
 import { exportFileName, exportToJson, exportToXlsx } from "@/modules/export/format";
 import { exportMarkdownZip } from "@/modules/export/markdown";
 import { buildOrgExport } from "@/modules/export/service";
@@ -18,6 +19,12 @@ export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
   const ctx = await requireOrgContext();
   if (!ctx) return new Response("Unauthorized", { status: 401 });
+
+  // A download is a person's click. An image tag on a page pointing here is
+  // every reader of that page starting the heaviest request there is.
+  if (request.headers.get("sec-fetch-dest") === "image") return new Response(null, { status: 403 });
+  if (!rateLimit(`export:${ctx.orgId}`, 6, 10 * 60_000).allowed)
+    return new Response(null, { status: 429 });
 
   const format = request.nextUrl.searchParams.get("format");
   const wantsJson = format === "json";

@@ -96,6 +96,18 @@ await editor(kasper).getByText("Kasper skriver samtidig på sin linje.").waitFor
 const text = await editor(kasper).innerText();
 if ((text.match(/Fælles tekst/g) ?? []).length !== 1) throw new Error(`doubled text: ${text}`);
 
+step("a dropped connection costs a delay, not a word");
+await kasper.reload();
+await editor(kasper).waitFor();
+await editor(martin).click();
+await martin.keyboard.press("End");
+await martin.context().setOffline(true);
+await martin.keyboard.type(" Skrevet uden net.");
+await martin.getByText("Ikke gemt endnu").waitFor({ timeout: 15_000 });
+await martin.context().setOffline(false);
+await editor(kasper).getByText("Skrevet uden net.").waitFor({ timeout: 40_000 });
+await martin.getByText("Gemt").waitFor({ timeout: 20_000 });
+
 step("a slash command and a mention");
 await editor(martin).locator("p").last().click();
 await martin.keyboard.press("End");
