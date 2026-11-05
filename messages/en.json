@@ -12,8 +12,8 @@
       "apply": "Apply for access"
     },
     "hero": {
-      "title": "The portfolio in one rhythm.",
-      "subtitle": "Facade is portfolio management for small and mid-sized organizations: write the development initiatives down, prioritize them in one order, plan the quarter within the free capacity, and show the way ahead on a roadmap. Open source, Danish and in the EU.",
+      "title": "The work behind the facade.",
+      "subtitle": "Facade is one shared place for a small team: projects with pages you write on at the same time, and the conversation right beside them. Open source, Danish and in the EU.",
       "ctaPrimary": "Create account",
       "ctaSecondary": "Log in",
       "trust": "AGPL-3.0 · Passkeys and two-factor sign-in · Your data out in one click",
@@ -21,12 +21,12 @@
       "ctaDemo": "Try the demo"
     },
     "values": {
-      "aiTitle": "From idea to quarter",
-      "aiBody": "Projects, tasks and experiments described so they can be weighed against each other, prioritized with WSJF or by hand, and broken into deliverables the teams can reach in the quarter. The AI can sharpen a description or propose deliverables, but a person decides.",
+      "aiTitle": "Write together, talk together",
+      "aiBody": "Pages update as you write, and the conversation sits beside the work instead of in another app. The AI can suggest text, but a person puts it in.",
       "dataTitle": "Your data, always",
-      "dataBody": "The whole portfolio can be downloaded as a spreadsheet and JSON in one click, and the workspace can be deleted completely.",
+      "dataBody": "The whole workspace can be downloaded as Markdown, a spreadsheet and JSON in one click, and deleted completely again.",
       "securityTitle": "Secure from day one",
-      "securityBody": "Workspaces are separated in the database, not only in the code. Passkeys, two-factor sign-in and a log that cannot be edited."
+      "securityBody": "Workspaces are separated in the database, not just in the code. Passkeys, two-factor sign-in and a log that cannot be edited."
     },
     "status": "Version {version} · built to be used",
     "family": {
@@ -40,17 +40,17 @@
     },
     "demo": {
       "title": "Try it without creating anything",
-      "body": "You get your own workspace with a portfolio in full swing: initiatives, a committed quarter and a roadmap. It is deleted after {hours, plural, one {# hour} other {# hours}}. No email, no sign-up.",
+      "body": "You get your own workspace with a project under way: pages, subpages and a channel. It is deleted after {hours, plural, one {# hour} other {# hours}}. No email, no sign-up.",
       "privacy": "Do not put real personal data in the demo. It passes through a database and possibly a language model on the way.",
       "cta": "Open a demo"
     },
     "featuresLabel": "What you get",
     "features": {
-      "initiatives": "Projects, tasks and experiments",
-      "prioritize": "One prioritized backlog, with WSJF or by hand",
-      "plan": "Quarter plan with deliverables and capacity",
-      "roadmap": "A roadmap that looks nine months ahead",
-      "decisions": "Status and a decision log",
+      "pages": "Projects with pages and subpages in a tree",
+      "together": "Several people writing on one page at once",
+      "channels": "Channels, threads and reactions",
+      "talk": "A conversation beside every page",
+      "search": "Search across everything, history and a trash",
       "model": "AI at Mistral in the EU or Ollama on your own machine"
     }
   },
@@ -145,13 +145,7 @@
       "settings": "Settings",
       "skipToContent": "Skip to content",
       "hideMenu": "Hide the menu",
-      "showMenu": "Show the menu",
-      "overview": "Overview",
-      "initiatives": "Initiatives",
-      "prioritize": "Prioritization",
-      "plan": "Quarter plan",
-      "roadmap": "Roadmap",
-      "decisions": "Decisions"
+      "showMenu": "Show the menu"
     },
     "orgSwitcher": {
       "label": "Workspace",
@@ -233,16 +227,19 @@
       "title": "Data and export",
       "subtitle": "Take a complete copy of everything this workspace holds.",
       "xlsxTitle": "Spreadsheet",
-      "xlsxBody": "One file with a tab per kind of data: initiatives, status, goals, quarter plans, deliverables, teams, capacity, decisions and history. For yourselves, or for anyone who needs to look without knowing Facade.",
+      "xlsxBody": "One file with a tab per kind of data: projects, pages, page texts, channels, messages and the audit trail. It opens in Excel, Numbers and LibreOffice.",
       "xlsxAction": "Download spreadsheet",
       "jsonTitle": "Machine-readable copy",
-      "jsonBody": "The same data as JSON, with every id kept. It is the file that lets you move to something other than Facade without losing the links between initiatives, quarters and deliverables.",
+      "jsonBody": "The same data as JSON, with every id kept. It is the file that lets you move to another installation or to something else entirely.",
       "jsonAction": "Download JSON",
       "sheetsLabel": "Tabs in the file (named in Danish, as the file writes them):",
       "membersSheet": "Brugere",
       "notBackupTitle": "This is not a backup.",
       "notBackupBody": "An export can be read but not restored, and it is only as fresh as the day you downloaded it. The night's encrypted dump is what saves you when the database is gone.",
-      "privacy": "The export holds the workspace's whole portfolio and its history. Passwords, passkeys and the key to the workspace's language model never go with it. That you downloaded the file is written in the audit trail."
+      "privacy": "The export holds the workspace's whole content and history. Passwords, passkeys and keys are not in it.",
+      "mdTitle": "Markdown with files",
+      "mdBody": "A zip file with a folder per project, a file per page, the channels as text and every file. It opens without Facade, and it is the one you will want to read in ten years.",
+      "mdCta": "Download Markdown"
     }
   },
   "settings": {
@@ -254,10 +251,7 @@
       "access": "Access",
       "workspace": "Workspace",
       "ai": "AI",
-      "data": "Data",
-      "portfolio": "Portfolio",
-      "goals": "Goals",
-      "teams": "Teams"
+      "data": "Data"
     },
     "access": {
       "title": "Access to this installation",
@@ -305,7 +299,7 @@
       },
       "delete": {
         "title": "Delete the workspace",
-        "body": "Everything in the workspace goes: every member's conversations and files, roles, tasks, and the whole audit trail about them. It cannot be undone.",
+        "body": "Everything in the workspace goes: every project, page, message, file, role, and the whole audit trail about them. It cannot be undone.",
         "exportFirst": "Take an export first if you want to keep anything. It is under Data.",
         "typeName": "Type {name} to confirm",
         "action": "Delete the workspace permanently",
@@ -366,7 +360,7 @@
       "messageLength": "Characters in a message, at most",
       "principlesTitle": "How Facade uses AI",
       "principleDecides": "The AI answers, the person decides. The model writes an answer; it never sends anything out of the house, never deletes anything and changes nothing unless you do.",
-      "principleUndo": "Every conversation is your own. You can delete it, and you can take it out.",
+      "principleUndo": "A suggestion from the model reaches the page only when you say yes, and the history can undo it.",
       "principleData": "What you write, and what your documents contain, is sent to the model as data, never as instructions. The system prompt and the roles live on the server, where the administrator sets them.",
       "principleSovereign": "The model can be swapped, including for a local one. Who can see what is listed in docs/subprocessors.md.",
       "test": "Test the connection",
@@ -383,7 +377,7 @@
       "failWhereToLook": "The details are in the server log.",
       "testNotAllowed": "Only the owner or an administrator can test the connection.",
       "withoutTitle": "Without a model",
-      "withoutBody": "Facade is built around the conversation: without a model you can still see your conversations, take them out and edit the workspace's roles and tasks, but the writing field says so plainly, and nothing breaks.",
+      "withoutBody": "Without a model everything else works: pages, channels, search and export. Only the suggestion buttons are gone.",
       "setupEuComment": "hosted in the EU (Mistral)",
       "setupLocalComment": "or locally (Ollama)",
       "setupKeyPlaceholder": "your-key-here",
@@ -392,18 +386,18 @@
     },
     "members": {
       "title": "Members",
-      "body": "Everyone in the workspace has their own conversations, which nobody else can see. Owners and admins can invite and remove members and edit roles and tasks.",
+      "body": "Everybody in the workspace can read and write everything in it. Owners and admins can invite and remove members and change roles.",
       "name": "Name",
       "email": "E-mail",
       "role": "Role",
       "you": "(you)",
       "remove": "Remove",
       "removeTitle": "Remove {name} from the workspace?",
-      "removeBody": "The person loses access immediately. Their conversations and files go with the account if it is deleted; otherwise they stay, unseen by anyone else.",
+      "removeBody": "The person loses access at once. What they wrote stays.",
       "removeConfirm": "Remove the member",
       "leave": "Leave the workspace",
       "leaveTitle": "Leave the workspace?",
-      "leaveBody": "You lose access to the workspace and your conversations in it. An owner or admin can invite you again.",
+      "leaveBody": "You lose access to the workspace. An owner or admin can invite you again.",
       "leaveConfirm": "Leave",
       "inviteTitle": "Invite a colleague",
       "inviteBody": "Type the address and you get a link. Send it yourself, the way you talk to each other anyway. The link is for that address only and lasts 48 hours.",
@@ -424,89 +418,6 @@
         "invalid": "Type a valid e-mail address.",
         "generic": "That went wrong. Try again."
       }
-    },
-    "portfolio": {
-      "title": "Portfolio",
-      "body": "How the portfolio weighs, counts quarters and shows the roadmap. Applies to the whole workspace.",
-      "scoring": "Assessment",
-      "scoringHint": "The method decides which scores initiatives are weighed on, and how they add up.",
-      "fiscal": "Financial year",
-      "fiscalHint": "The month the year starts in. Quarters count from it: if the year starts in July, July–September is Q1.",
-      "roadmap": "Roadmap",
-      "planned": "Planned quarters",
-      "plannedHint": "Quarters shown as planned, that is from the quarter plans.",
-      "forecast": "Expected quarters",
-      "forecastHint": "Quarters shown after the planned ones, from the initiatives' expected start and end.",
-      "start": "The roadmap starts with",
-      "startCurrent": "The quarter we are in",
-      "startNext": "Next quarter (the one being planned)",
-      "horizon": "The roadmap looks {months} months ahead.",
-      "capacity": "Capacity",
-      "reserved": "Operations by default",
-      "reservedHint": "The share of a team's capacity that goes to operations and other fixed work by default. Can be adjusted per team and quarter.",
-      "percent": "%",
-      "signals": "Signals",
-      "wip": "Limit on initiatives in progress",
-      "wipHint": "The overview warns when more are in progress. 0 means no limit.",
-      "stale": "Status is old after",
-      "staleHint": "Initiatives in progress without a status for this many days show as quiet on the overview.",
-      "days": "days",
-      "save": "Save the settings",
-      "saved": "The settings are saved",
-      "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
-      }
-    },
-    "goals": {
-      "title": "Strategic goals",
-      "body": "Why the organization does things. An initiative can belong to one goal, and the roadmap can be grouped by them. Few and clear goals work best.",
-      "name": "Goal",
-      "namePlaceholder": "E.g. Better self-service for residents",
-      "description": "Description",
-      "add": "Add goal",
-      "added": "The goal is added",
-      "save": "Save",
-      "saved": "The goal is saved",
-      "archive": "Archive",
-      "restore": "Restore",
-      "archived": "Archived",
-      "archivedHint": "Archived goals keep their initiatives but cannot be chosen for new ones.",
-      "empty": "No goals yet.",
-      "moveUp": "Move {name} up",
-      "moveDown": "Move {name} down",
-      "edit": "Edit",
-      "cancel": "Cancel"
-    },
-    "teams": {
-      "title": "Teams",
-      "body": "Teams are the ones doing the work, and they are where capacity comes from. The default capacity applies to every quarter until the quarter plan adjusts it.",
-      "name": "Team",
-      "namePlaceholder": "E.g. Digital",
-      "description": "Description",
-      "capacity": "Capacity per quarter",
-      "capacityHint": "Person-days in an ordinary quarter, before operations. E.g. 4 people × 60 days = 240.",
-      "add": "Add team",
-      "added": "The team is added",
-      "save": "Save",
-      "saved": "The team is saved",
-      "archive": "Archive",
-      "restore": "Restore",
-      "archived": "Archived",
-      "empty": "No teams yet.",
-      "days": "{days, plural, one {# day} other {# days}}",
-      "edit": "Edit",
-      "cancel": "Cancel"
     }
   },
   "demo": {
@@ -519,10 +430,10 @@
     "updated": "Last updated 19 September 2026.",
     "back": "Back",
     "language": "På dansk",
-    "intro": "Facade is an open source tool for portfolio management, run by Haij. This is the agreement between you and us when you use the edition we run. If you run the code yourself, only the licence applies.",
+    "intro": "Facade is an open source tool for working together, run by Haij. This is the agreement, short and in plain words.",
     "what": {
       "title": "What Facade is",
-      "body": "A tool for keeping track of an organization's development initiatives: describing them, prioritizing them, planning quarters and showing a roadmap. Proposals from AI are drafts, not answers."
+      "body": "One shared place for a small team: projects with pages written on together, and channels for the conversation."
     },
     "account": {
       "title": "Accounts and access",
@@ -534,7 +445,7 @@
     },
     "ai": {
       "title": "AI",
-      "body": "If a language model is set up and you ask for a proposal, the initiative's text, the quarter's objective and the teams' names are sent to the model provider. Who that is, is shown under Settings → AI and in the list of subprocessors. Without a language model everything else works as before."
+      "body": "If a language model is set up and you ask for a suggestion, the page's text or the channel's latest messages are sent to the model. The model is Mistral in the EU or one on the installation's own server, and nothing is sent until you ask."
     },
     "leaving": {
       "title": "Leaving",
@@ -588,46 +499,238 @@
   },
   "help": {
     "title": "Help",
-    "intro": "How Facade works, in the rhythm a portfolio lives in.",
+    "intro": "How Facade works.",
     "howToTitle": "How to use the tool",
     "closing": "Something missing here? Write to us, or fix the page yourself: the code is open.",
     "howTo": {
-      "initiatives": {
-        "title": "Initiatives",
-        "body": "Everything the organization could do is written down as initiatives: projects (several teams or quarters), tasks (small, one team in one quarter) and experiments (an assumption tested cheaply). Anyone in the workspace can write one down. It starts as an idea and becomes assessed once it is described well enough: problem, benefit, success criteria and risks."
+      "projects": {
+        "title": "Projects and pages",
+        "body": "A project holds pages and has its own channel. Pages can sit under other pages as deep as you like. Drag a page in the menu to move it, or choose Move in its menu. Subpages come along."
       },
-      "assessment": {
-        "title": "Assessment and score",
-        "body": "An initiative is weighed 1–5 on value, time criticality, risk/opportunity and size. The portfolio's method adds them up: WSJF (value + time + risk divided by size), value divided by size, or no score at all if you would rather prioritize by hand. The method is chosen under Settings → Portfolio."
+      "writing": {
+        "title": "Writing on a page",
+        "body": "Type / to choose a heading, task list, table, image or a link to another page. Select text to make it bold or add a link. Drag an image onto the page, or paste it from the clipboard."
       },
-      "prioritize": {
-        "title": "Prioritization",
-        "body": "The backlog is every open initiative in one order. Portfolio managers (owners and admins) move them by dragging, with the arrows or by typing a place. The score can propose an order, but it does not decide: the proposal is shown, and a person chooses to use it or not."
+      "together": {
+        "title": "Writing together",
+        "body": "Everybody can write on the same page at the same time. You see each other's cursors and everything saves itself. If the connection drops it says Not saved yet and Facade keeps trying; leave the tab open until it is back. Ctrl/⌘+Z undoes your own changes, not your colleague's."
       },
-      "plan": {
-        "title": "Quarter plan",
-        "body": "The quarter's plan takes initiatives in from the backlog, gives each an objective for the quarter and breaks it into deliverables one team can reach. Each team has a capacity in person-days, minus what operations take; the rest is free and is allocated to the deliverables. Over-allocated teams show in red. The plan is a draft until it is committed, and is closed when the quarter is over."
+      "talk": {
+        "title": "Channels and threads",
+        "body": "Every project has a channel, and you can create more. Reply in a thread to keep a subject together. Type @ to mention somebody. Enter sends, Shift+Enter breaks the line. Everybody in the workspace can read every channel; there are no private messages."
       },
-      "roadmap": {
-        "title": "Roadmap",
-        "body": "The roadmap shows the planned quarters as the plans say, and the expected quarters after them as the initiatives themselves expect. By default one planned and two expected, nine months ahead; this is set under Settings → Portfolio. It can be grouped by goal, team or kind and printed."
+      "pageTalk": {
+        "title": "A conversation on a page",
+        "body": "The Conversation button opens a conversation that belongs to the page. Whoever has taken part hears when others write."
       },
-      "status": {
-        "title": "Status and decisions",
-        "body": "The person closest to the work reports status: on track, at risk or off track, with a sentence. The history is kept. The decision log is the portfolio's memory: what was decided, and why. The audit trail remembers everything that changed; the log remembers what was meant."
+      "inbox": {
+        "title": "Inbox and search",
+        "body": "The inbox gathers what is aimed at you: when somebody mentions or answers you. ⌘K or Ctrl+K searches every page and message from anywhere."
+      },
+      "history": {
+        "title": "History and trash",
+        "body": "While you write, a version is kept at most every ten minutes. Under History you can see them and restore one; that happens as an ordinary change, so it can be undone too. A deleted page stays in the trash with everything under it until somebody deletes it for good. An archived project is found in the same place."
       },
       "roles": {
         "title": "Who may do what",
-        "body": "Every member can write and describe initiatives, report status and set a deliverable's status. Owners and admins are portfolio managers: they prioritize, plan the quarter, set capacity, record decisions and change settings, goals and teams."
+        "body": "Every member can read and write everything in the workspace. Owners and admins invite and remove members under Settings → Workspace. Messages can only be edited and deleted by whoever wrote them."
       },
       "ai": {
-        "title": "What the AI may do",
-        "body": "If a language model is set up, it can sharpen an initiative's description and propose deliverables for a quarter. They are always proposals: nothing is saved until a person has chosen and pressed. It never deletes anything and never sends anything out of the house. What you write is treated as data, never as instructions."
+        "title": "AI",
+        "body": "With a language model set up, the Suggestions button can summarize the page, find what is missing, keep writing or make a selection clearer, and What happened? catches you up on a channel. The AI never writes on its own: a suggestion reaches the page only when you ask, and the history can undo it. Without a model everything else works."
       },
       "data": {
         "title": "Your data",
-        "body": "The whole portfolio can be downloaded as a spreadsheet and JSON under Settings → Data. The workspace can be deleted completely, audit trail included."
+        "body": "Under Settings → Data the whole workspace can be downloaded as Markdown with pages, files and conversations, as a spreadsheet and as JSON. One page can be downloaded as Markdown from its menu. The owner can delete the workspace completely."
       }
+    }
+  },
+  "nav": {
+    "search": "Search",
+    "home": "Home",
+    "inbox": "Inbox",
+    "projects": "Projects",
+    "channels": "Channels",
+    "people": "People",
+    "trash": "Trash",
+    "help": "Help",
+    "online": "online",
+    "offline": "not online",
+    "addProject": "New project",
+    "addChannel": "New channel",
+    "addPage": "New page",
+    "addPageTo": "New page in {project}",
+    "addSubpage": "New subpage",
+    "projectName": "What is the project called?",
+    "channelName": "What is the channel called?",
+    "channelTaken": "There is already a channel with that name.",
+    "create": "Create",
+    "noProjects": "No projects yet.",
+    "untitled": "Untitled",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "move": "Move",
+    "moveTitle": "Move “{title}”",
+    "moveHint": "Subpages come along.",
+    "moveTo": "Put it under",
+    "toTrash": "Move to trash",
+    "trashed": "Moved to the trash",
+    "pageMenu": "Options for {title}",
+    "failed": "That did not work. Try again.",
+    "cannotMove": "The page cannot be moved there.",
+    "generalChannel": "general"
+  },
+  "home": {
+    "title": "Home",
+    "projects": "Projects",
+    "recent": "Recently written on",
+    "noRecent": "When somebody writes on a page, it shows up here.",
+    "emptyTitle": "Start with a project",
+    "emptyHint": "A project holds pages and a channel of its own. Invite your colleagues under Settings and you can write together."
+  },
+  "project": {
+    "channel": "Talk in #{name}",
+    "pages": "Pages",
+    "noPages": "There are no pages in the project yet.",
+    "nameLabel": "Project name",
+    "descriptionLabel": "What the project is about",
+    "descriptionPlaceholder": "What is the project about?",
+    "archive": "Archive project",
+    "archiveTitle": "Archive {name}?",
+    "archiveBody": "The project leaves the menu, but nothing is deleted. You find it again under Trash."
+  },
+  "page": {
+    "saving": "Saving",
+    "saved": "Saved",
+    "notSaved": "Not saved yet. Retrying",
+    "breadcrumbs": "Location",
+    "hereNow": "On the page right now",
+    "talk": "Conversation",
+    "history": "History",
+    "ai": "Suggestions",
+    "titleLabel": "Page title",
+    "lastEdited": "Last written on by {name}, {when, date, medium}",
+    "subpages": "Subpages",
+    "gone": "This page no longer exists.",
+    "menu": "Options for {title}",
+    "downloadMarkdown": "Download as Markdown",
+    "talkEmpty": "Nobody has said anything about this page yet.",
+    "talkPlaceholder": "Write a comment",
+    "noHistory": "The history starts when somebody writes on the page.",
+    "restore": "Restore this version",
+    "restored": "The version is restored",
+    "reason": {
+      "restore": "before a restore",
+      "ai": "before an AI suggestion"
+    }
+  },
+  "editor": {
+    "label": "Page content",
+    "placeholder": "Write, or type / to choose",
+    "headingPlaceholder": "Heading",
+    "nobody": "Nobody by that name",
+    "noCommand": "Nothing to choose",
+    "bold": "Bold",
+    "italic": "Italic",
+    "strike": "Strikethrough",
+    "inlineCode": "Code",
+    "link": "Link",
+    "linkPrompt": "Address (empty removes the link)",
+    "uploadFailed": "{name} could not be uploaded. 10 MB at most.",
+    "slash": {
+      "h1": "Large heading",
+      "h2": "Heading",
+      "h3": "Small heading",
+      "todo": "Task list",
+      "bullet": "Bullet list",
+      "ordered": "Numbered list",
+      "quote": "Quote",
+      "code": "Code",
+      "table": "Table",
+      "divider": "Divider",
+      "image": "Image or file",
+      "pageLink": "Link to page"
+    }
+  },
+  "conversation": {
+    "empty": "It is quiet here. Write the first message.",
+    "placeholder": "Write to #{channel}",
+    "replyPlaceholder": "Reply in the thread",
+    "replies": "{count, plural, one {# reply} other {# replies}}",
+    "backToChannel": "Back",
+    "thread": "Thread",
+    "older": "Show older",
+    "deleted": "This message was deleted.",
+    "edited": "(edited)",
+    "formerMember": "Former member",
+    "failed": "The message was not sent. Try again.",
+    "editLabel": "Edit the message",
+    "editHint": "Enter saves, Esc cancels",
+    "react": "React",
+    "reply": "Reply in thread",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete the message?",
+    "attach": "Attach a file",
+    "send": "Send",
+    "mentionList": "People",
+    "removeFile": "Remove {name}",
+    "uploadFailed": "{name} could not be uploaded. 10 MB at most."
+  },
+  "inbox": {
+    "title": "Inbox",
+    "empty": "When somebody mentions or answers you, it shows up here.",
+    "markAll": "Mark all as read",
+    "kind": {
+      "mention": "{actor} mentioned you in {where}",
+      "reply": "{actor} replied in {where}",
+      "page_mention": "{actor} mentioned you on {where}"
+    }
+  },
+  "trash": {
+    "title": "Trash",
+    "empty": "The trash is empty.",
+    "archived": "Archived projects",
+    "restore": "Restore",
+    "purge": "Delete for good",
+    "purgeTitle": "Delete “{title}” for good?",
+    "purgeBody": "The page and everything under it are gone forever. This cannot be undone.",
+    "unarchive": "Bring back"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search pages and messages",
+    "nothing": "Nothing found.",
+    "start": "Type to search.",
+    "onPage": "on a page"
+  },
+  "ai": {
+    "title": "Suggestions",
+    "hint": "The model reads the page and suggests text. Nothing reaches the page until you ask.",
+    "working": "Working…",
+    "proposal": "Suggestion",
+    "insert": "Insert at the end",
+    "replace": "Replace the selection",
+    "discard": "Discard",
+    "placed": "Inserted. The history can undo it.",
+    "catchUp": "What happened?",
+    "keepAsPage": "Keep as a page",
+    "summaryTitle": "Summary of the conversation",
+    "task": {
+      "summarize": "Summarize the page",
+      "tasks": "Find what is missing",
+      "continue": "Keep writing",
+      "improve": "Make the selection clearer"
+    },
+    "error": {
+      "noModel": "No language model is set up. That is done under Settings.",
+      "rateLimited": "The ceiling for model calls is reached. Try again later.",
+      "unreachable": "The model is not answering right now.",
+      "badAnswer": "The model's answer could not be used. Try again.",
+      "generic": "That did not work. Try again.",
+      "notFound": "The page does not exist.",
+      "invalid": "That did not work. Try again.",
+      "unauthorized": "Sign in again."
     }
   }
 }

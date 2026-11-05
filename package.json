@@ -18,6 +18,7 @@
     "db:studio": "drizzle-kit studio",
     "test": "vitest run",
     "test:watch": "vitest",
+    "e2e": "node e2e/collaboration.mjs",
     "script": "tsx"
   },
   "dependencies": {
@@ -72,6 +73,7 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "16.3.5",
     "eslint-config-prettier": "^10.1.8",
+    "playwright": "1.64.1",
     "prettier": "^3.9.6",
     "shadcn": "^4.21.0",
     "tailwindcss": "^4.3.3",

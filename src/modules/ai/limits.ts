@@ -28,7 +28,7 @@ export const MAX_CALLS_PER_INSTALLATION_PER_DAY = env.AI_DAILY_CALL_CAP;
  * initiative, `breakdown` a proposed set of deliverables for a quarter,
  * `test` the connection test under Settings → AI.
  */
-export type AiKind = "sharpen" | "breakdown" | "test";
+export type AiKind = "page" | "channel" | "test";
 
 export class RateLimited extends Error {
   constructor() {

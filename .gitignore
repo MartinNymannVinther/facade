@@ -44,3 +44,4 @@ next-env.d.ts
 # patches passed around by hand
 *.patch
 *.bundle
+e2e/shots/

@@ -1,4 +1,4 @@
-import { FileJson, FileSpreadsheet } from "lucide-react";
+import { FileArchive, FileJson, FileSpreadsheet } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buttonVariants } from "@/components/ui/button";
@@ -33,11 +33,32 @@ export default async function DataExportPage() {
 
       <Card>
         <CardHeader>
+          <CardTitle>{t("mdTitle")}</CardTitle>
+          <CardDescription>{t("mdBody")}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <a
+            href="/api/export?format=markdown"
+            className={cn(buttonVariants({ size: "sm" }), "w-fit")}
+            download
+          >
+            <FileArchive data-slot="icon" />
+            {t("mdCta")}
+          </a>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
           <CardTitle>{t("xlsxTitle")}</CardTitle>
           <CardDescription>{t("xlsxBody")}</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
-          <a href="/api/export" className={cn(buttonVariants({ size: "sm" }), "w-fit")} download>
+          <a
+            href="/api/export"
+            className={cn(buttonVariants({ size: "sm", variant: "outline" }), "w-fit")}
+            download
+          >
             <FileSpreadsheet data-slot="icon" />
             {t("xlsxAction")}
           </a>

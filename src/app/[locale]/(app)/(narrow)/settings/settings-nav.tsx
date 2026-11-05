@@ -6,9 +6,6 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 const ITEMS = [
-  { href: "/settings/portfolio", key: "portfolio" },
-  { href: "/settings/goals", key: "goals" },
-  { href: "/settings/teams", key: "teams" },
   { href: "/settings/workspace", key: "workspace" },
   { href: "/settings/security", key: "security" },
   { href: "/settings/ai", key: "ai" },
@@ -27,9 +24,9 @@ export function SettingsNav({ access }: { access: { pending: number } | null }) 
   const pathname = usePathname();
   const items = access
     ? [
-        ...ITEMS.slice(0, 5),
+        ...ITEMS.slice(0, 2),
         { href: "/settings/access", key: "access" } as const,
-        ...ITEMS.slice(5),
+        ...ITEMS.slice(2),
       ]
     : ITEMS;
 

@@ -7,22 +7,21 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const HOW_TO = [
-  "initiatives",
-  "assessment",
-  "prioritize",
-  "plan",
-  "roadmap",
-  "status",
+  "projects",
+  "writing",
+  "together",
+  "talk",
+  "pageTalk",
+  "inbox",
+  "history",
   "roles",
   "ai",
   "data",
 ] as const;
 
 /**
- * How the tool works, in the rhythm a portfolio lives in: write the
- * initiatives down, weigh them, order them, plan the quarter, show the
- * road ahead, report and decide — then who may do what, what the AI may
- * do, and the way out.
+ * How the tool works: where things live, how to write and talk, what is
+ * kept, who may do what, what the AI may do, and the way out.
  */
 export default async function HelpPage() {
   const t = await getTranslations("help");

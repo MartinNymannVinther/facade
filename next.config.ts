@@ -146,6 +146,9 @@ export function securityHeaders(production: boolean): Array<{ key: string; value
 const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
+  // One copy of Yjs on the server: bundled and external copies do not
+  // recognize each other's types, and the document code depends on that.
+  serverExternalPackages: ["yjs", "y-prosemirror", "y-protocols"],
   // Dev only: `next dev` refuses to serve its own assets to any host but
   // localhost, and a dev server reached from another machine (motor.local)
   // otherwise renders as script-less HTML. Ignored by `next build`.

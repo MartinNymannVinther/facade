@@ -16,7 +16,7 @@ export const aiCalls = pgTable(
     id: domainId("id"),
     orgId: tenant(),
     userId: text("user_id").references(() => users.id, { onDelete: "set null" }),
-    kind: text("kind").notNull(), // draft | split | summary | test
+    kind: text("kind").notNull(), // page | channel | test
     engine: text("engine").notNull().default(""),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },

@@ -28,6 +28,16 @@ export async function createPageAction(raw: unknown) {
   return runAction(raw, NewPage, createPage);
 }
 
+/** A page born with words: an AI summary a person chose to keep. */
+export async function createPageWithTextAction(raw: unknown) {
+  const schema = z.object({
+    projectId: Id,
+    title: z.string().max(300),
+    markdown: z.string().max(20_000),
+  });
+  return runAction(raw, schema, (ctx, i) => createPage(ctx, { ...i, parentId: null }));
+}
+
 export async function updatePageAction(raw: unknown) {
   const schema = PageFields.partial().extend({ id: Id });
   return runAction(raw, schema, (ctx, { id, ...fields }) => updatePage(ctx, id, fields));

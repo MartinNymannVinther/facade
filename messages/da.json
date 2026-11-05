@@ -12,8 +12,8 @@
       "apply": "Ansøg om adgang"
     },
     "hero": {
-      "title": "Porteføljen i én rytme.",
-      "subtitle": "Facade er porteføljestyring til små og mellemstore organisationer: skriv udviklingsinitiativerne ned, prioritér dem i én rækkefølge, læg kvartalets plan inden for den ledige kapacitet, og vis vejen frem på en roadmap. Open source, dansk og i EU.",
+      "title": "Arbejdet bag facaden.",
+      "subtitle": "Facade er et fælles sted til et lille hold: projekter med sider I skriver på samtidig, og samtalen lige ved siden af. Open source, dansk og i EU.",
       "ctaPrimary": "Opret konto",
       "ctaSecondary": "Log ind",
       "trust": "AGPL-3.0 · Passkeys og totrinslogin · Jeres data kan hentes ud med ét klik",
@@ -21,10 +21,10 @@
       "ctaDemo": "Prøv demoen"
     },
     "values": {
-      "aiTitle": "Fra idé til kvartal",
-      "aiBody": "Projekter, opgaver og eksperimenter beskrevet så de kan vejes mod hinanden, prioriteret med WSJF eller i hånden, og brudt ned i leverancer, som teamene kan nå i kvartalet. AI'en kan skærpe en beskrivelse eller foreslå leverancer, men et menneske bestemmer.",
+      "aiTitle": "Skriv sammen, tal sammen",
+      "aiBody": "Siderne opdateres mens I skriver, og samtalen ligger ved siden af arbejdet i stedet for i en anden app. AI'en kan foreslå tekst, men et menneske sætter den ind.",
       "dataTitle": "Jeres data, altid",
-      "dataBody": "Hele porteføljen kan hentes ud som regneark og JSON med ét klik, og arbejdsrummet kan slettes helt igen.",
+      "dataBody": "Hele arbejdsrummet kan hentes ud som Markdown, regneark og JSON med ét klik, og det kan slettes helt igen.",
       "securityTitle": "Sikkerhed fra første dag",
       "securityBody": "Arbejdsrum er adskilt i databasen, ikke kun i koden. Passkeys, totrinslogin og en log der ikke kan redigeres."
     },
@@ -40,17 +40,17 @@
     },
     "demo": {
       "title": "Prøv uden at oprette noget",
-      "body": "Du får dit eget arbejdsrum med en portefølje i fuld gang: initiativer, et besluttet kvartal og en roadmap. Det slettes efter {hours, plural, one {# time} other {# timer}}. Ingen e-mail, ingen tilmelding.",
+      "body": "Du får dit eget arbejdsrum med et projekt i gang: sider, undersider og en kanal. Det slettes efter {hours, plural, one {# time} other {# timer}}. Ingen e-mail, ingen tilmelding.",
       "privacy": "Skriv ikke rigtige personoplysninger i demoen. Den passerer en database og eventuelt en sprogmodel på vejen.",
       "cta": "Åbn en demo"
     },
     "featuresLabel": "Det du får",
     "features": {
-      "initiatives": "Projekter, opgaver og eksperimenter",
-      "prioritize": "Én prioriteret backlog, med WSJF eller i hånden",
-      "plan": "Kvartalsplan med leverancer og kapacitet",
-      "roadmap": "Roadmap, der kan ses ni måneder frem",
-      "decisions": "Status og beslutningslog",
+      "pages": "Projekter med sider og undersider i et træ",
+      "together": "Flere skriver på samme side samtidig",
+      "channels": "Kanaler, tråde og reaktioner",
+      "talk": "En samtale ved siden af hver side",
+      "search": "Søgning i alt, historik og papirkurv",
       "model": "AI hos Mistral i EU eller Ollama på egen maskine"
     }
   },
@@ -145,13 +145,7 @@
       "settings": "Indstillinger",
       "skipToContent": "Spring til indholdet",
       "hideMenu": "Skjul menuen",
-      "showMenu": "Vis menuen",
-      "overview": "Overblik",
-      "initiatives": "Initiativer",
-      "prioritize": "Prioritering",
-      "plan": "Kvartalsplan",
-      "roadmap": "Roadmap",
-      "decisions": "Beslutninger"
+      "showMenu": "Vis menuen"
     },
     "orgSwitcher": {
       "label": "Arbejdsrum",
@@ -233,16 +227,19 @@
       "title": "Data og eksport",
       "subtitle": "Tag en komplet kopi af alt hvad dette arbejdsrum indeholder.",
       "xlsxTitle": "Regneark",
-      "xlsxBody": "Én fil med en fane per type data: initiativer, status, mål, kvartalsplaner, leverancer, teams, kapacitet, beslutninger og historik. Til jer selv, eller til enhver der skal kigge med uden at kende Facade.",
+      "xlsxBody": "Én fil med en fane pr. slags data: projekter, sider, sidetekster, kanaler, beskeder og revisionsspor. Den åbner i Excel, Numbers og LibreOffice.",
       "xlsxAction": "Hent regneark",
       "jsonTitle": "Maskinlæsbar kopi",
-      "jsonBody": "De samme data som JSON, med alle id'er bevaret. Det er den fil der gør, at I kan flytte til noget andet end Facade uden at miste sammenhængen mellem initiativer, kvartaler og leverancer.",
+      "jsonBody": "De samme data som JSON, hvor alle id'er er bevaret. Det er filen, der lader jer flytte til en anden installation eller noget helt andet.",
       "jsonAction": "Hent JSON",
       "sheetsLabel": "Faner i filen:",
       "membersSheet": "Brugere",
       "notBackupTitle": "Det her er ikke en backup.",
       "notBackupBody": "En eksport kan læses, men den kan ikke lægges tilbage, og den er kun så ny som den dag du hentede den. Den dag databasen er væk, er det det natlige krypterede dump der redder dig.",
-      "privacy": "Eksporten indeholder hele arbejdsrummets portefølje og dets historik. Adgangskoder, passkeys og nøglen til arbejdsrummets sprogmodel kommer aldrig med. At du henter filen bliver skrevet i revisionssporet."
+      "privacy": "Eksporten rummer hele arbejdsrummets indhold og historik. Adgangskoder, passkeys og nøgler er ikke med.",
+      "mdTitle": "Markdown med filer",
+      "mdBody": "En zip-fil med en mappe pr. projekt, en fil pr. side, kanalerne som tekst og alle filer. Den kan åbnes uden Facade, og det er den, I vil læse om ti år.",
+      "mdCta": "Hent Markdown"
     }
   },
   "settings": {
@@ -254,10 +251,7 @@
       "access": "Adgang",
       "workspace": "Arbejdsrum",
       "ai": "AI",
-      "data": "Data",
-      "portfolio": "Portefølje",
-      "goals": "Mål",
-      "teams": "Teams"
+      "data": "Data"
     },
     "access": {
       "title": "Adgang til installationen",
@@ -305,7 +299,7 @@
       },
       "delete": {
         "title": "Slet arbejdsrummet",
-        "body": "Alt i arbejdsrummet forsvinder: alle medlemmers samtaler og filer, roller, opgaver og hele revisionssporet om dem. Det kan ikke fortrydes.",
+        "body": "Alt i arbejdsrummet forsvinder: alle projekter, sider, beskeder, filer, roller og hele revisionssporet om dem. Det kan ikke fortrydes.",
         "exportFirst": "Hent en eksport først, hvis du vil beholde noget. Den findes under Data.",
         "typeName": "Skriv {name} for at bekræfte",
         "action": "Slet arbejdsrummet permanent",
@@ -366,7 +360,7 @@
       "messageLength": "Tegn i en besked, højst",
       "principlesTitle": "Sådan bruger Facade AI",
       "principleDecides": "AI'en svarer, mennesket beslutter. Modellen skriver et svar; den sender aldrig noget ud af huset, sletter aldrig noget og ændrer intet uden at du gør det.",
-      "principleUndo": "Hver samtale er din egen. Du kan slette den, og du kan hente den ud.",
+      "principleUndo": "Et forslag fra modellen kommer først på siden, når du siger ja, og historikken kan fortryde det.",
       "principleData": "Det du skriver, og det dine dokumenter indeholder, sendes til modellen som data, aldrig som instruktioner. Systemprompten og rollerne ligger på serveren, hvor administratoren bestemmer dem.",
       "principleSovereign": "Modellen kan skiftes ud, også til en lokal. Hvem der kan se hvad står i docs/subprocessors.md.",
       "test": "Test forbindelsen",
@@ -383,7 +377,7 @@
       "failWhereToLook": "Detaljerne står i serverloggen.",
       "testNotAllowed": "Kun ejeren eller en administrator kan teste forbindelsen.",
       "withoutTitle": "Uden model",
-      "withoutBody": "Facade er bygget om samtalen: uden en model kan du stadig se dine samtaler, hente dem ud og rette arbejdsrummets roller og opgaver, men skrivefeltet siger det ligeud, og intet går i stykker.",
+      "withoutBody": "Uden en model virker alt andet: sider, kanaler, søgning og eksport. Kun knapperne med forslag er væk.",
       "setupEuComment": "EU-hostet (Mistral)",
       "setupLocalComment": "eller lokalt (Ollama)",
       "setupKeyPlaceholder": "din-nøgle-her",
@@ -392,18 +386,18 @@
     },
     "members": {
       "title": "Medlemmer",
-      "body": "Alle i arbejdsrummet har deres egne samtaler, som ingen andre kan se. Ejere og administratorer kan invitere og fjerne medlemmer og rette roller og opgaver.",
+      "body": "Alle i arbejdsrummet kan læse og skrive alt i det. Ejere og administratorer kan invitere og fjerne medlemmer og rette roller.",
       "name": "Navn",
       "email": "E-mail",
       "role": "Rolle",
       "you": "(dig)",
       "remove": "Fjern",
       "removeTitle": "Fjern {name} fra arbejdsrummet?",
-      "removeBody": "Personen mister adgangen med det samme. Personens samtaler og filer slettes sammen med kontoen, hvis den slettes; ellers bliver de stående, men kan ikke ses af andre.",
+      "removeBody": "Personen mister adgangen med det samme. Det, personen har skrevet, bliver stående.",
       "removeConfirm": "Fjern medlemmet",
       "leave": "Forlad arbejdsrummet",
       "leaveTitle": "Forlad arbejdsrummet?",
-      "leaveBody": "Du mister adgangen til arbejdsrummet og dine samtaler i det. En ejer eller administrator kan invitere dig igen.",
+      "leaveBody": "Du mister adgangen til arbejdsrummet. En ejer eller administrator kan invitere dig igen.",
       "leaveConfirm": "Forlad",
       "inviteTitle": "Inviter en kollega",
       "inviteBody": "Skriv adressen, og du får et link. Send det selv, sådan som I ellers taler sammen. Linket gælder kun den adresse og i 48 timer.",
@@ -424,89 +418,6 @@
         "invalid": "Skriv en gyldig e-mailadresse.",
         "generic": "Det gik galt. Prøv igen."
       }
-    },
-    "portfolio": {
-      "title": "Portefølje",
-      "body": "Hvordan porteføljen vurderer, tæller kvartaler og viser roadmappen. Gælder for hele arbejdsrummet.",
-      "scoring": "Vurdering",
-      "scoringHint": "Metoden bestemmer, hvilke scorer initiativerne vurderes på, og hvordan de lægges sammen.",
-      "fiscal": "Regnskabsår",
-      "fiscalHint": "Måneden året starter i. Kvartalerne tælles fra den: starter året i juli, er juli–september K1.",
-      "roadmap": "Roadmap",
-      "planned": "Planlagte kvartaler",
-      "plannedHint": "Kvartaler vist som planlagt, altså fra kvartalsplanerne.",
-      "forecast": "Forventede kvartaler",
-      "forecastHint": "Kvartaler vist efter de planlagte, ud fra initiativernes forventede start og slut.",
-      "start": "Roadmappen starter med",
-      "startCurrent": "Det kvartal vi er i",
-      "startNext": "Næste kvartal (det der planlægges)",
-      "horizon": "Roadmappen viser {months} måneder frem.",
-      "capacity": "Kapacitet",
-      "reserved": "Drift som standard",
-      "reservedHint": "Den andel af et teams kapacitet, der som udgangspunkt går til drift og andet fast arbejde. Kan tilpasses pr. team og kvartal.",
-      "percent": "%",
-      "signals": "Signaler",
-      "wip": "Grænse for initiativer i gang",
-      "wipHint": "Overblikket advarer, når flere er i gang. 0 betyder ingen grænse.",
-      "stale": "Status er gammel efter",
-      "staleHint": "Initiativer i gang uden status i så mange dage vises som stille på overblikket.",
-      "days": "dage",
-      "save": "Gem indstillingerne",
-      "saved": "Indstillingerne er gemt",
-      "months": {
-        "1": "Januar",
-        "2": "Februar",
-        "3": "Marts",
-        "4": "April",
-        "5": "Maj",
-        "6": "Juni",
-        "7": "Juli",
-        "8": "August",
-        "9": "September",
-        "10": "Oktober",
-        "11": "November",
-        "12": "December"
-      }
-    },
-    "goals": {
-      "title": "Strategiske mål",
-      "body": "Hvorfor organisationen gør tingene. Et initiativ kan høre til ét mål, og roadmappen kan grupperes efter dem. Få og klare mål virker bedst.",
-      "name": "Mål",
-      "namePlaceholder": "Fx Bedre selvbetjening for beboerne",
-      "description": "Beskrivelse",
-      "add": "Tilføj mål",
-      "added": "Målet er tilføjet",
-      "save": "Gem",
-      "saved": "Målet er gemt",
-      "archive": "Arkivér",
-      "restore": "Gendan",
-      "archived": "Arkiveret",
-      "archivedHint": "Arkiverede mål beholder deres initiativer, men kan ikke vælges til nye.",
-      "empty": "Ingen mål endnu.",
-      "moveUp": "Flyt {name} op",
-      "moveDown": "Flyt {name} ned",
-      "edit": "Ret",
-      "cancel": "Fortryd"
-    },
-    "teams": {
-      "title": "Teams",
-      "body": "Teams er dem, der udfører arbejdet, og det er her kapaciteten kommer fra. Standardkapaciteten gælder hvert kvartal, indtil kvartalsplanen tilpasser den.",
-      "name": "Team",
-      "namePlaceholder": "Fx Digital",
-      "description": "Beskrivelse",
-      "capacity": "Kapacitet pr. kvartal",
-      "capacityHint": "Persondage i et almindeligt kvartal, før drift. Fx 4 personer × 60 dage = 240.",
-      "add": "Tilføj team",
-      "added": "Teamet er tilføjet",
-      "save": "Gem",
-      "saved": "Teamet er gemt",
-      "archive": "Arkivér",
-      "restore": "Gendan",
-      "archived": "Arkiveret",
-      "empty": "Ingen teams endnu.",
-      "days": "{days, plural, one {# dag} other {# dage}}",
-      "edit": "Ret",
-      "cancel": "Fortryd"
     }
   },
   "demo": {
@@ -519,10 +430,10 @@
     "updated": "Senest opdateret 19. september 2026.",
     "back": "Tilbage",
     "language": "In English",
-    "intro": "Facade er et open source-værktøj til porteføljestyring, drevet af Haij. Det her er aftalen mellem dig og os, når du bruger den udgave vi driver. Kører du koden selv, gælder kun licensen.",
+    "intro": "Facade er et open source-værktøj til samarbejde, drevet af Haij. Det her er aftalen, kort og på almindeligt dansk.",
     "what": {
       "title": "Hvad Facade er",
-      "body": "Et værktøj til at holde styr på en organisations udviklingsinitiativer: beskrive dem, prioritere dem, planlægge kvartaler og vise en roadmap. Forslag fra AI er udkast, ikke facit."
+      "body": "Et fælles sted til et lille hold: projekter med sider, der skrives på samtidig, og kanaler til samtalen."
     },
     "account": {
       "title": "Konto og adgang",
@@ -534,7 +445,7 @@
     },
     "ai": {
       "title": "AI",
-      "body": "Er der sat en sprogmodel op, og beder du om et forslag, sendes initiativets tekst, kvartalets mål og teamenes navne til modeludbyderen. Hvem det er, står under Indstillinger → AI og i listen over underdatabehandlere. Uden en sprogmodel virker alt andet som før."
+      "body": "Er der sat en sprogmodel op, og beder du om et forslag, sendes sidens tekst eller kanalens seneste beskeder til modellen. Modellen er Mistral i EU eller en model på installationens egen server, og intet sendes, før du beder om det."
     },
     "leaving": {
       "title": "At holde op",
@@ -588,46 +499,238 @@
   },
   "help": {
     "title": "Hjælp",
-    "intro": "Sådan virker Facade, i den rytme en portefølje lever i.",
+    "intro": "Sådan virker Facade.",
     "howToTitle": "Sådan bruger du værktøjet",
     "closing": "Mangler der noget her? Skriv til os, eller ret siden selv: koden er åben.",
     "howTo": {
-      "initiatives": {
-        "title": "Initiativer",
-        "body": "Alt det organisationen kunne gøre, skrives ned som initiativer: projekter (flere teams eller kvartaler), opgaver (små, ét team i ét kvartal) og eksperimenter (en antagelse der afprøves billigt). Alle i arbejdsrummet kan skrive et initiativ ned. Det starter som en idé og bliver vurderet, når det er beskrevet godt nok: problem, gevinst, succeskriterier og risici."
+      "projects": {
+        "title": "Projekter og sider",
+        "body": "Et projekt samler sider og har sin egen kanal. Sider kan ligge under andre sider, så dybt I vil. Træk en side i menuen for at flytte den, eller vælg Flyt i sidens menu. Undersider følger med."
       },
-      "assessment": {
-        "title": "Vurdering og score",
-        "body": "Et initiativ vurderes 1–5 på værdi, tidskritikalitet, risiko/mulighed og størrelse. Porteføljens metode lægger dem sammen: WSJF (værdi + tid + risiko divideret med størrelse), værdi divideret med størrelse, eller slet ingen score, hvis I hellere prioriterer i hånden. Metoden vælges under Indstillinger → Portefølje."
+      "writing": {
+        "title": "Skriv på en side",
+        "body": "Skriv / for at vælge overskrift, opgaveliste, tabel, billede eller et link til en anden side. Markér tekst for at gøre den fed eller lave et link. Træk et billede ind på siden, eller sæt det ind fra udklipsholderen."
       },
-      "prioritize": {
-        "title": "Prioritering",
-        "body": "Backloggen er alle åbne initiativer i én rækkefølge. Porteføljeansvarlige (ejere og administratorer) flytter dem ved at trække, med pilene eller ved at skrive en plads. Scoren kan foreslå en rækkefølge, men den bestemmer ikke: forslaget vises, og et menneske vælger at bruge det eller lade være."
+      "together": {
+        "title": "Skriv sammen",
+        "body": "Alle kan skrive på samme side på samme tid. I ser hinandens markører, og alt gemmes af sig selv. Hvis forbindelsen ryger, står der Ikke gemt endnu, og Facade prøver igen; lad fanen stå åben, til den er tilbage. Ctrl/⌘+Z fortryder dine egne ændringer, ikke din kollegas."
       },
-      "plan": {
-        "title": "Kvartalsplan",
-        "body": "Kvartalets plan tager initiativer ind fra backloggen, giver hvert et mål for kvartalet og bryder det ned i leverancer, som ét team kan nå. Hvert team har en kapacitet i persondage, minus det drift tager; resten er ledig og bliver fordelt på leverancerne. Overbookede teams står med rødt. Planen er et udkast, til den besluttes, og afsluttes, når kvartalet er gået."
+      "talk": {
+        "title": "Kanaler og tråde",
+        "body": "Hvert projekt har en kanal, og I kan oprette flere. Svar i en tråd for at holde et emne samlet. Skriv @ for at nævne en person. Enter sender, Shift+Enter giver en ny linje. Alle i arbejdsrummet kan læse alle kanaler; der er ingen private beskeder."
       },
-      "roadmap": {
-        "title": "Roadmap",
-        "body": "Roadmappen viser de planlagte kvartaler, som planerne siger, og de forventede kvartaler derefter, som initiativerne selv forventer. Som standard ét planlagt og to forventede, altså ni måneder frem; det sættes under Indstillinger → Portefølje. Den kan grupperes efter mål, team eller type og udskrives."
+      "pageTalk": {
+        "title": "Samtale på en side",
+        "body": "Knappen Samtale åbner en samtale, der hører til siden. Den, der har skrevet med der, får besked, når andre skriver."
       },
-      "status": {
-        "title": "Status og beslutninger",
-        "body": "Den, der er tættest på arbejdet, giver status: på sporet, i risiko eller af sporet, med en sætning. Historikken gemmes. Beslutningsloggen er porteføljens hukommelse: hvad der blev besluttet, og hvorfor. Revisionssporet husker alt, der ændrede sig; loggen husker, hvad der var meningen."
+      "inbox": {
+        "title": "Indbakke og søgning",
+        "body": "Indbakken samler det, der er rettet mod dig: når nogen nævner dig eller svarer dig. ⌘K eller Ctrl+K søger i alle sider og beskeder fra hvor som helst."
+      },
+      "history": {
+        "title": "Historik og papirkurv",
+        "body": "Mens I skriver, gemmes en version højst hvert tiende minut. Under Historik kan du se dem og gendanne; det sker som en almindelig ændring, så det også kan fortrydes. En slettet side ligger i papirkurven med alt under sig, til nogen sletter den helt. Et arkiveret projekt findes samme sted."
       },
       "roles": {
         "title": "Hvem må hvad",
-        "body": "Alle medlemmer kan skrive og beskrive initiativer, give status og rette en leverances status. Ejere og administratorer er porteføljeansvarlige: de prioriterer, lægger kvartalsplanen, sætter kapacitet, skriver beslutninger og ændrer indstillinger, mål og teams."
+        "body": "Alle medlemmer kan læse og skrive alt i arbejdsrummet. Ejere og administratorer inviterer og fjerner medlemmer under Indstillinger → Arbejdsrum. Beskeder kan kun rettes og slettes af den, der skrev dem."
       },
       "ai": {
-        "title": "Hvad AI'en må",
-        "body": "Er der sat en sprogmodel op, kan den skærpe beskrivelsen af et initiativ og foreslå leverancer til et kvartal. Det er altid forslag: intet gemmes, før et menneske har valgt og trykket. Den sletter aldrig noget og sender aldrig noget ud af huset. Det I skriver, behandles som data, aldrig som instruktioner."
+        "title": "AI",
+        "body": "Med en sprogmodel sat op kan knappen Forslag opsummere siden, finde det der mangler, skrive videre eller gøre et markeret stykke klarere, og Hvad er der sket? samler en kanal op. AI'en skriver aldrig selv: et forslag kommer først på siden, når du beder om det, og historikken kan fortryde det. Uden model virker alt andet."
       },
       "data": {
         "title": "Jeres data",
-        "body": "Hele porteføljen kan hentes ud som regneark og JSON under Indstillinger → Data. Arbejdsrummet kan slettes helt igen, revisionsspor inklusive."
+        "body": "Under Indstillinger → Data kan hele arbejdsrummet hentes som Markdown med sider, filer og samtaler, som regneark og som JSON. En enkelt side kan hentes som Markdown fra sidens menu. Ejeren kan slette arbejdsrummet helt."
       }
+    }
+  },
+  "nav": {
+    "search": "Søg",
+    "home": "Hjem",
+    "inbox": "Indbakke",
+    "projects": "Projekter",
+    "channels": "Kanaler",
+    "people": "Folk",
+    "trash": "Papirkurv",
+    "help": "Hjælp",
+    "online": "online",
+    "offline": "ikke online",
+    "addProject": "Nyt projekt",
+    "addChannel": "Ny kanal",
+    "addPage": "Ny side",
+    "addPageTo": "Ny side i {project}",
+    "addSubpage": "Ny underside",
+    "projectName": "Hvad hedder projektet?",
+    "channelName": "Hvad hedder kanalen?",
+    "channelTaken": "Der findes allerede en kanal med det navn.",
+    "create": "Opret",
+    "noProjects": "Ingen projekter endnu.",
+    "untitled": "Uden titel",
+    "collapse": "Fold sammen",
+    "expand": "Fold ud",
+    "move": "Flyt",
+    "moveTitle": "Flyt “{title}”",
+    "moveHint": "Undersider følger med.",
+    "moveTo": "Læg den under",
+    "toTrash": "Læg i papirkurven",
+    "trashed": "Lagt i papirkurven",
+    "pageMenu": "Valg for {title}",
+    "failed": "Det gik ikke. Prøv igen.",
+    "cannotMove": "Siden kan ikke flyttes dertil.",
+    "generalChannel": "generelt"
+  },
+  "home": {
+    "title": "Hjem",
+    "projects": "Projekter",
+    "recent": "Senest skrevet på",
+    "noRecent": "Når nogen skriver på en side, står den her.",
+    "emptyTitle": "Start med et projekt",
+    "emptyHint": "Et projekt samler sider og sin egen kanal. Inviter dine kolleger under Indstillinger, så kan I skrive sammen."
+  },
+  "project": {
+    "channel": "Snak i #{name}",
+    "pages": "Sider",
+    "noPages": "Der er ingen sider i projektet endnu.",
+    "nameLabel": "Projektets navn",
+    "descriptionLabel": "Hvad projektet handler om",
+    "descriptionPlaceholder": "Hvad handler projektet om?",
+    "archive": "Arkivér projekt",
+    "archiveTitle": "Arkivér {name}?",
+    "archiveBody": "Projektet forsvinder fra menuen, men intet bliver slettet. Du finder det igen under Papirkurv."
+  },
+  "page": {
+    "saving": "Gemmer",
+    "saved": "Gemt",
+    "notSaved": "Ikke gemt endnu. Prøver igen",
+    "breadcrumbs": "Placering",
+    "hereNow": "På siden lige nu",
+    "talk": "Samtale",
+    "history": "Historik",
+    "ai": "Forslag",
+    "titleLabel": "Sidens titel",
+    "lastEdited": "Sidst skrevet på af {name}, {when, date, medium}",
+    "subpages": "Undersider",
+    "gone": "Siden findes ikke længere.",
+    "menu": "Valg for {title}",
+    "downloadMarkdown": "Hent som Markdown",
+    "talkEmpty": "Ingen har sagt noget om siden endnu.",
+    "talkPlaceholder": "Skriv en kommentar",
+    "noHistory": "Historikken begynder, når nogen skriver på siden.",
+    "restore": "Gendan denne version",
+    "restored": "Versionen er gendannet",
+    "reason": {
+      "restore": "før gendannelse",
+      "ai": "før AI-forslag"
+    }
+  },
+  "editor": {
+    "label": "Sidens indhold",
+    "placeholder": "Skriv, eller tast / for at vælge",
+    "headingPlaceholder": "Overskrift",
+    "nobody": "Ingen med det navn",
+    "noCommand": "Intet at vælge",
+    "bold": "Fed",
+    "italic": "Kursiv",
+    "strike": "Gennemstreget",
+    "inlineCode": "Kode",
+    "link": "Link",
+    "linkPrompt": "Adresse (tom fjerner linket)",
+    "uploadFailed": "{name} kunne ikke lægges op. Højst 10 MB.",
+    "slash": {
+      "h1": "Stor overskrift",
+      "h2": "Overskrift",
+      "h3": "Lille overskrift",
+      "todo": "Opgaveliste",
+      "bullet": "Punktliste",
+      "ordered": "Nummereret liste",
+      "quote": "Citat",
+      "code": "Kode",
+      "table": "Tabel",
+      "divider": "Streg",
+      "image": "Billede eller fil",
+      "pageLink": "Link til side"
+    }
+  },
+  "conversation": {
+    "empty": "Her er stille. Skriv den første besked.",
+    "placeholder": "Skriv til #{channel}",
+    "replyPlaceholder": "Svar i tråden",
+    "replies": "{count, plural, one {# svar} other {# svar}}",
+    "backToChannel": "Tilbage",
+    "thread": "Tråd",
+    "older": "Vis ældre",
+    "deleted": "Beskeden er slettet.",
+    "edited": "(rettet)",
+    "formerMember": "Tidligere medlem",
+    "failed": "Beskeden blev ikke sendt. Prøv igen.",
+    "editLabel": "Ret beskeden",
+    "editHint": "Enter gemmer, Esc fortryder",
+    "react": "Reagér",
+    "reply": "Svar i tråd",
+    "edit": "Ret",
+    "delete": "Slet",
+    "deleteConfirm": "Slet beskeden?",
+    "attach": "Vedhæft fil",
+    "send": "Send",
+    "mentionList": "Personer",
+    "removeFile": "Fjern {name}",
+    "uploadFailed": "{name} kunne ikke lægges op. Højst 10 MB."
+  },
+  "inbox": {
+    "title": "Indbakke",
+    "empty": "Når nogen nævner dig eller svarer dig, står det her.",
+    "markAll": "Markér alt som læst",
+    "kind": {
+      "mention": "{actor} nævnte dig i {where}",
+      "reply": "{actor} svarede i {where}",
+      "page_mention": "{actor} nævnte dig på {where}"
+    }
+  },
+  "trash": {
+    "title": "Papirkurv",
+    "empty": "Papirkurven er tom.",
+    "archived": "Arkiverede projekter",
+    "restore": "Gendan",
+    "purge": "Slet helt",
+    "purgeTitle": "Slet “{title}” helt?",
+    "purgeBody": "Siden og alt under den forsvinder for altid. Det kan ikke fortrydes.",
+    "unarchive": "Tag frem igen"
+  },
+  "search": {
+    "title": "Søg",
+    "placeholder": "Søg i sider og beskeder",
+    "nothing": "Intet fundet.",
+    "start": "Skriv for at søge.",
+    "onPage": "på en side"
+  },
+  "ai": {
+    "title": "Forslag",
+    "hint": "Modellen læser siden og foreslår tekst. Intet kommer på siden, før du beder om det.",
+    "working": "Arbejder…",
+    "proposal": "Forslag",
+    "insert": "Sæt ind nederst",
+    "replace": "Erstat det markerede",
+    "discard": "Kassér",
+    "placed": "Sat ind. Historikken kan fortryde det.",
+    "catchUp": "Hvad er der sket?",
+    "keepAsPage": "Gem som side",
+    "summaryTitle": "Opsummering af samtalen",
+    "task": {
+      "summarize": "Opsummér siden",
+      "tasks": "Find det, der mangler",
+      "continue": "Skriv videre",
+      "improve": "Gør det markerede klarere"
+    },
+    "error": {
+      "noModel": "Der er ingen sprogmodel sat op. Det gøres under Indstillinger.",
+      "rateLimited": "Loftet for modelkald er nået. Prøv igen senere.",
+      "unreachable": "Modellen svarer ikke lige nu.",
+      "badAnswer": "Modellens svar kunne ikke bruges. Prøv igen.",
+      "generic": "Det gik ikke. Prøv igen.",
+      "notFound": "Siden findes ikke.",
+      "invalid": "Det gik ikke. Prøv igen.",
+      "unauthorized": "Log ind igen."
     }
   }
 }

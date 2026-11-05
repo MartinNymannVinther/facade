@@ -15,14 +15,7 @@ const VALUES = [
   { icon: ShieldCheck, titleKey: "securityTitle", bodyKey: "securityBody" },
 ] as const;
 
-const FEATURE_KEYS = [
-  "initiatives",
-  "prioritize",
-  "plan",
-  "roadmap",
-  "decisions",
-  "model",
-] as const;
+const FEATURE_KEYS = ["pages", "together", "channels", "talk", "search", "model"] as const;
 
 /** The family's front door; the wider story lives there, not here. */
 const HAIJ_URL = "https://haij.dk";
