@@ -31,22 +31,18 @@ decides it, so it is an installation's choice and not a workspace's. The
 regional endpoints cost 1.1x list price; that is what this row costs.
 
 Mistral receives what a prompt contains and nothing else, and only when
-a person presses a button that asks for a proposal (docs/adr/0015):
+a person presses a button that asks for a proposal (docs/adr/0014):
 
-- **Sharpen the description**: the initiative's title, kind and the
-  description fields as they stand in the form — summary, problem,
-  benefit, success criteria, hypothesis and risks.
-- **Propose deliverables**: the initiative's title, kind, summary,
-  benefit and success criteria, the quarter's objective for it, the
-  titles of the deliverables it already has, and the workspace's team
-  names with their ids, so the proposal can name a team.
+- **A suggestion on a page**: the page's text and whatever is selected.
+- **What happened in a channel**: the channel's latest messages with the
+  names of the people who wrote them.
 - **The connection test** under Settings → AI carries nothing from the
   workspace: one fixed sentence — "Svar med præcis ét ord: OK" — so that
   "configured" and "working" can be told apart.
 
-No prompt carries a person's account name or e-mail. The owner's name on
-an initiative, status notes, decisions and capacity numbers are never
-sent. Nothing is sent in the background: without a press, no call.
+No prompt carries an e-mail address. Names appear only where they are part of
+the conversation being summarized. Nothing is sent in the background:
+without a press, no call.
 
 ## A workspace can choose a different one
 

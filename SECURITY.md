@@ -1,8 +1,8 @@
 # Security Policy
 
-Facade is a multi-tenant tool for portfolio management; workspace
-isolation, the integrity of what a portfolio decided and data protection
-are its most important properties. We take every report
+Facade is a multi-tenant tool for working together; workspace isolation,
+the integrity of what people wrote and data protection are its most
+important properties. We take every report
 seriously and appreciate the time it takes to make one.
 
 ## Reporting a vulnerability
@@ -24,10 +24,10 @@ Particularly interesting: anything that lets one workspace read or write
 another workspace's data (RLS bypass), authentication bypass, audit-log
 tampering, an invitation link that admits somebody it should not, a row
 in one workspace that manages to point at another workspace's goal,
-team or initiative, a member doing what only a portfolio manager may
+page or message, a stream hearing what it should not
 (reordering the backlog, committing a quarter, changing capacity), a
 prompt that reaches the model as instructions rather than data because
-of what an initiative's text contained, and injection of any kind. The RLS test suite in `tests/rls/` is
+of what a page or message contained, and injection of any kind. The RLS test suite in `tests/rls/` is
 the executable specification of the isolation model.
 
 ## Supported versions

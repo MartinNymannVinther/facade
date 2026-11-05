@@ -13,7 +13,7 @@ const browser = await chromium.launch();
 const problems = [];
 
 async function person(name, viewport = { width: 1280, height: 800 }) {
-  const context = await browser.newContext({ viewport, locale: "da-DK" });
+  const context = await browser.newContext({ viewport, locale: "da-DK", ignoreHTTPSErrors: true });
   const page = await context.newPage();
   page.on("pageerror", (e) => problems.push(`${name}: ${e.message}`));
   page.on("console", (m) => {

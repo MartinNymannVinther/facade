@@ -578,7 +578,8 @@
     "pageMenu": "Valg for {title}",
     "failed": "Det gik ikke. Prøv igen.",
     "cannotMove": "Siden kan ikke flyttes dertil.",
-    "generalChannel": "generelt"
+    "generalChannel": "generelt",
+    "settings": "Indstillinger"
   },
   "home": {
     "title": "Hjem",

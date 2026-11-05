@@ -306,7 +306,7 @@ export function SidebarSettingsLink({
   onNavigate?: () => void;
   attention?: number;
 }) {
-  const t = useTranslations("app.nav");
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const active = pathname.startsWith("/settings");
   return (

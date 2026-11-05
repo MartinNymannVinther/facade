@@ -1,75 +1,52 @@
 # Facade
 
-Facade ([facade.haij.dk](https://facade.haij.dk)) is open source portfolio
-management for small and mid-sized organizations: the municipality's
-digitalization unit, the housing association's administration, the
-mid-sized company with more ideas than people. Write the development
-initiatives down — projects, tasks and experiments — and describe them
-well enough to be weighed against each other. Put them in one order.
-Plan the quarter: take initiatives in, break them into deliverables the
-teams can finish, and set them against the capacity the teams have free
-once operations have taken theirs. Show the road ahead on a roadmap that
-looks nine months out. Keep status and a decision log, so the portfolio
-remembers what it meant.
+Facade ([facade.haij.dk](https://facade.haij.dk)) is one shared place for a
+small team: projects with pages you write on at the same time, and the
+conversation right beside them. Think of a small Notion and a small Slack
+that have agreed to live in the same house, on your own server or in the EU.
 
-Facade is one tool in the [Haij](https://haij.dk) family and stands on
-the Haij foundation, taken by way of
-[Ajour](https://github.com/MartinNymannVinther/ajour),
-[Tavle](https://github.com/MartinNymannVinther/tavle),
-[Domino](https://github.com/MartinNymannVinther/domino) and
-[Makker](https://github.com/MartinNymannVinther/makker): Danish-first,
-EU-sovereign, secure by design. The project constitution — dogmas,
-principles, architecture and rules — lives in [CLAUDE.md](CLAUDE.md).
-Decisions and their trade-offs live in [docs/adr](docs/adr/).
+It is one tool in the Haij family ([haij.dk](https://haij.dk)) and stands on
+the family's foundation, taken by way of Ajour, Tavle, Domino, Makker and
+[Plot](https://github.com/MartinNymannVinther/plot): Danish-first, EU or
+self-hosted, your data always yours, the AI helps and the human decides.
 
 ## Status
 
-0.9, waves 0 to 3 built: the foundation from Makker (auth with passkeys
-and TOTP, workspaces separated in the database, admission by invitation,
-the audit log, CI, Docker), the ten product tables with isolation tests
-that also prove a row cannot point into another workspace, initiatives
-with scores and one backlog order, quarter plans with deliverables and
-capacity, the roadmap, status and the decision log, the AI's two
-proposals, the overview, the demo, export and help. Nothing here has run
-a real portfolio yet. Dogma seven is what 1.0 waits for — one real
-quarter — and [docs/launch.md](docs/launch.md) is the road to it.
-
-Much of the code is written together with Claude Code, under the rules
-in [CLAUDE.md](CLAUDE.md). Every change is reviewed, tested and deployed
-by a person; the tests for tenancy isolation are the part of the
-codebase that is trusted least to good intentions.
+1.0. Everything below is built, tested and proven by a test that puts two
+real browsers on one page. It has not yet carried real work between real
+people; that is the first thing it is for, and dogma seven decides when it
+goes in the window on haij.dk (docs/haij-tool-card.md).
 
 ## What it is
 
-**Initiatives, three kinds.** A project spans teams or quarters, a task
-is one team in one quarter, an experiment tests an assumption cheaply.
-All three are described the same way — problem, benefit, success
-criteria, risks — and belong to at most one strategic goal.
+**Projects and pages.** A project holds a tree of pages as deep as you like,
+and a channel of its own. Drag a page to move it, or use its menu.
 
-**One backlog, one order.** Every open initiative stands in one order,
-the same on every page. Each is weighed 1–5 on value, time criticality,
-risk and size; the workspace chooses WSJF, value/effort or no score at
-all. The scores can propose an order; a person decides it.
+**Writing together.** Several people write on one page at the same moment
+and see each other's cursors. Nothing is lost when two people type in the
+same sentence, when the connection drops, or when a tab closes mid-word.
+Type `/` for headings, task lists, tables, images and links to other pages,
+and `@` to name a colleague.
 
-**The quarter.** A quarter's plan takes initiatives in with an objective
-each and breaks them into deliverables, each on a team with its days.
-Each team's capacity, minus operations, is what is free; the plan shows
-what is allocated and who is over. The plan is a draft until it is
-committed, and history once it is closed.
+**Talking beside the work.** Channels with threads, reactions and files.
+Every project has one, and every page has its own conversation next to it.
 
-**The roadmap.** The planned quarters as the plans say, the expected
-quarters after them as the initiatives expect, drawn differently so
-nobody reads an expectation as a promise. How far it looks is a setting;
-by default nine months. Grouped by goal, team or kind, and it prints.
+**What waits for you.** An inbox for what is aimed at you, unread marks on
+channels, and who is here right now. ⌘K searches every page and message.
 
-**Status and decisions.** The person closest to the work says how it is
-going, and the history stays. The decision log says what the portfolio
-decided and why.
+**Nothing is gone for good by accident.** Every page keeps its history and
+can be restored; a deleted page sits in the trash with everything under it;
+an archived project waits there too.
 
-**AI that proposes.** With a model set up, the AI can sharpen an
-initiative's description or propose deliverables for a quarter. It is
-always a proposal a person takes or leaves. Mistral at the EU endpoint,
-or Ollama on your own machine; without either, everything else works.
+**An AI that proposes.** It can summarize a page, find what is missing, keep
+writing, make a selection clearer, or catch you up on a channel. Nothing
+reaches a page until a person says yes, and the history can undo it. Runs at
+Mistral in the EU or on your own machine with Ollama, and without a model
+everything else works.
+
+**Your way out.** The whole workspace as Markdown with its files, as a
+spreadsheet and as JSON, and a folder of Markdown goes in again with
+`scripts/import-markdown.ts`.
 
 ## Haij-dogmerne
 
@@ -112,8 +89,9 @@ apply: a member of a workspace invites them with a link from Indstillinger
 → Arbejdsrum.
 
 ```bash
-pnpm test        # RLS isolation, quarters, scores, capacity, the export, the gates
+pnpm test        # RLS isolation, the document, the tree, channels, the hub, the export
 pnpm lint && pnpm typecheck
+pnpm e2e         # two real browsers on one page, against a dev server on an empty database
 ```
 
 The tests run against the database from the compose file and never call
@@ -124,7 +102,7 @@ names when they happen. The Postgres image has to be pulled and the
 cluster initialised the first time, so `--wait` matters; a migrate fired
 before that is done fails and leaves an empty database behind. And
 Facade's dev database listens on port 5439, beside the family's other dev
-databases (Haij 5432, Tavle 5433, Domino 5434, Makker 5435); if something
+databases (Haij 5432, Tavle 5433, Domino 5434, Makker 5435, Plot 5436, Kladde 5437, Kadence 5438); if something
 else already holds 5439, set another `POSTGRES_PORT` in `.env` and change
 the three URLs to match, or the migration talks to the wrong server.
 

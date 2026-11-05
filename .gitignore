@@ -45,3 +45,4 @@ next-env.d.ts
 *.patch
 *.bundle
 e2e/shots/
+seed/

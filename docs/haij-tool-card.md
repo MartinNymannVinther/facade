@@ -1,63 +1,42 @@
 # The tool card for haij.dk
 
-The copy for Facade's card on the family's front page, in both languages,
-and the entry for the site's `src/content/tools.ts`. It belongs in the
-haij-site repository, not this one; it is kept here so the words are
-written by the people who built the tool.
-
-haij.dk already lists the portfolio tool as coming ("Portefølje",
-`portefolje.haij.dk`). Facade is that tool made generic: the entry below
-replaces it, and it goes live only after dogma seven — one real quarter
-run in it (docs/launch.md).
+The copy for Facade's card on haij.dk, in both languages, with the entry
+proposed for the site's `tools.ts`. It belongs in the haij.dk repository;
+it is written here so it travels with the release it describes. Dogma seven
+decides when it goes up: not before real work has run on it.
 
 ## Dansk
 
-**Facade — Porteføljen i én rytme.**
+**Facade** — Arbejdet bag facaden.
 
-Simpel porteføljestyring til små og mellemstore organisationer. Skriv
-udviklingsinitiativerne ned — projekter, opgaver og eksperimenter — og
-beskriv dem, så de kan vejes mod hinanden. Prioritér dem i én rækkefølge,
-med WSJF eller i hånden. Læg kvartalets plan, brudt ned i leverancer og
-sat op mod teamenes ledige kapacitet, og vis vejen frem på en roadmap,
-der som standard ser ni måneder frem. Status og en beslutningslog holder
-porteføljen ærlig. AI'en kan skærpe en beskrivelse eller foreslå
-leverancer; et menneske bestemmer.
+Et fælles sted til et lille hold: projekter med sider I skriver på samtidig,
+og samtalen lige ved siden af. Kanaler, tråde, en indbakke til det, der er
+rettet mod dig, og søgning i det hele. Alt kan hentes ud som Markdown, og AI'en
+foreslår, men et menneske sætter ind. Kører hos Mistral i EU eller på din egen
+maskine med Ollama.
 
 ## English
 
-**Facade — The portfolio in one rhythm.**
+**Facade** — The work behind the facade.
 
-Simple portfolio management for small and mid-sized organizations. Write
-the development initiatives down — projects, tasks and experiments — and
-describe them so they can be weighed against each other. Prioritize them
-in one order, with WSJF or by hand. Plan the quarter, broken into
-deliverables and set against the teams' free capacity, and show the way
-ahead on a roadmap that looks nine months out by default. Status and a
-decision log keep the portfolio honest. The AI can sharpen a description
-or propose deliverables; a person decides.
+One shared place for a small team: projects with pages you write on at the
+same time, and the conversation right beside them. Channels, threads, an inbox
+for what is aimed at you, and search across it all. Everything comes out as
+Markdown, and the AI proposes while a person puts it in. Runs at Mistral in the
+EU or on your own machine with Ollama.
 
 ## The entry
 
 ```ts
 {
-  id: "facade",
-  host: "facade.haij.dk",
-  status: "coming",
-  text: {
-    da: {
-      name: "Facade",
-      tagline: "Porteføljen i én rytme.",
-      description:
-        "Initiativer, prioritering, kvartalsplan med kapacitet, roadmap, status og beslutningslog — simpel porteføljestyring til små og mellemstore organisationer.",
-      note: "På vej",
-    },
-    en: {
-      name: "Facade",
-      tagline: "The portfolio in one rhythm.",
-      description:
-        "Initiatives, prioritization, a quarter plan with capacity, a roadmap, status and a decision log — simple portfolio management for small and mid-sized organizations.",
-      note: "Coming",
-    },
-  },
+  slug: "facade",
+  name: "Facade",
+  tagline: { da: "Arbejdet bag facaden.", en: "The work behind the facade." },
+  url: "https://facade.haij.dk",
+  repo: "https://github.com/MartinNymannVinther/facade",
+  license: "AGPL-3.0",
+  status: "beta",
+  selfHost: true,
+  ai: { providers: ["mistral-eu", "ollama"], decides: "human" },
 }
 ```

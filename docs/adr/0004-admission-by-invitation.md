@@ -2,7 +2,7 @@
 
 Status: accepted · Date: 2026-09-03 (inherited from Haij, ADR 0013 there)
 
-> Inherited with the foundation from Makker, which took it from Domino (ADR 0001). The reasoning is the family's and holds here; where an example names a flow, a brick, a run or a conversation, that is a sibling's example, not a feature of Facade.
+> Inherited with the foundation from Plot, which took it from Makker, which took it from Domino (ADR 0001). The reasoning is the family's and holds here; where an example names a flow, a brick, a run or a conversation, that is a sibling's example, not a feature of Facade.
 
 A public repository and a closed installation need a front door that is
 not a "no": a way to ask, a way for the owner to say yes with one click,

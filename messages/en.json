@@ -578,7 +578,8 @@
     "pageMenu": "Options for {title}",
     "failed": "That did not work. Try again.",
     "cannotMove": "The page cannot be moved there.",
-    "generalChannel": "general"
+    "generalChannel": "general",
+    "settings": "Settings"
   },
   "home": {
     "title": "Home",

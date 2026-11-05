@@ -28,7 +28,7 @@ gh repo edit MartinNymannVinther/facade --visibility public \
 gh repo edit MartinNymannVinther/facade \
   --description "Porteføljen i én rytme. Simpel porteføljestyring til små og mellemstore organisationer, open source." \
   --homepage https://facade.haij.dk \
-  --add-topic portfolio-management --add-topic roadmap --add-topic mistral --add-topic ollama \
+  --add-topic collaboration --add-topic crdt --add-topic mistral --add-topic ollama \
   --add-topic nextjs --add-topic postgresql --add-topic open-source --add-topic danish
 ```
 
@@ -122,9 +122,8 @@ open it. A backup nobody has restored is a hope, not a backup.
 ## 7. Turn the demo on
 
 Set `DEMO=on` in Coolify and redeploy. Open `https://facade.haij.dk/demo`
-in a private window and check that you land on the overview with the
-demo stripe at the top, that the seeded portfolio is there — a committed
-quarter, a roadmap, a decision log — and that `/register` still shows the
+in a private window and check that you land on Home with the demo stripe at the top, that the
+seeded project is there with its pages and channel, and that `/register` still shows the
 application form rather than a sign-up form.
 
 Be clear-eyed about what this does: `DEMO=on` hands out throwaway
@@ -142,14 +141,8 @@ you actually do.
 > Intet af det vi selv har bygget kommer i vinduet før det har kørt
 > rigtigt arbejde.
 
-Run one real quarter in it. Not the demo portfolio — a real
-organisation's initiatives, described, prioritized in a real meeting,
-planned against the teams' real capacity, and followed through the
-quarter with status and decisions, ending with the quarter closed and
-the next one committed. One quarter is enough to learn what a v1 is
-missing; whether the four scores are the right ones, how capacity is
-really counted, and what the roadmap's reader asks for are the likeliest
-first answers, and they should be findings rather than guesses.
+Run real work in it: real people writing on real pages for a few weeks, not
+the demo. Dogma seven says that comes before the card goes up on haij.dk.
 
 Until that has happened, the tool card on haij.dk waits.
 

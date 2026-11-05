@@ -22,16 +22,16 @@ runtime but the machine.
    repository, branch `main`. Coolify picks up `docker-compose.yml`.
 2. Set the environment variables (Coolify → Environment Variables):
 
-   | Variable             | Value                                                              |
-   | -------------------- | ------------------------------------------------------------------ |
-   | `POSTGRES_PASSWORD`  | `openssl rand -hex 24`                                             |
-   | `FACADE_APP_PASSWORD`  | `openssl rand -hex 24`                                             |
-   | `FACADE_AUTH_PASSWORD` | `openssl rand -hex 24`                                             |
-   | `BETTER_AUTH_SECRET` | `openssl rand -base64 32`                                          |
-   | `BETTER_AUTH_URL`    | `https://facade.haij.dk` (public URL; passkeys bind to this origin)  |
-   | `LLM_PROVIDER`       | `mistral` hosted, `ollama` self-hosted, or leave unset for `none`  |
-   | `MISTRAL_API_KEY`    | only with `LLM_PROVIDER=mistral`                                   |
-   | `AI_DAILY_CALL_CAP`  | model calls per day across the whole installation; `0` for no roof |
+   | Variable               | Value                                                               |
+   | ---------------------- | ------------------------------------------------------------------- |
+   | `POSTGRES_PASSWORD`    | `openssl rand -hex 24`                                              |
+   | `FACADE_APP_PASSWORD`  | `openssl rand -hex 24`                                              |
+   | `FACADE_AUTH_PASSWORD` | `openssl rand -hex 24`                                              |
+   | `BETTER_AUTH_SECRET`   | `openssl rand -base64 32`                                           |
+   | `BETTER_AUTH_URL`      | `https://facade.haij.dk` (public URL; passkeys bind to this origin) |
+   | `LLM_PROVIDER`         | `mistral` hosted, `ollama` self-hosted, or leave unset for `none`   |
+   | `MISTRAL_API_KEY`      | only with `LLM_PROVIDER=mistral`                                    |
+   | `AI_DAILY_CALL_CAP`    | model calls per day across the whole installation; `0` for no roof  |
 
    Hex, not base64, for the three database passwords, and that is not a
    style preference. `docker-compose.yml` builds the connection strings by

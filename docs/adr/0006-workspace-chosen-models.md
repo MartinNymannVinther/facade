@@ -2,7 +2,7 @@
 
 Status: accepted · Date: 2026-09-04
 
-> Inherited with the foundation from Makker, which took it from Domino (ADR 0001). The reasoning is the family's and holds here; where an example names a flow, a brick, a run or a conversation, that is a sibling's example, not a feature of Facade.
+> Inherited with the foundation from Plot, which took it from Makker, which took it from Domino (ADR 0001). The reasoning is the family's and holds here; where an example names a flow, a brick, a run or a conversation, that is a sibling's example, not a feature of Facade.
 
 Until now the language model belonged to the installation: `LLM_PROVIDER`,
 `LLM_MODEL` and `MISTRAL_API_KEY` in `.env`, one answer for everybody on

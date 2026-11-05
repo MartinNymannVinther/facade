@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: >-
-        Facade keeps its concept count deliberately low — a conversation,
+        Facade keeps its concept count deliberately low: projects, pages and channels.
         a role, a task, a file, a document — and the omissions are part of
         the product (CLAUDE.md, "deliberately not built"). An idea that
         earns a new concept has to be worth it, so say what problem it

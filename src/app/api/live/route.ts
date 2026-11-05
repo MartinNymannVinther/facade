@@ -1,18 +1,26 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
+import { auth } from "@/core/auth/auth";
 import { requireOrgContext } from "@/core/auth/guard";
 import { memberships } from "@/core/db/schema";
 import { withOrgContext, type OrgContext } from "@/core/db/tenant";
 import { dropConnection, openConnection, presence } from "@/modules/live/hub";
 import type { LiveEvent } from "@/modules/live/events";
-import { and } from "drizzle-orm";
 
 export const dynamic = "force-dynamic";
 
 const HEARTBEAT_MS = 20_000;
-/** How long a removed member can keep listening, at most. */
+/** How long somebody signed out or removed can keep listening, at most. */
 const RECHECK_MS = 30_000;
 
-async function stillMember(ctx: OrgContext): Promise<boolean> {
+/**
+ * The stream outlives the request that opened it, so what was true then is
+ * asked again: is the session still alive, still this person, still in this
+ * workspace?
+ */
+async function stillAllowed(ctx: OrgContext, headers: Headers): Promise<boolean> {
+  const session = await auth.api.getSession({ headers, query: { disableCookieCache: true } });
+  if (session?.user.id !== ctx.userId) return false;
+  if (session.session.activeOrganizationId !== ctx.orgId) return false;
   const rows = await withOrgContext(ctx, (tx) =>
     tx
       .select({ id: memberships.id })
@@ -53,9 +61,9 @@ export async function GET(request: Request) {
       );
       const heartbeat = setInterval(() => write(": ping\n\n"), HEARTBEAT_MS);
       const recheck = setInterval(() => {
-        stillMember(ctx)
-          .then((member) => {
-            if (!member) cleanup();
+        stillAllowed(ctx, request.headers)
+          .then((allowed) => {
+            if (!allowed) cleanup();
           })
           .catch(() => cleanup());
       }, RECHECK_MS);
