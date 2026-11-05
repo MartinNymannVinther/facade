@@ -1,0 +1,25 @@
+name: Idea
+description: Something Facade could do that it does not do yet.
+labels: [idea]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Facade keeps its concept count deliberately low — a conversation,
+        a role, a task, a file, a document — and the omissions are part of
+        the product (CLAUDE.md, "deliberately not built"). An idea that
+        earns a new concept has to be worth it, so say what problem it
+        solves before what it should look like.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is the problem
+      description: What are you trying to do today, and what makes it hard?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What could Facade do about it
+    validations:
+      required: true

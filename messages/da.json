@@ -1,0 +1,633 @@
+{
+  "common": {
+    "cancel": "Annuller",
+    "close": "Luk",
+    "error": "Noget gik galt. Prøv igen.",
+    "hours": "{value} t"
+  },
+  "landing": {
+    "nav": {
+      "login": "Log ind",
+      "register": "Opret konto",
+      "apply": "Ansøg om adgang"
+    },
+    "hero": {
+      "title": "Porteføljen i én rytme.",
+      "subtitle": "Facade er porteføljestyring til små og mellemstore organisationer: skriv udviklingsinitiativerne ned, prioritér dem i én rækkefølge, læg kvartalets plan inden for den ledige kapacitet, og vis vejen frem på en roadmap. Open source, dansk og i EU.",
+      "ctaPrimary": "Opret konto",
+      "ctaSecondary": "Log ind",
+      "trust": "AGPL-3.0 · Passkeys og totrinslogin · Jeres data kan hentes ud med ét klik",
+      "ctaApply": "Ansøg om adgang",
+      "ctaDemo": "Prøv demoen"
+    },
+    "values": {
+      "aiTitle": "Fra idé til kvartal",
+      "aiBody": "Projekter, opgaver og eksperimenter beskrevet så de kan vejes mod hinanden, prioriteret med WSJF eller i hånden, og brudt ned i leverancer, som teamene kan nå i kvartalet. AI'en kan skærpe en beskrivelse eller foreslå leverancer, men et menneske bestemmer.",
+      "dataTitle": "Jeres data, altid",
+      "dataBody": "Hele porteføljen kan hentes ud som regneark og JSON med ét klik, og arbejdsrummet kan slettes helt igen.",
+      "securityTitle": "Sikkerhed fra første dag",
+      "securityBody": "Arbejdsrum er adskilt i databasen, ikke kun i koden. Passkeys, totrinslogin og en log der ikke kan redigeres."
+    },
+    "status": "Version {version} · bygget til at blive brugt",
+    "family": {
+      "body": "Facade er ét værktøj i Haij-familien af open source-værktøjer til organisationer der vil eje deres egen teknologi.",
+      "link": "Læs om Haij"
+    },
+    "footer": {
+      "license": "Open source under AGPL-3.0",
+      "language": "English",
+      "terms": "Vilkår og privatliv"
+    },
+    "demo": {
+      "title": "Prøv uden at oprette noget",
+      "body": "Du får dit eget arbejdsrum med en portefølje i fuld gang: initiativer, et besluttet kvartal og en roadmap. Det slettes efter {hours, plural, one {# time} other {# timer}}. Ingen e-mail, ingen tilmelding.",
+      "privacy": "Skriv ikke rigtige personoplysninger i demoen. Den passerer en database og eventuelt en sprogmodel på vejen.",
+      "cta": "Åbn en demo"
+    },
+    "featuresLabel": "Det du får",
+    "features": {
+      "initiatives": "Projekter, opgaver og eksperimenter",
+      "prioritize": "Én prioriteret backlog, med WSJF eller i hånden",
+      "plan": "Kvartalsplan med leverancer og kapacitet",
+      "roadmap": "Roadmap, der kan ses ni måneder frem",
+      "decisions": "Status og beslutningslog",
+      "model": "AI hos Mistral i EU eller Ollama på egen maskine"
+    }
+  },
+  "notFound": {
+    "title": "Siden findes ikke",
+    "body": "Adressen er enten forkert, eller også er siden flyttet.",
+    "cta": "Til forsiden"
+  },
+  "auth": {
+    "login": {
+      "title": "Log ind",
+      "subtitle": "Velkommen tilbage.",
+      "email": "E-mail",
+      "password": "Adgangskode",
+      "submit": "Log ind",
+      "or": "eller",
+      "withPasskey": "Log ind med passkey",
+      "noAccount": "Har du ikke en konto?",
+      "registerLink": "Opret konto",
+      "error": "Forkert e-mail eller adgangskode.",
+      "passkeyError": "Login med passkey mislykkedes. Prøv igen.",
+      "errorOrigin": "Appen er ikke sat op til denne adresse. Åbn den på den adresse, der står i BETTER_AUTH_URL, eller tilføj denne i AUTH_TRUSTED_ORIGINS."
+    },
+    "register": {
+      "title": "Opret konto",
+      "subtitle": "Din konto og dit arbejdsrum oprettes samtidig.",
+      "name": "Dit navn",
+      "email": "E-mail",
+      "organizationName": "Arbejdsrummets navn",
+      "organizationHint": "Din virksomhed, forening eller afdeling. Kan ændres senere.",
+      "password": "Adgangskode",
+      "passwordHint": "Mindst 12 tegn.",
+      "submit": "Opret konto",
+      "haveAccount": "Har du allerede en konto?",
+      "loginLink": "Log ind",
+      "errorInvalid": "Tjek felterne og prøv igen.",
+      "errorEmailExists": "Der findes allerede en konto med denne e-mail.",
+      "errorGeneric": "Kontoen kunne ikke oprettes. Prøv igen.",
+      "closedBody": "Denne installation af Facade tager ikke imod nye brugere. Kontakt ejeren hvis du skal have adgang.",
+      "invitedSubtitle": "Du er inviteret. Kontoen oprettes til den e-mail og det arbejdsrum, invitationen gælder for.",
+      "lockedHint": "Fastlagt af invitationen.",
+      "errorInvitationInvalid": "Invitationen er udløbet eller allerede brugt. Bed om et nyt link.",
+      "invitationInvalidTitle": "Linket virker ikke længere",
+      "invitationInvalidBody": "Invitationen er udløbet, brugt eller erstattet af en nyere. Bed den der inviterede dig om et nyt link, eller ansøg om adgang igen.",
+      "applyLink": "Ansøg om adgang"
+    },
+    "twoFactor": {
+      "title": "Totrinsbekræftelse",
+      "subtitle": "Indtast koden fra din authenticator-app.",
+      "submit": "Bekræft",
+      "error": "Forkert kode. Prøv igen."
+    },
+    "onboarding": {
+      "title": "Opret dit arbejdsrum",
+      "subtitle": "Du mangler et arbejdsrum, før du kan komme i gang.",
+      "organizationName": "Arbejdsrummets navn",
+      "submit": "Opret arbejdsrum",
+      "error": "Arbejdsrummet kunne ikke oprettes. Prøv igen."
+    },
+    "apply": {
+      "title": "Ansøg om adgang",
+      "subtitle": "Denne installation af Facade tager imod nye brugere efter en kort ansøgning. Ejeren ser den personligt og svarer per mail.",
+      "name": "Dit navn",
+      "email": "E-mail",
+      "organizationName": "Organisation eller forening",
+      "message": "Hvad skal du bruge Facade til?",
+      "messageHint": "Valgfrit. En linje eller to om teamet gør det nemmere at sige ja.",
+      "submit": "Send ansøgning",
+      "sentTitle": "Tak, ansøgningen er modtaget",
+      "sentBody": "Du hører fra ejeren af denne installation på {email}. Svaret kommer fra et menneske, så regn med en dag eller to.",
+      "errorInvalid": "Tjek felterne og prøv igen.",
+      "errorTooMany": "Der er sendt mange ansøgninger herfra på kort tid. Prøv igen om en time.",
+      "privacy": "Vi gemmer navn, e-mail og organisation for at behandle ansøgningen, og ikke andet. Bliver den afvist, står oplysningerne kun tilbage som en note om afgørelsen.",
+      "haveAccount": "Har du allerede en konto?",
+      "loginLink": "Log ind"
+    }
+  },
+  "app": {
+    "nav": {
+      "help": "Hjælp",
+      "security": "Sikkerhed",
+      "logout": "Log ud",
+      "appearance": "Udseende",
+      "light": "Lys",
+      "dark": "Mørk",
+      "system": "Følg systemet",
+      "language": "Sprog",
+      "danish": "Dansk",
+      "english": "English",
+      "openMenu": "Åbn menu",
+      "menuTitle": "Navigation",
+      "settings": "Indstillinger",
+      "skipToContent": "Spring til indholdet",
+      "hideMenu": "Skjul menuen",
+      "showMenu": "Vis menuen",
+      "overview": "Overblik",
+      "initiatives": "Initiativer",
+      "prioritize": "Prioritering",
+      "plan": "Kvartalsplan",
+      "roadmap": "Roadmap",
+      "decisions": "Beslutninger"
+    },
+    "orgSwitcher": {
+      "label": "Arbejdsrum",
+      "create": "Opret arbejdsrum",
+      "createTitle": "Opret nyt arbejdsrum",
+      "name": "Navn",
+      "createSubmit": "Opret",
+      "switched": "Skiftet til {name}",
+      "created": "{name} er oprettet",
+      "error": "Arbejdsrummet kunne ikke oprettes. Prøv igen.",
+      "switch": "Skift arbejdsrum"
+    },
+    "security": {
+      "title": "Sikkerhed",
+      "subtitle": "Passkeys og totrinsbekræftelse for din konto.",
+      "passkeys": {
+        "title": "Passkeys",
+        "description": "Log ind uden adgangskode med Touch ID, Face ID eller en sikkerhedsnøgle.",
+        "empty": "Ingen passkeys endnu.",
+        "nameLabel": "Navn",
+        "namePlaceholder": "F.eks. MacBook",
+        "add": "Tilføj passkey",
+        "remove": "Fjern",
+        "addedAt": "Tilføjet {date}",
+        "addedToast": "Passkey tilføjet",
+        "removedToast": "Passkey fjernet",
+        "error": "Passkey kunne ikke tilføjes. Prøv igen."
+      },
+      "totp": {
+        "title": "Totrinsbekræftelse (TOTP)",
+        "description": "Kræv en kode fra din authenticator-app ved login.",
+        "statusEnabled": "Slået til",
+        "statusDisabled": "Slået fra",
+        "enable": "Slå til",
+        "disable": "Slå fra",
+        "password": "Bekræft med din adgangskode",
+        "scan": "Scan QR-koden med din authenticator-app, og indtast koden nedenfor.",
+        "backupCodes": "Backupkoder",
+        "backupHint": "Gem koderne et sikkert sted. De kan bruges, hvis du mister din telefon.",
+        "verifyLabel": "Kode fra appen",
+        "verify": "Bekræft",
+        "verifyError": "Forkert kode. Prøv igen.",
+        "enabledToast": "Totrinsbekræftelse er slået til",
+        "disabledToast": "Totrinsbekræftelse er slået fra",
+        "error": "Handlingen mislykkedes. Tjek adgangskoden, og prøv igen.",
+        "totpQrAlt": "QR-kode du scanner i din autentificeringsapp for at tilføje Facade"
+      }
+    },
+    "about": {
+      "title": "Om Facade",
+      "subtitle": "Hvilken udgave af Facade der kører her, og om databasen følger med.",
+      "short": "v{release}",
+      "dirtyShort": "ændret",
+      "dirty": "Lokale ændringer",
+      "dirtyHint": "Bygget fra en arbejdsmappe med ændringer der ikke er committet. Commit-nummeret fortæller altså ikke hele sandheden om koden der kører.",
+      "releaseHint": "Versionsnummeret hæves i hånden når et spring er værd at navngive. Commit-nummeret bages ind ved build og peger på præcis den kode der svarer.",
+      "versionLabel": "Version",
+      "commitLabel": "Commit",
+      "builtAtLabel": "Bygget",
+      "environmentLabel": "Miljø",
+      "runtimeLabel": "Runtime",
+      "environments": {
+        "development": "Udvikling",
+        "test": "Test",
+        "production": "Drift"
+      },
+      "schemaTitle": "Databaseskema",
+      "schemaHint": "Antallet af migreringer koden er bygget med, holdt op mod dem databasen har kørt.",
+      "schemaBehind": "Migreringer mangler",
+      "schemaBehindHint": "Databasen har færre migreringer end koden forventer. Kør migreringerne før du bruger systemet videre.",
+      "migrationLabel": "Seneste migrering",
+      "appliedLabel": "Kørt",
+      "appliedValue": "{applied} af {expected}",
+      "appliedAtLabel": "Senest kørt",
+      "unknown": "Ukendt",
+      "license": "Facade er open source under AGPL-3.0 og en del af Haij-familien."
+    },
+    "dataExport": {
+      "title": "Data og eksport",
+      "subtitle": "Tag en komplet kopi af alt hvad dette arbejdsrum indeholder.",
+      "xlsxTitle": "Regneark",
+      "xlsxBody": "Én fil med en fane per type data: initiativer, status, mål, kvartalsplaner, leverancer, teams, kapacitet, beslutninger og historik. Til jer selv, eller til enhver der skal kigge med uden at kende Facade.",
+      "xlsxAction": "Hent regneark",
+      "jsonTitle": "Maskinlæsbar kopi",
+      "jsonBody": "De samme data som JSON, med alle id'er bevaret. Det er den fil der gør, at I kan flytte til noget andet end Facade uden at miste sammenhængen mellem initiativer, kvartaler og leverancer.",
+      "jsonAction": "Hent JSON",
+      "sheetsLabel": "Faner i filen:",
+      "membersSheet": "Brugere",
+      "notBackupTitle": "Det her er ikke en backup.",
+      "notBackupBody": "En eksport kan læses, men den kan ikke lægges tilbage, og den er kun så ny som den dag du hentede den. Den dag databasen er væk, er det det natlige krypterede dump der redder dig.",
+      "privacy": "Eksporten indeholder hele arbejdsrummets portefølje og dets historik. Adgangskoder, passkeys og nøglen til arbejdsrummets sprogmodel kommer aldrig med. At du henter filen bliver skrevet i revisionssporet."
+    }
+  },
+  "settings": {
+    "title": "Indstillinger",
+    "subtitle": "Din sikkerhed og din installation.",
+    "nav": {
+      "security": "Sikkerhed",
+      "about": "Om",
+      "access": "Adgang",
+      "workspace": "Arbejdsrum",
+      "ai": "AI",
+      "data": "Data",
+      "portfolio": "Portefølje",
+      "goals": "Mål",
+      "teams": "Teams"
+    },
+    "access": {
+      "title": "Adgang til installationen",
+      "subtitle": "Hvem der må oprette et arbejdsrum her. Du godkender og sender linket; resten sker af sig selv.",
+      "pendingTitle": "Ansøgninger",
+      "pendingEmpty": "Ingen ventende ansøgninger.",
+      "approve": "Godkend",
+      "decline": "Afvis",
+      "declinedToast": "Ansøgningen er afvist.",
+      "linkTitle": "Link til {email}",
+      "linkBody": "Vises kun nu. Kopiér det og send det selv. Det virker i 7 dage og kun én gang.",
+      "copy": "Kopiér link",
+      "copiedToast": "Linket er kopieret.",
+      "inviteTitle": "Inviter direkte",
+      "inviteBody": "Uden ansøgning først. Samme link, samme regler.",
+      "inviteEmail": "E-mail",
+      "inviteOrganization": "Arbejdsrummets navn",
+      "inviteSubmit": "Opret invitation",
+      "invitationsTitle": "Invitationer",
+      "invitationsEmpty": "Ingen invitationer endnu.",
+      "renew": "Nyt link",
+      "expires": "Udløber {date}",
+      "used": "Brugt {date}",
+      "applied": "Ansøgt {date}",
+      "decidedApproved": "Godkendt {date}",
+      "decidedDeclined": "Afvist {date}",
+      "historyTitle": "Tidligere afgørelser",
+      "stateOpen": "Ubrugt",
+      "stateUsed": "Brugt",
+      "stateExpired": "Udløbet",
+      "stateRevoked": "Erstattet",
+      "errorInvalid": "Tjek e-mail og navnet på arbejdsrummet."
+    },
+    "workspace": {
+      "title": "Arbejdsrum",
+      "subtitle": "Hvem der er med, og vejen ud igen.",
+      "createdOn": "Oprettet {date}",
+      "name": "Navn",
+      "email": "E-mail",
+      "role": "Rolle",
+      "roles": {
+        "owner": "Ejer",
+        "admin": "Administrator",
+        "member": "Medlem"
+      },
+      "delete": {
+        "title": "Slet arbejdsrummet",
+        "body": "Alt i arbejdsrummet forsvinder: alle medlemmers samtaler og filer, roller, opgaver og hele revisionssporet om dem. Det kan ikke fortrydes.",
+        "exportFirst": "Hent en eksport først, hvis du vil beholde noget. Den findes under Data.",
+        "typeName": "Skriv {name} for at bekræfte",
+        "action": "Slet arbejdsrummet permanent",
+        "deleting": "Sletter …",
+        "failed": "Arbejdsrummet blev ikke slettet. Prøv igen.",
+        "notOwner": "Kun ejeren af arbejdsrummet kan slette det.",
+        "nameMismatch": "Navnet passer ikke. Skriv arbejdsrummets navn præcis som det står."
+      }
+    },
+    "ai": {
+      "title": "AI",
+      "subtitle": "Hvilken motor der svarer, og hvad den må.",
+      "providerTitle": "Sprogmodel",
+      "providerHint": "Installationen sætter en model i miljøet, og hvert arbejdsrum kan vælge sin egen i stedet.",
+      "provider": "Udbyder",
+      "model": {
+        "title": "Din egen sprogmodel",
+        "subtitle": "Arbejdsrummet kan køre på en anden model end den installationen har sat op. Vælger du ingenting, arver du installationens.",
+        "current": "Model",
+        "source": "Valgt af",
+        "fromInstallation": "Installationen",
+        "fromWorkspace": "Dette arbejdsrum",
+        "keySource": "Nøgle",
+        "keyFromWorkspace": "Arbejdsrummets egen",
+        "keyFromInstallation": "Installationens",
+        "keyMissing": "Mangler",
+        "providerLabel": "Udbyder",
+        "provider_mistral": "Mistral (EU)",
+        "provider_ollama": "Ollama (lokal)",
+        "providerNone": "Ingen model",
+        "inherit": "Følg installationen ({provider})",
+        "providerHelp": "Ollama-adressen bestemmes af installationen. Det er med vilje: et arbejdsrum der selv kunne pege på en adresse, ville få serveren til at hente fra hvor som helst.",
+        "modelLabel": "Modelnavn",
+        "modelHelpMistral": "Lad feltet stå tomt for at bruge {placeholder}.",
+        "modelHelpOllama": "Navnet skal matche en model du har hentet med „ollama pull“. Test forbindelsen ovenfor, så siger den hvilke du har.",
+        "keyLabel": "API-nøgle",
+        "keyPlaceholder": "Indsæt din Mistral-nøgle",
+        "keyStored": "Der ligger en gemt nøgle",
+        "keyHelp": "Lad feltet stå tomt for at bruge installationens nøgle. Nøglen krypteres før den gemmes og kan ikke læses ud igen.",
+        "keyStoredHelp": "Arbejdsrummet har sin egen nøgle. Skriv en ny for at erstatte den, eller fjern den for at falde tilbage på installationens.",
+        "keyRemove": "Fjern gemt nøgle",
+        "save": "Gem",
+        "saving": "Gemmer …",
+        "saved": "Gemt",
+        "saveFailed": "Kunne ikke gemmes. Prøv igen.",
+        "notAllowed": "Kun ejere og administratorer kan ændre arbejdsrummets model.",
+        "short_mistral": "Mistral",
+        "short_ollama": "Ollama",
+        "shortNone": "ingen model"
+      },
+      "noModel": "Ingen model konfigureret",
+      "setupIntro": "Facade er en chat og kan ikke svare uden en model. Sæt en op:",
+      "setupOutro": "Kør derefter Facade igen. Uden en model siger skrivefeltet det, og indstillinger, roller og opgaver kan stadig rettes.",
+      "limitsTitle": "Loft over AI-kald",
+      "limitsHint": "Et modelkald koster penge på en hostet installation og minutter på en lokal. Tallene er rundhåndede for et menneske og nærige for et script.",
+      "perUser": "Kald pr. bruger i timen",
+      "perWorkspace": "Kald pr. arbejdsrum i døgnet",
+      "messageLength": "Tegn i en besked, højst",
+      "principlesTitle": "Sådan bruger Facade AI",
+      "principleDecides": "AI'en svarer, mennesket beslutter. Modellen skriver et svar; den sender aldrig noget ud af huset, sletter aldrig noget og ændrer intet uden at du gør det.",
+      "principleUndo": "Hver samtale er din egen. Du kan slette den, og du kan hente den ud.",
+      "principleData": "Det du skriver, og det dine dokumenter indeholder, sendes til modellen som data, aldrig som instruktioner. Systemprompten og rollerne ligger på serveren, hvor administratoren bestemmer dem.",
+      "principleSovereign": "Modellen kan skiftes ud, også til en lokal. Hvem der kan se hvad står i docs/subprocessors.md.",
+      "test": "Test forbindelsen",
+      "testing": "Tester …",
+      "testPatience": "En lokal model skal måske læses ind fra disken først. Det kan tage op mod et minut første gang.",
+      "testOk": "Modellen svarer",
+      "testOkDetail": "{model} svarede „{sample}“ på {seconds} sekunder.",
+      "testFailed": "Modellen svarer ikke",
+      "failAuth": "Nøglen blev afvist. Tjek arbejdsrummets egen nøgle herunder, eller installationens MISTRAL_API_KEY.",
+      "failUnreachable": "Der er ingen der lytter på adressen. Kører Ollama? Tjek OLLAMA_BASE_URL.",
+      "failConfig": "Modellen er sat op forkert. Ret modelnavnet herunder, eller LLM_MODEL i .env.",
+      "failGeneric": "Kaldet gik galt. Detaljerne står herunder og i serverloggen.",
+      "failRateLimited": "Mistral afviste kaldet som for mange (429). Nøglen virker, men kontoen eller planen sætter loftet: på den gratis Experiment-plan sker det ofte når modellen er travl, og en nøgle under et arbejdsrum uden aktiv plan får det samme svar. Tjek Billing og Limits på console.mistral.ai for den organisation nøglen hører til.",
+      "failWhereToLook": "Detaljerne står i serverloggen.",
+      "testNotAllowed": "Kun ejeren eller en administrator kan teste forbindelsen.",
+      "withoutTitle": "Uden model",
+      "withoutBody": "Facade er bygget om samtalen: uden en model kan du stadig se dine samtaler, hente dem ud og rette arbejdsrummets roller og opgaver, men skrivefeltet siger det ligeud, og intet går i stykker.",
+      "setupEuComment": "EU-hostet (Mistral)",
+      "setupLocalComment": "eller lokalt (Ollama)",
+      "setupKeyPlaceholder": "din-nøgle-her",
+      "perInstallation": "Kald i hele installationen i døgnet",
+      "failCeiling": "Facades eget loft over AI-kald blev nået, ikke udbyderens. Loftet står under “Loft over AI-kald” herunder; installationens samlede loft sættes med AI_DAILY_CALL_CAP. Prøv igen om lidt."
+    },
+    "members": {
+      "title": "Medlemmer",
+      "body": "Alle i arbejdsrummet har deres egne samtaler, som ingen andre kan se. Ejere og administratorer kan invitere og fjerne medlemmer og rette roller og opgaver.",
+      "name": "Navn",
+      "email": "E-mail",
+      "role": "Rolle",
+      "you": "(dig)",
+      "remove": "Fjern",
+      "removeTitle": "Fjern {name} fra arbejdsrummet?",
+      "removeBody": "Personen mister adgangen med det samme. Personens samtaler og filer slettes sammen med kontoen, hvis den slettes; ellers bliver de stående, men kan ikke ses af andre.",
+      "removeConfirm": "Fjern medlemmet",
+      "leave": "Forlad arbejdsrummet",
+      "leaveTitle": "Forlad arbejdsrummet?",
+      "leaveBody": "Du mister adgangen til arbejdsrummet og dine samtaler i det. En ejer eller administrator kan invitere dig igen.",
+      "leaveConfirm": "Forlad",
+      "inviteTitle": "Inviter en kollega",
+      "inviteBody": "Skriv adressen, og du får et link. Send det selv, sådan som I ellers taler sammen. Linket gælder kun den adresse og i 48 timer.",
+      "invite": "Lav et link",
+      "issued": "Link til {email}",
+      "issuedHint": "Kopiér og send. Har personen ingen konto, oprettes den gennem linket; ellers logger de ind og siger ja.",
+      "copy": "Kopiér",
+      "copied": "Kopieret",
+      "copyLink": "Kopiér link",
+      "copyFailed": "Kunne ikke kopiere. Markér linket og kopiér selv.",
+      "pendingEmail": "Inviteret",
+      "expires": "Udløber",
+      "cancel": "Træk tilbage",
+      "errors": {
+        "alreadyMember": "Personen er allerede medlem.",
+        "alreadyInvited": "Der findes allerede et åbent link til den adresse. Træk det tilbage først, hvis du vil lave et nyt.",
+        "forbidden": "Det kræver at du er ejer eller administrator.",
+        "invalid": "Skriv en gyldig e-mailadresse.",
+        "generic": "Det gik galt. Prøv igen."
+      }
+    },
+    "portfolio": {
+      "title": "Portefølje",
+      "body": "Hvordan porteføljen vurderer, tæller kvartaler og viser roadmappen. Gælder for hele arbejdsrummet.",
+      "scoring": "Vurdering",
+      "scoringHint": "Metoden bestemmer, hvilke scorer initiativerne vurderes på, og hvordan de lægges sammen.",
+      "fiscal": "Regnskabsår",
+      "fiscalHint": "Måneden året starter i. Kvartalerne tælles fra den: starter året i juli, er juli–september K1.",
+      "roadmap": "Roadmap",
+      "planned": "Planlagte kvartaler",
+      "plannedHint": "Kvartaler vist som planlagt, altså fra kvartalsplanerne.",
+      "forecast": "Forventede kvartaler",
+      "forecastHint": "Kvartaler vist efter de planlagte, ud fra initiativernes forventede start og slut.",
+      "start": "Roadmappen starter med",
+      "startCurrent": "Det kvartal vi er i",
+      "startNext": "Næste kvartal (det der planlægges)",
+      "horizon": "Roadmappen viser {months} måneder frem.",
+      "capacity": "Kapacitet",
+      "reserved": "Drift som standard",
+      "reservedHint": "Den andel af et teams kapacitet, der som udgangspunkt går til drift og andet fast arbejde. Kan tilpasses pr. team og kvartal.",
+      "percent": "%",
+      "signals": "Signaler",
+      "wip": "Grænse for initiativer i gang",
+      "wipHint": "Overblikket advarer, når flere er i gang. 0 betyder ingen grænse.",
+      "stale": "Status er gammel efter",
+      "staleHint": "Initiativer i gang uden status i så mange dage vises som stille på overblikket.",
+      "days": "dage",
+      "save": "Gem indstillingerne",
+      "saved": "Indstillingerne er gemt",
+      "months": {
+        "1": "Januar",
+        "2": "Februar",
+        "3": "Marts",
+        "4": "April",
+        "5": "Maj",
+        "6": "Juni",
+        "7": "Juli",
+        "8": "August",
+        "9": "September",
+        "10": "Oktober",
+        "11": "November",
+        "12": "December"
+      }
+    },
+    "goals": {
+      "title": "Strategiske mål",
+      "body": "Hvorfor organisationen gør tingene. Et initiativ kan høre til ét mål, og roadmappen kan grupperes efter dem. Få og klare mål virker bedst.",
+      "name": "Mål",
+      "namePlaceholder": "Fx Bedre selvbetjening for beboerne",
+      "description": "Beskrivelse",
+      "add": "Tilføj mål",
+      "added": "Målet er tilføjet",
+      "save": "Gem",
+      "saved": "Målet er gemt",
+      "archive": "Arkivér",
+      "restore": "Gendan",
+      "archived": "Arkiveret",
+      "archivedHint": "Arkiverede mål beholder deres initiativer, men kan ikke vælges til nye.",
+      "empty": "Ingen mål endnu.",
+      "moveUp": "Flyt {name} op",
+      "moveDown": "Flyt {name} ned",
+      "edit": "Ret",
+      "cancel": "Fortryd"
+    },
+    "teams": {
+      "title": "Teams",
+      "body": "Teams er dem, der udfører arbejdet, og det er her kapaciteten kommer fra. Standardkapaciteten gælder hvert kvartal, indtil kvartalsplanen tilpasser den.",
+      "name": "Team",
+      "namePlaceholder": "Fx Digital",
+      "description": "Beskrivelse",
+      "capacity": "Kapacitet pr. kvartal",
+      "capacityHint": "Persondage i et almindeligt kvartal, før drift. Fx 4 personer × 60 dage = 240.",
+      "add": "Tilføj team",
+      "added": "Teamet er tilføjet",
+      "save": "Gem",
+      "saved": "Teamet er gemt",
+      "archive": "Arkivér",
+      "restore": "Gendan",
+      "archived": "Arkiveret",
+      "empty": "Ingen teams endnu.",
+      "days": "{days, plural, one {# dag} other {# dage}}",
+      "edit": "Ret",
+      "cancel": "Fortryd"
+    }
+  },
+  "demo": {
+    "bannerTitle": "Det her er en demo.",
+    "bannerBody": "Arbejdsrummet og alt i det slettes efter {hours, plural, one {# time} other {# timer}}. Skriv gerne i det.",
+    "bannerCta": "Ansøg om en rigtig konto"
+  },
+  "terms": {
+    "title": "Vilkår og privatliv",
+    "updated": "Senest opdateret 19. september 2026.",
+    "back": "Tilbage",
+    "language": "In English",
+    "intro": "Facade er et open source-værktøj til porteføljestyring, drevet af Haij. Det her er aftalen mellem dig og os, når du bruger den udgave vi driver. Kører du koden selv, gælder kun licensen.",
+    "what": {
+      "title": "Hvad Facade er",
+      "body": "Et værktøj til at holde styr på en organisations udviklingsinitiativer: beskrive dem, prioritere dem, planlægge kvartaler og vise en roadmap. Forslag fra AI er udkast, ikke facit."
+    },
+    "account": {
+      "title": "Konto og adgang",
+      "body": "Du får adgang ved at ansøge eller blive inviteret. Vi gemmer dit navn, din e-mail og navnet på dit arbejdsrum, og vi bruger dem til at logge dig ind og til at skrive til dig om tjenesten. Adgangskoder gemmes hashet, og du kan tilføje passkey og totrinsbekræftelse. Vi sælger ikke noget, og vi sender ikke markedsmails du ikke har bedt om."
+    },
+    "yourData": {
+      "title": "Jeres data",
+      "body": "Alt I skriver i Facade tilhører jer og jeres arbejdsrum. Det kan hentes ud som regneark og JSON med ét klik og slettes igen. Vi kigger ikke i det, medmindre I beder os om hjælp, og vi videregiver det aldrig."
+    },
+    "ai": {
+      "title": "AI",
+      "body": "Er der sat en sprogmodel op, og beder du om et forslag, sendes initiativets tekst, kvartalets mål og teamenes navne til modeludbyderen. Hvem det er, står under Indstillinger → AI og i listen over underdatabehandlere. Uden en sprogmodel virker alt andet som før."
+    },
+    "leaving": {
+      "title": "At holde op",
+      "body": "Du kan slette dit arbejdsrum med det samme, uden at skrive til nogen og uden at vente. Eksporten ligger et klik væk, og den er læsbar uden Facade. Vi opbevarer ikke en kopi bagefter ud over de natlige krypterede backups, som ruller ud efter 30 dage — både på serveren og i det EU-lager de kopieres til."
+    },
+    "availability": {
+      "title": "Drift og garantier",
+      "body": "Facade er ny, og der er ingen oppetidsgaranti. Vi passer på jeres data med krypterede backups hver nat, men I bør hente en eksport ind imellem. Tjenesten leveres som den er, uden garantier ud over hvad ufravigelig lovgivning kræver."
+    },
+    "license": {
+      "title": "Licens",
+      "body": "Koden er AGPL-3.0. Du må bruge, ændre og køre den selv; ændrer du den og stiller den til rådighed for andre over et netværk, skal dine ændringer også være tilgængelige. Det du skriver i værktøjet er ikke omfattet af licensen — det er dit."
+    },
+    "demo": {
+      "title": "Demoen",
+      "body": "Et demo-arbejdsrum oprettes uden e-mail eller tilmelding og slettes helt efter 24 timer, konto inklusive. Læg ikke rigtige personoplysninger i det. Vi gemmer kun de tekniske logdata der skal til for at holde demoen kørende."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "body": "Skriv til martin@vintherconsulting.dk. Har du fundet et sikkerhedsproblem, står fremgangsmåden i SECURITY.md i kodearkivet; meld det der frem for i en almindelig mail."
+    },
+    "subprocessorsNote": "Hvem der kan se hvad, står i",
+    "shareLinks": {
+      "title": "Invitationer",
+      "body": "Et invitationslink gælder én adresse og udløber efter to døgn. Det er dig der sender det; vi sender ingen mails."
+    }
+  },
+  "join": {
+    "title": "Du er inviteret",
+    "intro": "{inviter} har inviteret dig ind i arbejdsrummet {workspace}.",
+    "someone": "En kollega",
+    "invalidTitle": "Linket virker ikke længere",
+    "invalidBody": "Invitationen er udløbet eller trukket tilbage. Bed den der inviterede dig om et nyt link.",
+    "acceptedBody": "Invitationen er allerede brugt. Log ind for at komme ind i arbejdsrummet.",
+    "toLogin": "Log ind",
+    "wrongAccount": "Invitationen er til {email}, men du er logget ind som {current}. Log ud, og åbn linket igen.",
+    "switchAccount": "Log ud",
+    "accept": "Kom ind i arbejdsrummet",
+    "wrongPerson": "Invitationen er sendt til en anden adresse end den du er logget ind med.",
+    "name": "Dit navn",
+    "email": "E-mail",
+    "lockedHint": "Invitationen gælder denne adresse. Kontoen bliver medlem af {workspace}.",
+    "password": "Adgangskode",
+    "passwordHint": "Mindst 12 tegn. En sætning er nemmere at huske end et kodeord.",
+    "submit": "Opret konto og kom ind",
+    "haveAccount": "Har du allerede en konto?",
+    "loginLink": "Log ind",
+    "errorEmailExists": "Der findes allerede en konto med den adresse. Log ind, og åbn linket igen.",
+    "errorInvalid": "Noget i det du skrev kunne ikke bruges. Se felterne igennem.",
+    "errorGeneric": "Det gik galt. Prøv igen."
+  },
+  "help": {
+    "title": "Hjælp",
+    "intro": "Sådan virker Facade, i den rytme en portefølje lever i.",
+    "howToTitle": "Sådan bruger du værktøjet",
+    "closing": "Mangler der noget her? Skriv til os, eller ret siden selv: koden er åben.",
+    "howTo": {
+      "initiatives": {
+        "title": "Initiativer",
+        "body": "Alt det organisationen kunne gøre, skrives ned som initiativer: projekter (flere teams eller kvartaler), opgaver (små, ét team i ét kvartal) og eksperimenter (en antagelse der afprøves billigt). Alle i arbejdsrummet kan skrive et initiativ ned. Det starter som en idé og bliver vurderet, når det er beskrevet godt nok: problem, gevinst, succeskriterier og risici."
+      },
+      "assessment": {
+        "title": "Vurdering og score",
+        "body": "Et initiativ vurderes 1–5 på værdi, tidskritikalitet, risiko/mulighed og størrelse. Porteføljens metode lægger dem sammen: WSJF (værdi + tid + risiko divideret med størrelse), værdi divideret med størrelse, eller slet ingen score, hvis I hellere prioriterer i hånden. Metoden vælges under Indstillinger → Portefølje."
+      },
+      "prioritize": {
+        "title": "Prioritering",
+        "body": "Backloggen er alle åbne initiativer i én rækkefølge. Porteføljeansvarlige (ejere og administratorer) flytter dem ved at trække, med pilene eller ved at skrive en plads. Scoren kan foreslå en rækkefølge, men den bestemmer ikke: forslaget vises, og et menneske vælger at bruge det eller lade være."
+      },
+      "plan": {
+        "title": "Kvartalsplan",
+        "body": "Kvartalets plan tager initiativer ind fra backloggen, giver hvert et mål for kvartalet og bryder det ned i leverancer, som ét team kan nå. Hvert team har en kapacitet i persondage, minus det drift tager; resten er ledig og bliver fordelt på leverancerne. Overbookede teams står med rødt. Planen er et udkast, til den besluttes, og afsluttes, når kvartalet er gået."
+      },
+      "roadmap": {
+        "title": "Roadmap",
+        "body": "Roadmappen viser de planlagte kvartaler, som planerne siger, og de forventede kvartaler derefter, som initiativerne selv forventer. Som standard ét planlagt og to forventede, altså ni måneder frem; det sættes under Indstillinger → Portefølje. Den kan grupperes efter mål, team eller type og udskrives."
+      },
+      "status": {
+        "title": "Status og beslutninger",
+        "body": "Den, der er tættest på arbejdet, giver status: på sporet, i risiko eller af sporet, med en sætning. Historikken gemmes. Beslutningsloggen er porteføljens hukommelse: hvad der blev besluttet, og hvorfor. Revisionssporet husker alt, der ændrede sig; loggen husker, hvad der var meningen."
+      },
+      "roles": {
+        "title": "Hvem må hvad",
+        "body": "Alle medlemmer kan skrive og beskrive initiativer, give status og rette en leverances status. Ejere og administratorer er porteføljeansvarlige: de prioriterer, lægger kvartalsplanen, sætter kapacitet, skriver beslutninger og ændrer indstillinger, mål og teams."
+      },
+      "ai": {
+        "title": "Hvad AI'en må",
+        "body": "Er der sat en sprogmodel op, kan den skærpe beskrivelsen af et initiativ og foreslå leverancer til et kvartal. Det er altid forslag: intet gemmes, før et menneske har valgt og trykket. Den sletter aldrig noget og sender aldrig noget ud af huset. Det I skriver, behandles som data, aldrig som instruktioner."
+      },
+      "data": {
+        "title": "Jeres data",
+        "body": "Hele porteføljen kan hentes ud som regneark og JSON under Indstillinger → Data. Arbejdsrummet kan slettes helt igen, revisionsspor inklusive."
+      }
+    }
+  }
+}
