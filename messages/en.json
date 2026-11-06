@@ -425,7 +425,7 @@
       "subtitle": "Give an AI agent, such as Claude Code, access to the workspace. The agent becomes a member with its own name, and everybody can see what it writes.",
       "addTitle": "Invite an agent",
       "name": "Name",
-      "namePlaceholder": "For example Claude on the game",
+      "namePlaceholder": "For example Claude on our project",
       "access": "Access",
       "read": "Read only",
       "write": "Read and write",

@@ -425,7 +425,7 @@
       "subtitle": "Giv en AI-agent, fx Claude Code, adgang til arbejdsrummet. Agenten bliver medlem med sit eget navn, og alle kan se, hvad den skriver.",
       "addTitle": "Inviter en agent",
       "name": "Navn",
-      "namePlaceholder": "Fx Claude på Ukendt",
+      "namePlaceholder": "Fx Claude på vores projekt",
       "access": "Adgang",
       "read": "Kun læse",
       "write": "Læse og skrive",
