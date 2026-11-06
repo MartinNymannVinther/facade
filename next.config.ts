@@ -152,7 +152,14 @@ const nextConfig: NextConfig = {
   // Dev only: `next dev` refuses to serve its own assets to any host but
   // localhost, and a dev server reached from another machine (motor.local)
   // otherwise renders as script-less HTML. Ignored by `next build`.
-  allowedDevOrigins: ["motor.local", "motor"],
+  allowedDevOrigins: [
+    "motor.local",
+    "motor",
+    ...(process.env.AUTH_TRUSTED_ORIGINS ?? "")
+      .split(",")
+      .filter(Boolean)
+      .map((origin) => new URL(origin.trim()).hostname),
+  ],
   env: {
     FACADE_VERSION: pkg.version,
     FACADE_COMMIT: commit,
