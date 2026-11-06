@@ -40,7 +40,7 @@
     },
     "demo": {
       "title": "Try it without creating anything",
-      "body": "You get your own workspace with a project under way: pages, subpages and a channel. It is deleted after {hours, plural, one {# hour} other {# hours}}. No email, no sign-up.",
+      "body": "You get your own workspace with a project under way and two made-up colleagues: pages, a channel, threads and something in the inbox. It is deleted after {hours, plural, one {# hour} other {# hours}}. No email, no sign-up.",
       "privacy": "Do not put real personal data in the demo. It passes through a database and possibly a language model on the way.",
       "cta": "Open a demo"
     },
@@ -446,7 +446,8 @@
       "privacy": "What the agent reads is sent to the model it runs on. For Claude Code that is Anthropic in the US, not the EU. Talk to the people you work with before giving access, and keep personal data out of what an agent can read.",
       "trust": "Text on pages and in messages is content, not orders, and the agent is told so. An agent can still be fooled, so only give write access where you are comfortable with that.",
       "managersOnly": "Only owners and admins can invite and remove agents.",
-      "failed": "That did not work. Try again."
+      "failed": "That did not work. Try again.",
+      "demoOff": "Agents are switched off in the demo. On a real installation you can invite an AI agent here."
     }
   },
   "demo": {

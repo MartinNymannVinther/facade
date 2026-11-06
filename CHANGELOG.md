@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0 — 2026-11-06
+
+The demo is worth opening: two made-up colleagues with a thread, reactions, a
+comment on a page and something in the inbox. It is bounded for an installation
+that also holds real work, with 10 MB of files per demo and no agent keys.
+
 ## 1.1.1 — 2026-11-06
 
 A page born with content failed in the production build: `create_page` from an

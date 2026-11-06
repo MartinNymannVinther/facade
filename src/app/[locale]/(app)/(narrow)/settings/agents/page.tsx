@@ -4,6 +4,7 @@ import { getOrgContext } from "@/core/auth/session";
 import { env } from "@/core/env";
 import { redirect } from "@/i18n/navigation";
 import { listAgents } from "@/modules/agents/service";
+import { isDemoWorkspace } from "@/modules/demo/service";
 import { currentRole } from "@/modules/export/workspace";
 import { AgentsAdmin } from "./agents-admin";
 
@@ -17,11 +18,16 @@ export default async function AgentsPage() {
     redirect({ href: "/login", locale: await getLocale() });
     return null;
   }
-  const [agents, role] = await Promise.all([listAgents(context), currentRole(context)]);
+  const [agents, role, demo] = await Promise.all([
+    listAgents(context),
+    currentRole(context),
+    isDemoWorkspace(context.orgId),
+  ]);
   return (
     <AgentsAdmin
       agents={agents}
-      canManage={role === "owner" || role === "admin"}
+      canManage={!demo && (role === "owner" || role === "admin")}
+      demo={demo}
       endpoint={`${env.BETTER_AUTH_URL.replace(/\/$/, "")}/api/mcp`}
     />
   );

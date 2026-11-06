@@ -40,7 +40,7 @@
     },
     "demo": {
       "title": "Prøv uden at oprette noget",
-      "body": "Du får dit eget arbejdsrum med et projekt i gang: sider, undersider og en kanal. Det slettes efter {hours, plural, one {# time} other {# timer}}. Ingen e-mail, ingen tilmelding.",
+      "body": "Du får dit eget arbejdsrum med et projekt i gang og to opdigtede kolleger: sider, en kanal, tråde og noget i indbakken. Det slettes efter {hours, plural, one {# time} other {# timer}}. Ingen e-mail, ingen tilmelding.",
       "privacy": "Skriv ikke rigtige personoplysninger i demoen. Den passerer en database og eventuelt en sprogmodel på vejen.",
       "cta": "Åbn en demo"
     },
@@ -446,7 +446,8 @@
       "privacy": "Det, agenten læser, sendes til den model, agenten kører på. For Claude Code er det Anthropic i USA, ikke EU. Tag det med dem, I arbejder sammen med, før I giver adgang, og hold personoplysninger ude af det, en agent kan læse.",
       "trust": "Tekst på sider og i beskeder er indhold, ikke ordrer, og det får agenten besked på. En agent kan alligevel lade sig narre, så giv kun skriveadgang, hvor du er tryg ved det.",
       "managersOnly": "Kun ejere og administratorer kan invitere og fjerne agenter.",
-      "failed": "Det gik ikke. Prøv igen."
+      "failed": "Det gik ikke. Prøv igen.",
+      "demoOff": "Agenter er slået fra i demoen. På en rigtig installation kan du invitere en AI-agent her."
     }
   },
   "demo": {

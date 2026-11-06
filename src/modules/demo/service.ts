@@ -84,9 +84,9 @@ export async function cleanupExpiredDemos(now = new Date()): Promise<number> {
     try {
       await authDb.execute(sql`delete from organizations where id = ${row.organizationId}`);
       await authDb.execute(sql`delete from users where id = ${row.userId}`);
-      // An agent added in the demo has no membership left to find it by.
+      // The demo's colleagues have no membership left to find them by.
       await authDb.execute(sql`
-        delete from users u where u.email like '%@agents.facade.invalid'
+        delete from users u where u.email like '%.facade.invalid'
           and not exists (select 1 from memberships m where m.user_id = u.id)
       `);
     } catch (error) {
@@ -153,7 +153,7 @@ export async function createDemoWorkspace(locale: "da" | "en"): Promise<DemoSess
   });
 
   try {
-    await seedDemoWorkspace({ orgId: organization.id, userId }, locale);
+    await seedDemoWorkspace({ orgId: organization.id, userId }, locale, name);
   } catch (error) {
     // An empty demo is still a demo; the visitor can add their own.
     console.error("demo: could not seed the workspace", error);

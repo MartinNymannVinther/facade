@@ -5,6 +5,7 @@ import { Refused } from "@/core/action";
 import { authDb } from "@/core/db/client";
 import { agentTokens, memberships, users } from "@/core/db/schema";
 import { withOrgContext, type OrgContext } from "@/core/db/tenant";
+import { isDemoWorkspace } from "@/modules/demo/service";
 import { currentRole } from "@/modules/export/workspace";
 import { publish } from "@/modules/live/hub";
 
@@ -50,6 +51,8 @@ export async function createAgent(
   input: z.infer<typeof NewAgent>,
 ): Promise<{ id: string; token: string }> {
   await requireManager(ctx);
+  // A key reaches past the browser, and a demo is anybody's.
+  if (await isDemoWorkspace(ctx.orgId)) throw new Refused("forbidden");
   const userId = randomUUID();
   await authDb.transaction(async (tx) => {
     await tx

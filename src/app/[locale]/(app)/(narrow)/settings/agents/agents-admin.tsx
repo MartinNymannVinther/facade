@@ -19,10 +19,12 @@ const SERVER_NAME = "facade";
 export function AgentsAdmin({
   agents,
   canManage,
+  demo,
   endpoint,
 }: {
   agents: AgentView[];
   canManage: boolean;
+  demo: boolean;
   endpoint: string;
 }) {
   const t = useTranslations("settings.agents");
@@ -116,7 +118,7 @@ export function AgentsAdmin({
           </CardContent>
         </Card>
       ) : (
-        <p className="text-meta text-sm">{t("managersOnly")}</p>
+        <p className="text-meta text-sm">{demo ? t("demoOff") : t("managersOnly")}</p>
       )}
 
       <section>

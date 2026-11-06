@@ -6,6 +6,8 @@ import {
   demoLandingUrl,
   isDemoWorkspace,
 } from "@/modules/demo/service";
+import { createAgent } from "@/modules/agents/service";
+import { storeFile } from "@/modules/files/service";
 import { adminPool } from "../helpers/db";
 
 /**
@@ -47,7 +49,32 @@ describe("a demo workspace", () => {
               (select count(*)::int from messages where org_id = $1) as messages`,
       [orgId],
     );
-    expect(seeded.rows[0]).toEqual({ projects: 1, pages: 3, messages: 2 });
+    expect(seeded.rows[0]).toEqual({ projects: 1, pages: 3, messages: 6 });
+    const people = await admin.query(
+      `select count(*)::int as n from memberships where organization_id = $1`,
+      [orgId],
+    );
+    expect(people.rows[0].n).toBe(3);
+    const inbox = await admin.query(
+      `select count(*)::int as n from notifications where org_id = $1 and user_id = $2`,
+      [orgId, userId],
+    );
+    expect(inbox.rows[0].n).toBeGreaterThan(0);
+    const plan = await admin.query(
+      `select d.text from page_documents d join pages p on p.id = d.page_id
+       where p.org_id = $1 and p.parent_id is null`,
+      [orgId],
+    );
+    expect(plan.rows[0].text).toContain("120");
+  });
+
+  it("keeps a demo to 10 MB of files and away from agent keys", async () => {
+    const ctx = { orgId, userId };
+    await storeFile(ctx, { name: "a", mime: "image/png", bytes: Buffer.alloc(9 * 1024 * 1024) });
+    await expect(
+      storeFile(ctx, { name: "b", mime: "image/png", bytes: Buffer.alloc(2 * 1024 * 1024) }),
+    ).rejects.toThrow("conflict");
+    await expect(createAgent(ctx, { name: "Nej", access: "read" })).rejects.toThrow("forbidden");
   });
 
   it("is deleted whole when its time is up, guest account included", async () => {
@@ -60,5 +87,10 @@ describe("a demo workspace", () => {
     const user = await admin.query(`select 1 from users where id = $1`, [userId]);
     const rows = await admin.query(`select 1 from projects where org_id = $1`, [orgId]);
     expect([org.rowCount, user.rowCount, rows.rowCount]).toEqual([0, 0, 0]);
+    const colleagues = await admin.query(
+      `select 1 from users u where u.email like '%.facade.invalid'
+         and not exists (select 1 from memberships m where m.user_id = u.id)`,
+    );
+    expect(colleagues.rowCount).toBe(0);
   });
 });

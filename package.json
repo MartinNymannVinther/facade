@@ -1,6 +1,6 @@
 {
   "name": "facade",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Open source workspace for a small team: projects, pages written together, and the conversation beside them. Part of the Haij family.",
   "license": "AGPL-3.0-only",
   "private": true,
@@ -19,6 +19,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "node e2e/collaboration.mjs",
+    "e2e:demo": "node e2e/demo.mjs",
     "script": "tsx"
   },
   "dependencies": {

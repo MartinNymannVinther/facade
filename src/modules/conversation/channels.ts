@@ -3,7 +3,7 @@ import { z } from "zod";
 import { Refused } from "@/core/action";
 import { channelReads, channels, pages } from "@/core/db/schema";
 import { withOrgContext, type OrgContext } from "@/core/db/tenant";
-import { publish } from "@/modules/live/hub";
+import { publish, publishToUser } from "@/modules/live/hub";
 
 export const ChannelFields = z.object({
   name: z.string().trim().min(1).max(60),
@@ -153,4 +153,6 @@ export async function markRead(ctx: OrgContext, channelId: string): Promise<void
         set: { lastReadAt: now },
       });
   });
+  // The count in the rail is drawn on the server, in every tab this person has.
+  publishToUser(ctx.orgId, ctx.userId, { type: "inbox" });
 }

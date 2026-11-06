@@ -184,13 +184,13 @@ nothing more.
 
 `DEMO` defaults to `off`, and while it is off `/demo` answers 404 and no
 demo code runs at all. Set `DEMO=on` and every visitor to `/demo` gets
-their own workspace with the default roles and tasks in it, signed in
-as a throwaway account, deleted automatically after 24 hours.
+their own workspace with a project under way and two made-up colleagues in
+it, signed in as a throwaway account, deleted automatically after 24 hours.
 
 That is a real workspace built by the real services, so what a visitor
-sees is the product rather than a mock of it. Three things keep it
+sees is the product rather than a mock of it. Five things keep it
 bounded: five demos an hour per address, two hundred live demos at once,
-and an expiry on every one of them.
+an expiry on every one of them, 10 MB of files per demo, and no agent keys.
 
 Cleanup runs on each visit, so an installation that gets visitors needs no
 scheduler. If yours is quiet, or you would rather not rely on that, use
@@ -208,7 +208,8 @@ Turn it on only where you mean it. A demo instance is not the same
 installation as an organisation's own Facade: `DEMO=on` hands out accounts,
 which is exactly what `SIGNUP=closed` exists to prevent. Run the demo on
 its own installation with its own database, or accept that anyone can
-create a workspace on this one.
+create a workspace on this one. Workspaces are separated by RLS, so a demo
+cannot see real work; what they share is the machine.
 
 The terms page at `/terms` tells visitors what a demo is and asks them not
 to put real personal data in one; if you host a demo, read that page and
