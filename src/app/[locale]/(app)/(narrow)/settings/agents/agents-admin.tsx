@@ -133,7 +133,12 @@ export function AgentsAdmin({
                 <span className="text-meta block text-xs">
                   {agent.access === "write" ? t("write") : t("read")},{" "}
                   {agent.lastUsedAt
-                    ? t("lastUsed", { when: format.relativeTime(agent.lastUsedAt) })
+                    ? t("lastUsed", {
+                        when: format.dateTime(new Date(agent.lastUsedAt), {
+                          dateStyle: "short",
+                          timeStyle: "short",
+                        }),
+                      })
                     : t("neverUsed")}
                 </span>
               </span>

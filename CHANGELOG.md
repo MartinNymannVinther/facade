@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 — 2026-11-06
+
+A page born with content failed in the production build: `create_page` from an
+agent, a summary kept as a page, and the demo's pages. Two copies of
+prosemirror-model met in one call. The browser test now writes one as an agent.
+
 ## 1.1.0 — 2026-11-06
 
 Agents: invite an AI agent such as Claude Code as a named member, with a key and

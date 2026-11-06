@@ -1,10 +1,6 @@
 import { getSchema, type JSONContent } from "@tiptap/core";
 import { MarkdownManager } from "@tiptap/markdown";
-import {
-  prosemirrorJSONToYXmlFragment,
-  prosemirrorToYXmlFragment,
-  yXmlFragmentToProsemirrorJSON,
-} from "y-prosemirror";
+import { prosemirrorToYXmlFragment, yXmlFragmentToProsemirrorJSON } from "y-prosemirror";
 import * as Y from "yjs";
 import { contentExtensions } from "./extensions";
 
@@ -82,7 +78,10 @@ export function docToJson(doc: Y.Doc): JSONContent {
 
 export function jsonToState(json: JSONContent): Uint8Array {
   const doc = new Y.Doc();
-  prosemirrorJSONToYXmlFragment(tools().schema, json, doc.getXmlFragment(FRAGMENT));
+  // The node is built here, from our own schema. y-prosemirror is external on
+  // the server and has its own copy of prosemirror-model, so anything it builds
+  // from JSON is a stranger to that schema, in the production bundle only.
+  prosemirrorToYXmlFragment(tools().schema.nodeFromJSON(json), doc.getXmlFragment(FRAGMENT));
   return Y.encodeStateAsUpdate(doc);
 }
 

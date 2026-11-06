@@ -162,6 +162,29 @@ await kasper.getByRole("button", { name: /Skakmester/ }).waitFor({ timeout: 8000
 await kasper.screenshot({ path: `${SHOTS}/search.png` });
 await kasper.keyboard.press("Escape");
 
+step("an agent, with a key from the settings, writes a page with content");
+await martin.goto(`${BASE}/settings/agents`);
+await martin.fill("#agent-name", "Claude");
+await martin.selectOption("#agent-access", "write");
+await martin.getByRole("button", { name: "Lav nøgle" }).click();
+const token = (await martin.locator("code").first().textContent()).match(/fa_[\w-]+/)[0];
+const mcp = async (name, args) => {
+  const answer = await martin.request.post(`${BASE}/api/mcp`, {
+    headers: { Authorization: `Bearer ${token}` },
+    data: { jsonrpc: "2.0", id: 1, method: "tools/call", params: { name, arguments: args } },
+  });
+  return (await answer.json()).result;
+};
+const projects = JSON.parse((await mcp("list_projects", {})).content[0].text);
+const made = await mcp("create_page", {
+  project_id: projects[0].id,
+  title: "Fra agenten",
+  markdown: "# Overskrift\n\n- [ ] En opgave\n\n| a | b |\n| --- | --- |\n| 1 | 2 |",
+});
+if (made.isError) throw new Error(`create_page failed: ${made.content[0].text}`);
+const written = await mcp("read_page", { page_id: made.content[0].text.split(" ").pop() });
+if (!written.content[0].text.includes("En opgave")) throw new Error("the page came back empty");
+
 step("the phone");
 const phone = await person("Martin på telefonen", { width: 390, height: 844 });
 await phone.context().addCookies(await martin.context().cookies());
