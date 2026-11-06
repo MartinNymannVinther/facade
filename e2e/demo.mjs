@@ -12,6 +12,7 @@ const context = await browser.newContext({
   viewport: { width: 1280, height: 800 },
   locale: "da-DK",
   ignoreHTTPSErrors: true,
+  deviceScaleFactor: Number(process.env.E2E_SCALE ?? 1),
 });
 const page = await context.newPage();
 const problems = [];
@@ -36,6 +37,16 @@ await page.getByRole("link", { name: "Sommerfesten" }).last().click();
 await page.getByRole("link", { name: "Planen" }).last().click();
 await page.waitForURL("**/pages/*");
 await page.locator(".facade-page").getByText("120 gæster").waitFor();
+
+// Somebody else is here: the point of the whole product, in the first minute.
+await page.locator(".collaboration-carets__label", { hasText: "Anna Holm" }).waitFor({
+  timeout: 15_000,
+});
+await page.getByLabel("På siden lige nu").getByRole("img", { name: "Anna Holm" }).waitFor();
+await page.waitForTimeout(2500);
+await page.screenshot({ path: `${SHOTS}/demo-anna.png` });
+await page.locator(".facade-page").getByText("lørdag morgen.").waitFor({ timeout: 20_000 });
+
 await page.getByRole("button", { name: "Samtale" }).click();
 await page.getByText("Skal der ikke stå noget om regnvejr her?").waitFor();
 await page.screenshot({ path: `${SHOTS}/demo-page.png` });

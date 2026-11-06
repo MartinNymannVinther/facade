@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { requireOrgContext } from "@/core/auth/guard";
 import { crossSite } from "@/core/http/cross-site";
+import { colleagueOnPage } from "@/modules/demo/colleague";
 import { ownConnection, watchPage } from "@/modules/live/hub";
 import { getPage } from "@/modules/pages/service";
 
@@ -20,5 +21,8 @@ export async function POST(request: Request) {
   if (!connection) return new Response(null, { status: 409 });
   const { pageId } = parsed.data;
   if (pageId && !(await getPage(ctx, pageId))) return new Response(null, { status: 404 });
-  return Response.json({ users: watchPage(connection, pageId) });
+  const users = watchPage(connection, pageId);
+  if (pageId)
+    void colleagueOnPage(ctx, pageId).catch((error) => console.error("demo colleague", error));
+  return Response.json({ users });
 }

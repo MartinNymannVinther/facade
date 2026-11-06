@@ -6,7 +6,7 @@ Status: accepted · Date: 2026-11-05
 
 Facade is a small Notion and a small Slack in one: projects with pages
 written on together, and channels beside them. It was asked for to work
-with two colleagues on the game Ukendt, as part of the Haij family and on
+with two colleagues on a game, as part of the Haij family and on
 the family's foundation.
 
 The foundation has been copied five times: Haij, Ajour, Tavle, Domino,
@@ -31,7 +31,8 @@ for: the work behind the facade.
 
 ## Alternatives rejected
 
-- **Inside Ukendt.** The collaboration is about Ukendt but is not Ukendt, and
+- **Inside that game's code.** The collaboration is about the game but is not
+  the game, and
   the next project should not need a game engine to have a page.
 - **Inside Tavle or Plot.** A page and a channel are not a card or an
   initiative; the concepts overlap in nothing but the foundation.

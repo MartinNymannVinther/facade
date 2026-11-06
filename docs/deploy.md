@@ -191,6 +191,8 @@ That is a real workspace built by the real services, so what a visitor
 sees is the product rather than a mock of it. Five things keep it
 bounded: five demos an hour per address, two hundred live demos at once,
 an expiry on every one of them, 10 MB of files per demo, and no agent keys.
+The first time the plan is opened, a made-up colleague writes one line on it,
+so a visitor sees a cursor that is not their own.
 
 Cleanup runs on each visit, so an installation that gets visitors needs no
 scheduler. If yours is quiet, or you would rather not rely on that, use

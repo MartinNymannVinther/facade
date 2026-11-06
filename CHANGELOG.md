@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0 — 2026-11-06
+
+In the demo, Anna writes a line on the plan with her own cursor the first time
+it is opened, so a visitor sees the point of the tool without opening a second
+window.
+
 ## 1.2.0 — 2026-11-06
 
 The demo is worth opening: two made-up colleagues with a thread, reactions, a

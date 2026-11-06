@@ -54,20 +54,20 @@ afterAll(async () => {
 
 describe("mentions", () => {
   const people = [
-    { id: "1", name: "Kasper" },
-    { id: "2", name: "Kasper Holm" },
+    { id: "1", name: "Sofie" },
+    { id: "2", name: "Sofie Holm" },
   ];
 
   it("takes the longest name, and goes both ways", () => {
-    const body = encodeMentions("Hej @Kasper Holm og @Kasper", people);
-    expect(body).toBe("Hej @[Kasper Holm](2) og @[Kasper](1)");
+    const body = encodeMentions("Hej @Sofie Holm og @Sofie", people);
+    expect(body).toBe("Hej @[Sofie Holm](2) og @[Sofie](1)");
     expect(mentionIds(body)).toEqual(["2", "1"]);
-    expect(plainMentions(body)).toBe("Hej @Kasper Holm og @Kasper");
+    expect(plainMentions(body)).toBe("Hej @Sofie Holm og @Sofie");
     expect(splitMentions(body)).toEqual([
       { text: "Hej " },
-      { name: "Kasper Holm", id: "2" },
+      { name: "Sofie Holm", id: "2" },
       { text: " og " },
-      { name: "Kasper", id: "1" },
+      { name: "Sofie", id: "1" },
     ]);
   });
 });
@@ -76,10 +76,10 @@ describe("channels", () => {
   it("makes the general channel once, and every project brings its own", async () => {
     await ensureGeneralChannel(a, "generelt");
     await ensureGeneralChannel(a, "generelt");
-    await createProject(a, { name: "Ukendt", description: "", icon: "" });
+    await createProject(a, { name: "Holdet", description: "", icon: "" });
     const list = await listChannels(a);
     expect(list.filter((c) => c.name === "generelt")).toHaveLength(1);
-    expect(list.find((c) => c.name === "Ukendt")?.kind).toBe("project");
+    expect(list.find((c) => c.name === "Holdet")?.kind).toBe("project");
   });
 
   it("refuses a second channel of the same name", async () => {
@@ -194,7 +194,7 @@ describe("the inbox", () => {
       description: "",
       icon: "",
     });
-    const page = await createPage(a, { projectId, parentId: null, title: "Gåde" });
+    const page = await createPage(a, { projectId, parentId: null, title: "Idé" });
     const id = await pageChannelId(a, page.id);
     expect(await pageChannelId(a2, page.id)).toBe(id);
     expect((await listChannels(a)).map((c) => c.id)).not.toContain(id);
@@ -202,6 +202,6 @@ describe("the inbox", () => {
     await markInboxRead(a2);
     await say(a, "Et svar", null, id);
     const item = (await listInbox(a2))[0];
-    expect(item).toMatchObject({ kind: "reply", pageId: page.id, pageTitle: "Gåde" });
+    expect(item).toMatchObject({ kind: "reply", pageId: page.id, pageTitle: "Idé" });
   });
 });

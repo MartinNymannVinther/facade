@@ -16,7 +16,7 @@ codebase to:
 
 1. **Real open source.** AGPL-3.0. Everything that runs on facade.haij.dk
    can be cloned and run elsewhere or locally, 1:1. No feature exists only
-   on the hosted instance. The repository is private until Martin opens it.
+   on the hosted instance.
 2. **Self-hosting.** Runs on one server with Docker Compose, one Postgres
    and a local language model through Ollama, without a single cloud key.
    The test: cut the internet, and everything essential still works.
@@ -37,7 +37,7 @@ codebase to:
    exceptions), passkeys and TOTP from the start, a public way to report
    vulnerabilities, and never a secret in the code.
 7. **Used for real.** Nothing goes in the window before it has run real
-   work. Facade's first real work is the development of Ukendt.
+   work. Facade's first real work is a game Martin develops with two colleagues.
 
 ## Product principles
 

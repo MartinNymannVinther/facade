@@ -102,6 +102,11 @@ export function watchPage(connection: Connection, pageId: string | null): string
   return users;
 }
 
+/** Who has a page open. */
+export function pageUsers(orgId: string, pageId: string): string[] {
+  return onPage(orgId, pageId);
+}
+
 export function streamsOf(orgId: string, userId: string): number {
   return inOrg(orgId).filter((c) => c.userId === userId).length;
 }

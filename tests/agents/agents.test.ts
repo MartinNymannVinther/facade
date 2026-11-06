@@ -46,7 +46,7 @@ beforeAll(async () => {
   a = await seedWorkspace(admin, "agents_a");
   member = await seedMember(admin, a.orgId, "agents_m");
   b = await seedWorkspace(admin, "agents_b");
-  ({ id: projectId } = await createProject(a, { name: "Ukendt", description: "", icon: "" }));
+  ({ id: projectId } = await createProject(a, { name: "Holdet", description: "", icon: "" }));
   const made = await createAgent(a, { name: "Claude", access: "write" });
   writerToken = made.token;
   writer = (await authenticateAgent(made.token))!;
@@ -130,13 +130,13 @@ describe("an agent at work", () => {
     const page = await createPage(a, {
       projectId,
       parentId: null,
-      title: "Gåder",
-      markdown: "Låsecylinderen er gåde tre",
+      title: "Noter",
+      markdown: "Havelågen er punkt tre",
     });
-    expect((await call(reader, "list_pages")).content[0]!.text).toContain("Gåder");
+    expect((await call(reader, "list_pages")).content[0]!.text).toContain("Noter");
     const read = await call(reader, "read_page", { page_id: page.id });
-    expect(read.content[0]!.text).toContain("Låsecylinderen");
-    expect((await call(reader, "search", { query: "låsecyl" })).content[0]!.text).toContain(
+    expect(read.content[0]!.text).toContain("Havelågen");
+    expect((await call(reader, "search", { query: "havelåg" })).content[0]!.text).toContain(
       page.id,
     );
   });

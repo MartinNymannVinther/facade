@@ -39,7 +39,7 @@ async function resolve(email: string, workspace?: string): Promise<Ctx> {
   return { orgId: found[0]!.orgId, userId: found[0]!.userId };
 }
 
-/** "02 Spilmotor.md" sorts second and is called "Spilmotor". */
+/** "02 Hjemmesiden.md" sorts second and is called "Hjemmesiden". */
 function titleOf(name: string): string {
   return name.replace(/\.md$/i, "").replace(/^\d+[\s._-]+/, "");
 }

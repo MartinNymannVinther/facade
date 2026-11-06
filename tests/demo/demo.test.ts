@@ -8,6 +8,14 @@ import {
 } from "@/modules/demo/service";
 import { createAgent } from "@/modules/agents/service";
 import { storeFile } from "@/modules/files/service";
+import { colleagueOnPage } from "@/modules/demo/colleague";
+import type { LiveEvent } from "@/modules/live/events";
+import { dropConnection, openConnection, watchPage } from "@/modules/live/hub";
+import { textOf } from "@/modules/pages/document";
+import { createPage } from "@/modules/pages/service";
+import { loadJson } from "@/modules/pages/sync";
+import { createProject } from "@/modules/projects/service";
+import { seedWorkspace } from "../helpers/workspace";
 import { adminPool } from "../helpers/db";
 
 /**
@@ -66,6 +74,48 @@ describe("a demo workspace", () => {
       [orgId],
     );
     expect(plan.rows[0].text).toContain("120");
+  });
+
+  it("has a colleague write once on the plan, with a cursor, and nowhere else", async () => {
+    const ctx = { orgId, userId };
+    const pace = { startMs: 0, stepMs: 0, endMs: 0 };
+    const events: LiveEvent[] = [];
+    const stream = openConnection(
+      orgId,
+      userId,
+      (e) => events.push(e),
+      () => {},
+    );
+    const { rows } = await admin.query(
+      `select id, title from pages where org_id = $1 and parent_id is null`,
+      [orgId],
+    );
+    const plan = rows[0].id as string;
+    watchPage(stream, plan);
+
+    await colleagueOnPage(ctx, plan, pace);
+    await colleagueOnPage(ctx, plan, pace);
+    const said = textOf(await loadJson(ctx, plan));
+    expect(said.match(/Jeg tager teltet/g)).toHaveLength(1);
+    expect(said).toContain("lørdag morgen.");
+    expect(events.some((e) => e.type === "doc.awareness")).toBe(true);
+    expect(events.filter((e) => e.type === "doc.update").length).toBeGreaterThan(10);
+    dropConnection(stream.id);
+
+    const { rows: under } = await admin.query(
+      `select id from pages where org_id = $1 and parent_id is not null limit 1`,
+      [orgId],
+    );
+    await colleagueOnPage(ctx, under[0].id, pace);
+    expect(textOf(await loadJson(ctx, under[0].id))).not.toContain("Jeg tager teltet");
+  });
+
+  it("leaves a real workspace alone, even a page called the same", async () => {
+    const real = await seedWorkspace(admin, "not_a_demo");
+    const { id: projectId } = await createProject(real, { name: "P", description: "", icon: "" });
+    const page = await createPage(real, { projectId, parentId: null, title: "Planen" });
+    await colleagueOnPage(real, page.id, { startMs: 0, stepMs: 0, endMs: 0 });
+    expect(textOf(await loadJson(real, page.id))).toBe("");
   });
 
   it("keeps a demo to 10 MB of files and away from agent keys", async () => {

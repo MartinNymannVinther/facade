@@ -36,7 +36,7 @@ beforeAll(async () => {
   a = await seedWorkspace(admin, "pages_a");
   a2 = await seedMember(admin, a.orgId, "pages_a2");
   b = await seedWorkspace(admin, "pages_b");
-  ({ id: projectId } = await createProject(a, { name: "Ukendt", description: "", icon: "" }));
+  ({ id: projectId } = await createProject(a, { name: "Holdet", description: "", icon: "" }));
 });
 
 afterAll(async () => {
@@ -134,12 +134,12 @@ describe("writing on a page", () => {
   it("keeps every edit through a settle, from two people", async () => {
     const { id } = await page("Sammen", null, "Start");
     const state = await loadState(a, id);
-    await appendUpdate(a, id, typed(state, "fra Kasper"));
-    await appendUpdate(a2, id, typed(state, "fra Michael"));
+    await appendUpdate(a, id, typed(state, "fra Sofie"));
+    await appendUpdate(a2, id, typed(state, "fra Emil"));
 
     const unsettled = textOf(docToJson(buildDoc([await loadState(a, id)])));
-    expect(unsettled).toContain("fra Kasper");
-    expect(unsettled).toContain("fra Michael");
+    expect(unsettled).toContain("fra Sofie");
+    expect(unsettled).toContain("fra Emil");
 
     await settlePage(a, id);
     const log = await admin.query(`select 1 from page_updates where page_id = $1`, [id]);
@@ -257,13 +257,13 @@ describe("search", () => {
   });
 
   it("finds a title, a word in the text by its beginning, and stays home", async () => {
-    const { id } = await page("Låsecylinderen", null, "Gåden med skakbonden og dominobrikker");
-    const byTitle = await search(a, "låsecyl");
+    const { id } = await page("Havelågen", null, "Idén med cykelhjelmen og lampeskærme");
+    const byTitle = await search(a, "havelåg");
     expect(byTitle.some((h) => h.kind === "page" && h.id === id)).toBe(true);
-    const byText = await search(a, "dominobri");
+    const byText = await search(a, "lampeskær");
     const hit = byText.find((h) => h.kind === "page" && h.id === id);
     expect(hit?.snippet).toContain("⟦");
-    expect(await search(b, "dominobri")).toEqual([]);
+    expect(await search(b, "lampeskær")).toEqual([]);
     expect(await search(a, "' OR 1=1 --")).toBeInstanceOf(Array);
   });
 });
@@ -290,7 +290,7 @@ describe("the Markdown export", () => {
     expect(names).toContain("Bog Plan/Kapitel.md");
     expect(names).toContain("Bog Plan/Kapitel/Afsnit.md");
     expect(strFromU8(zip["Bog Plan/Kapitel/Afsnit.md"]!)).toContain("Anden tekst");
-    expect(names.some((n) => n.startsWith("Ukendt"))).toBe(false);
+    expect(names.some((n) => n.startsWith("Holdet"))).toBe(false);
     expect(names.filter((n) => n.split("/").includes(".."))).toEqual([]);
   });
 });
