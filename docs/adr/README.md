@@ -34,3 +34,4 @@ session reads, and **TECH-DEBT.md** is what we know is not right yet.
 | [0012](0012-the-live-stream.md)                | One stream per tab, in one process                                     |
 | [0013](0013-everybody-reads-everything.md)     | Everybody in a workspace reads everything                              |
 | [0014](0014-the-ai-proposes-text.md)           | The AI proposes text, and a person places it                           |
+| [0015](0015-agents-are-members.md)             | An agent is a member, and comes in through MCP                         |

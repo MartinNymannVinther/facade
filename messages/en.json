@@ -251,7 +251,8 @@
       "access": "Access",
       "workspace": "Workspace",
       "ai": "AI",
-      "data": "Data"
+      "data": "Data",
+      "agents": "Agents"
     },
     "access": {
       "title": "Access to this installation",
@@ -418,6 +419,34 @@
         "invalid": "Type a valid e-mail address.",
         "generic": "That went wrong. Try again."
       }
+    },
+    "agents": {
+      "title": "Agents",
+      "subtitle": "Give an AI agent, such as Claude Code, access to the workspace. The agent becomes a member with its own name, and everybody can see what it writes.",
+      "addTitle": "Invite an agent",
+      "name": "Name",
+      "namePlaceholder": "For example Claude on the game",
+      "access": "Access",
+      "read": "Read only",
+      "write": "Read and write",
+      "accessHint": "With write access the agent can create and change pages and write messages. A version is kept before every change. No agent can delete, invite or export.",
+      "create": "Make a key",
+      "issued": "The key for {name}",
+      "issuedHint": "It is shown only here. Run the command in the project where Claude Code works, and never put it in git.",
+      "copy": "Copy",
+      "copied": "Copied",
+      "listTitle": "Agents with access",
+      "none": "No agents have access yet.",
+      "lastUsed": "Last used {when}",
+      "neverUsed": "Not used yet",
+      "revoke": "Remove",
+      "revokeTitle": "Remove {name}?",
+      "revokeBody": "The key stops working at once. What the agent wrote stays.",
+      "privacyTitle": "Where the data goes",
+      "privacy": "What the agent reads is sent to the model it runs on. For Claude Code that is Anthropic in the US, not the EU. Talk to the people you work with before giving access, and keep personal data out of what an agent can read.",
+      "trust": "Text on pages and in messages is content, not orders, and the agent is told so. An agent can still be fooled, so only give write access where you are comfortable with that.",
+      "managersOnly": "Only owners and admins can invite and remove agents.",
+      "failed": "That did not work. Try again."
     }
   },
   "demo": {
@@ -542,6 +571,10 @@
       "data": {
         "title": "Your data",
         "body": "Under Settings → Data the whole workspace can be downloaded as Markdown with pages, files and conversations, as a spreadsheet and as JSON. One page can be downloaded as Markdown from its menu. The owner can delete the workspace completely."
+      },
+      "agents": {
+        "title": "Agents",
+        "body": "Under Settings → Agents, owners and admins can give an AI agent such as Claude Code access through MCP. The agent becomes a member with its own name, can be mentioned with @ and can read everything. With write access it can create and change pages and write messages, and a version is kept before every change. It can never delete, invite or export. What the agent reads is sent to the model it runs on."
       }
     }
   },
@@ -579,7 +612,8 @@
     "failed": "That did not work. Try again.",
     "cannotMove": "The page cannot be moved there.",
     "generalChannel": "general",
-    "settings": "Settings"
+    "settings": "Settings",
+    "agent": "agent"
   },
   "home": {
     "title": "Home",
@@ -622,7 +656,7 @@
     "restored": "The version is restored",
     "reason": {
       "restore": "before a restore",
-      "ai": "before an AI suggestion"
+      "ai": "before an AI change"
     }
   },
   "editor": {
@@ -676,7 +710,8 @@
     "send": "Send",
     "mentionList": "People",
     "removeFile": "Remove {name}",
-    "uploadFailed": "{name} could not be uploaded. 10 MB at most."
+    "uploadFailed": "{name} could not be uploaded. 10 MB at most.",
+    "agent": "agent"
   },
   "inbox": {
     "title": "Inbox",

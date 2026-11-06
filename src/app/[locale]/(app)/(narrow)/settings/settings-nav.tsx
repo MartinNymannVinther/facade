@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 const ITEMS = [
   { href: "/settings/workspace", key: "workspace" },
   { href: "/settings/security", key: "security" },
+  { href: "/settings/agents", key: "agents" },
   { href: "/settings/ai", key: "ai" },
   { href: "/settings/data", key: "data" },
   { href: "/settings/about", key: "about" },

@@ -29,7 +29,8 @@ codebase to:
 5. **The AI helps, the human decides.** The AI may propose text, but nothing
    reaches a page without a person saying yes, it never sends anything out
    of the house and never deletes. What a page or a message says is data,
-   never instructions.
+   never instructions. An invited agent writes without asking each time, on
+   the terms in ADR 0015: named, undoable, and with no tool that deletes.
 6. **Secure from day one.** Workspaces are separated in the database
    (Postgres RLS) with a test proving it, every change a person would ask
    about lands in an audit log that cannot be edited (ADR 0011 names the
@@ -77,13 +78,16 @@ codebase to:
 - Live (ADR 0012): one Server-Sent Events stream per tab, an in-memory hub,
   edits as binary POSTs. No WebSocket, no custom server, no second port.
   One process is the installation, like the rate limiter.
+- Agents (ADR 0015): a member with no login, a key, and `/api/mcp`. New
+  abilities are new entries in `modules/agents/tools.ts`; none may delete,
+  invite or export.
 - Files: in Postgres (`files.bytes`), never on disk; 10 MB each.
 - AI: all model access through `src/core/llm`; proposals on their own
   routes (ADR 0008), under the roof (ADR 0009). Without a model the buttons
   are gone and everything else works.
 - Deployment: Docker Compose via Coolify on an EU VPS. No US cloud.
 - Layout: shared kernel in `src/core`; the product in
-  `src/modules/{projects,pages,live,conversation,files,search,ai,demo,export}`
+  `src/modules/{projects,pages,live,conversation,files,search,agents,ai,demo,export}`
   behind services that take an `OrgContext`; pages in `src/app/[locale]`,
   components in `src/components/{live,nav,page,conversation,search}`.
 - Trade-off accepted: the foundation is a copy, not a shared package (ADR

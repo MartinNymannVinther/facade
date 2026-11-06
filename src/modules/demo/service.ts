@@ -84,6 +84,11 @@ export async function cleanupExpiredDemos(now = new Date()): Promise<number> {
     try {
       await authDb.execute(sql`delete from organizations where id = ${row.organizationId}`);
       await authDb.execute(sql`delete from users where id = ${row.userId}`);
+      // An agent added in the demo has no membership left to find it by.
+      await authDb.execute(sql`
+        delete from users u where u.email like '%@agents.facade.invalid'
+          and not exists (select 1 from memberships m where m.user_id = u.id)
+      `);
     } catch (error) {
       // One stuck demo must not stop the others being cleaned up.
       console.error("demo: cleanup failed for", row.organizationId, error);

@@ -255,15 +255,23 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
             <li key={person.id} className="flex h-8 items-center gap-2 px-2 text-sm">
               <span className="relative">
                 <PersonDot person={person} size={22} />
-                <span
-                  className={cn(
-                    "border-sidebar absolute -right-0.5 -bottom-0.5 size-2.5 rounded-full border-2",
-                    online.has(person.id) ? "bg-primary" : "bg-input",
-                  )}
-                />
+                {!person.agent && (
+                  <span
+                    className={cn(
+                      "border-sidebar absolute -right-0.5 -bottom-0.5 size-2.5 rounded-full border-2",
+                      online.has(person.id) ? "bg-primary" : "bg-input",
+                    )}
+                  />
+                )}
               </span>
               <span className="text-sidebar-foreground truncate">{person.name}</span>
-              <span className="sr-only">{online.has(person.id) ? t("online") : t("offline")}</span>
+              {person.agent ? (
+                <span className="text-label text-xs">{t("agent")}</span>
+              ) : (
+                <span className="sr-only">
+                  {online.has(person.id) ? t("online") : t("offline")}
+                </span>
+              )}
             </li>
           ))}
         </ul>

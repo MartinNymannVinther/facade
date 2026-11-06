@@ -20,6 +20,7 @@ const TABLES = [
   "message_reactions",
   "channel_reads",
   "notifications",
+  "agent_tokens",
 ];
 
 /** ADR 0011: technical and high-churn, so no row trigger. Everything else has one. */
@@ -78,6 +79,11 @@ async function seed(key: string, orgId: string, userId: string) {
     orgId,
     `chan_${key}`,
     userId,
+  ]);
+  await admin.query(`insert into agent_tokens (org_id, user_id, token_hash) values ($1, $2, $3)`, [
+    orgId,
+    userId,
+    `hash_${key}`,
   ]);
   await admin.query(
     `insert into notifications (org_id, user_id, kind) values ($1, $2, 'mention')`,

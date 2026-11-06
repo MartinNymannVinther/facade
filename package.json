@@ -1,6 +1,6 @@
 {
   "name": "facade",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Open source workspace for a small team: projects, pages written together, and the conversation beside them. Part of the Haij family.",
   "license": "AGPL-3.0-only",
   "private": true,

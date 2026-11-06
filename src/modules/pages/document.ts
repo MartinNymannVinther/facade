@@ -1,6 +1,10 @@
 import { getSchema, type JSONContent } from "@tiptap/core";
 import { MarkdownManager } from "@tiptap/markdown";
-import { prosemirrorJSONToYXmlFragment, yXmlFragmentToProsemirrorJSON } from "y-prosemirror";
+import {
+  prosemirrorJSONToYXmlFragment,
+  prosemirrorToYXmlFragment,
+  yXmlFragmentToProsemirrorJSON,
+} from "y-prosemirror";
 import * as Y from "yjs";
 import { contentExtensions } from "./extensions";
 
@@ -80,6 +84,14 @@ export function jsonToState(json: JSONContent): Uint8Array {
   const doc = new Y.Doc();
   prosemirrorJSONToYXmlFragment(tools().schema, json, doc.getXmlFragment(FRAGMENT));
   return Y.encodeStateAsUpdate(doc);
+}
+
+/** The update that turns a document into `json`, touching only what differs. */
+export function rewrite(state: Uint8Array, json: JSONContent): Uint8Array {
+  const doc = buildDoc([state]);
+  const before = Y.encodeStateVector(doc);
+  prosemirrorToYXmlFragment(tools().schema.nodeFromJSON(json), doc.getXmlFragment(FRAGMENT));
+  return Y.encodeStateAsUpdate(doc, before);
 }
 
 export function markdownToJson(markdown: string): JSONContent {

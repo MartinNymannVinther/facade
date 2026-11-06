@@ -43,7 +43,8 @@ export default async function WorkspaceSettingsPage() {
       .where(eq(memberships.organizationId, context.orgId));
     return [org, rows] as const;
   });
-  const members = await listMembers(context);
+  // Agents are kept under Settings → Agents, where their keys are.
+  const members = (await listMembers(context)).filter((m) => !m.role.endsWith("agent"));
   const role = (await currentRole(context)) ?? "member";
   const invitations =
     role === "owner" || role === "admin" ? await listPendingInvitations(context.orgId) : [];

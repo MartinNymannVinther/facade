@@ -69,6 +69,11 @@ both matter, for different reasons.
 
 ## Not subprocessors, but worth naming
 
+**An agent somebody invites.** What an agent reads through a key leaves Facade
+for the model it runs on, and for Claude Code that is Anthropic in the US. The
+workspace's owner or admin makes that choice under Settings → Agents, Facade does
+not send anything by itself, and without a key nothing goes there (ADR 0015).
+
 **GitHub** holds the source repository. It processes no installation
 data, so it is a development dependency rather than a subprocessor, but
 it is US-owned and that is worth stating plainly rather than leaving for

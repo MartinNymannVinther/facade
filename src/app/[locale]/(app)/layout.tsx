@@ -75,7 +75,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <WorkspaceProvider
       value={{
         me: { id: session.user.id, name: session.user.name },
-        people: members.map((m) => ({ id: m.userId, name: m.name })),
+        people: members
+          .filter((m) => m.role !== "former_agent")
+          .map((m) => ({ id: m.userId, name: m.name, agent: m.role === "agent" })),
         projects: shownProjects,
         tree: tree.filter((n) => openProjects.has(n.projectId)),
         channels,

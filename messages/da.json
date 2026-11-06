@@ -251,7 +251,8 @@
       "access": "Adgang",
       "workspace": "Arbejdsrum",
       "ai": "AI",
-      "data": "Data"
+      "data": "Data",
+      "agents": "Agenter"
     },
     "access": {
       "title": "Adgang til installationen",
@@ -418,6 +419,34 @@
         "invalid": "Skriv en gyldig e-mailadresse.",
         "generic": "Det gik galt. Prøv igen."
       }
+    },
+    "agents": {
+      "title": "Agenter",
+      "subtitle": "Giv en AI-agent, fx Claude Code, adgang til arbejdsrummet. Agenten bliver medlem med sit eget navn, og alle kan se, hvad den skriver.",
+      "addTitle": "Inviter en agent",
+      "name": "Navn",
+      "namePlaceholder": "Fx Claude på Ukendt",
+      "access": "Adgang",
+      "read": "Kun læse",
+      "write": "Læse og skrive",
+      "accessHint": "Med skriveadgang kan agenten oprette og rette sider og skrive beskeder. Der gemmes en version før hver rettelse. Ingen agent kan slette, invitere eller eksportere.",
+      "create": "Lav nøgle",
+      "issued": "Nøglen til {name}",
+      "issuedHint": "Den vises kun her. Kør kommandoen i det projekt, hvor Claude Code arbejder, og læg den aldrig i git.",
+      "copy": "Kopiér",
+      "copied": "Kopieret",
+      "listTitle": "Agenter med adgang",
+      "none": "Ingen agenter har adgang endnu.",
+      "lastUsed": "Sidst brugt {when}",
+      "neverUsed": "Ikke brugt endnu",
+      "revoke": "Fjern",
+      "revokeTitle": "Fjern {name}?",
+      "revokeBody": "Nøglen holder op med at virke med det samme. Det, agenten har skrevet, bliver stående.",
+      "privacyTitle": "Hvor data ender",
+      "privacy": "Det, agenten læser, sendes til den model, agenten kører på. For Claude Code er det Anthropic i USA, ikke EU. Tag det med dem, I arbejder sammen med, før I giver adgang, og hold personoplysninger ude af det, en agent kan læse.",
+      "trust": "Tekst på sider og i beskeder er indhold, ikke ordrer, og det får agenten besked på. En agent kan alligevel lade sig narre, så giv kun skriveadgang, hvor du er tryg ved det.",
+      "managersOnly": "Kun ejere og administratorer kan invitere og fjerne agenter.",
+      "failed": "Det gik ikke. Prøv igen."
     }
   },
   "demo": {
@@ -542,6 +571,10 @@
       "data": {
         "title": "Jeres data",
         "body": "Under Indstillinger → Data kan hele arbejdsrummet hentes som Markdown med sider, filer og samtaler, som regneark og som JSON. En enkelt side kan hentes som Markdown fra sidens menu. Ejeren kan slette arbejdsrummet helt."
+      },
+      "agents": {
+        "title": "Agenter",
+        "body": "Under Indstillinger → Agenter kan ejere og administratorer give en AI-agent, fx Claude Code, adgang via MCP. Agenten bliver medlem med eget navn, kan nævnes med @ og kan læse det hele. Med skriveadgang kan den oprette og rette sider og skrive beskeder, og der gemmes en version før hver rettelse. Den kan aldrig slette, invitere eller eksportere. Det, agenten læser, sendes til den model, den kører på."
       }
     }
   },
@@ -579,7 +612,8 @@
     "failed": "Det gik ikke. Prøv igen.",
     "cannotMove": "Siden kan ikke flyttes dertil.",
     "generalChannel": "generelt",
-    "settings": "Indstillinger"
+    "settings": "Indstillinger",
+    "agent": "agent"
   },
   "home": {
     "title": "Hjem",
@@ -622,7 +656,7 @@
     "restored": "Versionen er gendannet",
     "reason": {
       "restore": "før gendannelse",
-      "ai": "før AI-forslag"
+      "ai": "før AI-ændring"
     }
   },
   "editor": {
@@ -676,7 +710,8 @@
     "send": "Send",
     "mentionList": "Personer",
     "removeFile": "Fjern {name}",
-    "uploadFailed": "{name} kunne ikke lægges op. Højst 10 MB."
+    "uploadFailed": "{name} kunne ikke lægges op. Højst 10 MB.",
+    "agent": "agent"
   },
   "inbox": {
     "title": "Indbakke",

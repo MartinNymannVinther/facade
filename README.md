@@ -44,6 +44,11 @@ reaches a page until a person says yes, and the history can undo it. Runs at
 Mistral in the EU or on your own machine with Ollama, and without a model
 everything else works.
 
+**Agents as colleagues.** Invite an AI agent such as Claude Code under Settings
+→ Agents: one `claude mcp add` and it can read the workspace, and write if you
+allow it, under its own name. It can never delete, and every change can be undone.
+What it reads goes to the model it runs on.
+
 **Your way out.** The whole workspace as Markdown with its files, as a
 spreadsheet and as JSON, and a folder of Markdown goes in again with
 `scripts/import-markdown.ts`.

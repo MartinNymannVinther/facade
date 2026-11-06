@@ -36,6 +36,20 @@
       "when": 1793899329224,
       "tag": "0004_better_auth_account_identity",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793953227560,
+      "tag": "0005_agents",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793953228560,
+      "tag": "0006_agents_rls_audit",
+      "breakpoints": true
     }
   ]
 }

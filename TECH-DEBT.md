@@ -58,6 +58,11 @@ A new message or a moved page asks the server to draw the shell again, at most
 every 300 ms. Right at this size; a large workspace would want the tree and the
 unread counts in client state.
 
+## Agents reach the whole workspace
+
+A key opens every project (ADR 0015). A team with work an agent should not read
+needs access per project, or a second workspace until then.
+
 ## Tests
 
 `e2e/collaboration.mjs` needs a dev server on an empty database, so it is not

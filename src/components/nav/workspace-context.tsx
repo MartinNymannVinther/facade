@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 import type { ChannelView } from "@/modules/conversation/channels";
 import type { TreeNode } from "@/modules/pages/tree";
 
-export type Person = { id: string; name: string };
+export type Person = { id: string; name: string; agent?: boolean };
 export type NavProject = { id: string; name: string; icon: string };
 
 export type WorkspaceData = {

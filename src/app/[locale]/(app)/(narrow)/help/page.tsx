@@ -16,6 +16,7 @@ const HOW_TO = [
   "history",
   "roles",
   "ai",
+  "agents",
   "data",
 ] as const;
 

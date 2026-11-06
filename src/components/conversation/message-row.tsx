@@ -98,6 +98,9 @@ export function MessageRow({
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline gap-2">
           <span className="truncate text-sm font-semibold">{author.name}</span>
+          {people.find((p) => p.id === message.authorId)?.agent && (
+            <span className="text-label shrink-0 text-xs">{t("agent")}</span>
+          )}
           <time dateTime={message.createdAt} className="text-meta shrink-0 text-xs">
             {format.dateTime(new Date(message.createdAt), {
               dateStyle: "short",
