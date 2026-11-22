@@ -50,6 +50,20 @@
       "when": 1793953228560,
       "tag": "0006_agents_rls_audit",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1795377207333,
+      "tag": "0007_files_in_projects",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1795377214359,
+      "tag": "0008_files_in_projects_rls",
+      "breakpoints": true
     }
   ]
 }

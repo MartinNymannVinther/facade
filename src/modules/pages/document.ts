@@ -149,3 +149,22 @@ export function mentionsOf(json: JSONContent): string[] {
   walk(json);
   return [...found].slice(0, MAX_MENTIONS);
 }
+
+const FILE_LINK = /^\/api\/files\/([\w-]{1,100})$/;
+const MAX_FILES = 200;
+
+/** Every workspace file a document shows or links to, once each. */
+export function filesOf(json: JSONContent): string[] {
+  const found = new Set<string>();
+  const take = (value: unknown) => {
+    const id = typeof value === "string" ? FILE_LINK.exec(value)?.[1] : undefined;
+    if (id) found.add(id);
+  };
+  const walk = (node: JSONContent) => {
+    if (node.type === "image") take(node.attrs?.src);
+    for (const mark of node.marks ?? []) if (mark.type === "link") take(mark.attrs?.href);
+    node.content?.forEach(walk);
+  };
+  walk(json);
+  return [...found].slice(0, MAX_FILES);
+}

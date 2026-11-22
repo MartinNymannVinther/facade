@@ -4,7 +4,8 @@ import { Refused } from "@/core/action";
 import { pageDocuments, pages, projects, users } from "@/core/db/schema";
 import { withOrgContext, type AppTransaction, type OrgContext } from "@/core/db/tenant";
 import { publish } from "@/modules/live/hub";
-import { jsonToState, markdownToJson, textOf } from "./document";
+import { placeFiles } from "@/modules/files/places";
+import { filesOf, jsonToState, markdownToJson, textOf } from "./document";
 import { sortAt, subtreeIds, wouldCycle, type TreeNode } from "./tree";
 
 export const PageFields = z.object({
@@ -87,6 +88,7 @@ export async function createPage(
       text: json ? textOf(json) : "",
       editedBy: ctx.userId,
     });
+    if (json) await placeFiles(tx, filesOf(json), { projectId: input.projectId, pageId: page!.id });
     return { id: page!.id };
   });
   publish(ctx.orgId, { type: "tree" });

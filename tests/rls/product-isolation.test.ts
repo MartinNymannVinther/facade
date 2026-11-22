@@ -163,6 +163,21 @@ describe("product tables", () => {
     );
   });
 
+  it("refuses a file placed in another workspace's project, page or message", async () => {
+    for (const [column, id] of [
+      ["project_id", "proj_b"],
+      ["page_id", "page_b"],
+      ["message_id", "msg_b"],
+    ])
+      await refused((c) =>
+        c.query(
+          `insert into files (org_id, name, mime, size, bytes, ${column})
+           values ($1, 'f', 'text/plain', 1, '\\x00'::bytea, $2)`,
+          [A.orgId, id],
+        ),
+      );
+  });
+
   it("keeps the inbox and the read marks one person's, inside a workspace too", async () => {
     const other = await seedMember(admin, A.orgId, "iso_a2");
     const inbox = await asApp(app, other, (c) => c.query(`select 1 from notifications`));

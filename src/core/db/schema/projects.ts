@@ -1,6 +1,5 @@
 import { sql } from "drizzle-orm";
 import {
-  bigint,
   bigserial,
   customType,
   doublePrecision,
@@ -128,20 +127,4 @@ export const pageVersions = pgTable(
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [index("page_versions_page_idx").on(t.pageId, t.createdAt)],
-);
-
-/** A file in a page or a message: in Postgres, never on disk. */
-export const files = pgTable(
-  "files",
-  {
-    id: domainId("id"),
-    orgId: tenant(),
-    name: text("name").notNull(),
-    mime: text("mime").notNull(),
-    size: bigint("size", { mode: "number" }).notNull(),
-    bytes: bytes("bytes").notNull(),
-    createdBy: text("created_by").references(() => users.id, { onDelete: "set null" }),
-    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  },
-  (t) => [index("files_org_idx").on(t.orgId, t.createdAt)],
 );

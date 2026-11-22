@@ -553,6 +553,10 @@
         "title": "Samtale på en side",
         "body": "Knappen Samtale åbner en samtale, der hører til siden. Den, der har skrevet med der, får besked, når andre skriver."
       },
+      "files": {
+        "title": "Filer",
+        "body": "Læg en fil på en side, eller vedhæft den til en besked; højst 10 MB pr. fil. Under Filer i hvert projekt samles alt, der er delt i projektet, med hvem der delte det, og hvor det hører til. Filer, du lægger op der, deles i projektets kanal. ⌘K finder en fil på navnet."
+      },
       "inbox": {
         "title": "Indbakke og søgning",
         "body": "Indbakken samler det, der er rettet mod dig: når nogen nævner dig eller svarer dig. ⌘K eller Ctrl+K søger i alle sider og beskeder fra hvor som helst."
@@ -633,7 +637,8 @@
     "descriptionPlaceholder": "Hvad handler projektet om?",
     "archive": "Arkivér projekt",
     "archiveTitle": "Arkivér {name}?",
-    "archiveBody": "Projektet forsvinder fra menuen, men intet bliver slettet. Du finder det igen under Papirkurv."
+    "archiveBody": "Projektet forsvinder fra menuen, men intet bliver slettet. Du finder det igen under Papirkurv.",
+    "files": "Filer"
   },
   "page": {
     "saving": "Gemmer",
@@ -769,5 +774,24 @@
       "invalid": "Det gik ikke. Prøv igen.",
       "unauthorized": "Log ind igen."
     }
+  },
+  "files": {
+    "title": "Filer",
+    "titleIn": "Filer i {name}",
+    "upload": "Del filer",
+    "uploading": "Lægger op …",
+    "hint": "Filerne deles i #{channel}. Højst 10 MB pr. fil.",
+    "uploadFailed": "{name} kunne ikke lægges op. Højst 10 MB.",
+    "shareFailed": "Filerne kunne ikke deles. Prøv igen.",
+    "all": "Alle",
+    "images": "Billeder",
+    "other": "Andet",
+    "empty": "Der er ikke delt nogen filer i projektet endnu. Filer, der lægges på en side eller sendes i en samtale, samles her.",
+    "emptyKind": "Ingen filer af den slags endnu.",
+    "onPage": "på {title}",
+    "inTalk": "i samtalen om {title}",
+    "inChannel": "i #{channel}",
+    "someone": "en tidligere kollega",
+    "open": "Åbn {name}"
   }
 }

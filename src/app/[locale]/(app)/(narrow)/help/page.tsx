@@ -12,6 +12,7 @@ const HOW_TO = [
   "together",
   "talk",
   "pageTalk",
+  "files",
   "inbox",
   "history",
   "roles",

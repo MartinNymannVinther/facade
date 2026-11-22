@@ -1,4 +1,4 @@
-import { Hash } from "lucide-react";
+import { Hash, Paperclip } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -39,15 +39,24 @@ export default async function ProjectPage({ params }: Props) {
         icon={project.icon}
         archived={project.archivedAt !== null}
       />
-      {channel && (
+      <div className="flex flex-wrap gap-x-5 gap-y-2">
+        {channel && (
+          <Link
+            href={`/channels/${channel.id}`}
+            className="text-primary-hover flex w-fit items-center gap-1 text-sm font-medium hover:underline"
+          >
+            <Hash aria-hidden className="size-4" />
+            {t("channel", { name: channel.name })}
+          </Link>
+        )}
         <Link
-          href={`/channels/${channel.id}`}
+          href={`/projects/${project.id}/files`}
           className="text-primary-hover flex w-fit items-center gap-1 text-sm font-medium hover:underline"
         >
-          <Hash aria-hidden className="size-4" />
-          {t("channel", { name: channel.name })}
+          <Paperclip aria-hidden className="size-4" />
+          {t("files")}
         </Link>
-      )}
+      </div>
       <section>
         <h2 className="mb-2 text-base font-semibold">{t("pages")}</h2>
         {top.length === 0 && <p className="text-meta text-sm">{t("noPages")}</p>}

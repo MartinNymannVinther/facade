@@ -12,6 +12,18 @@ export type SearchHit =
       pageId: string | null;
       author: string;
       snippet: string;
+    }
+  | {
+      kind: "file";
+      id: string;
+      name: string;
+      project: string;
+      pageId: string | null;
+      messageId: string | null;
+      parentId: string | null;
+      channelId: string | null;
+      /** True when the page is where it was sent, not where it was placed. */
+      talk: boolean;
     };
 
 /**
@@ -66,6 +78,20 @@ export async function search(ctx: OrgContext, input: string): Promise<SearchHit[
       where m.deleted_at is null and (m.search @@ q.danish or to_tsvector('simple', m.body) @@ q.simple)
       order by m.created_at desc limit 20
     `);
+    // A file by its name, wherever it was shared; one uploaded and never
+    // sent belongs nowhere yet and is not found (docs/adr/0016).
+    const shared = await tx.execute(sql`
+      select f.id, f.name, coalesce(p.name, '') as project, f.page_id, f.message_id,
+        m.parent_id, m.channel_id
+      from files f
+      left join projects p on p.id = f.project_id
+      left join pages g on g.id = f.page_id
+      left join messages m on m.id = f.message_id
+      where (f.project_id is not null or f.message_id is not null)
+        and f.name ilike ${like}
+        and g.deleted_at is null and m.deleted_at is null and p.archived_at is null
+      order by f.created_at desc limit 10
+    `);
     return [
       ...(found.rows as Omit<Extract<SearchHit, { kind: "page" }>, "kind">[]).map((row) => ({
         kind: "page" as const,
@@ -94,6 +120,27 @@ export async function search(ctx: OrgContext, input: string): Promise<SearchHit[
         pageId: row.page_id,
         author: row.author,
         snippet: row.snippet,
+      })),
+      ...(
+        shared.rows as {
+          id: string;
+          name: string;
+          project: string;
+          page_id: string | null;
+          message_id: string | null;
+          parent_id: string | null;
+          channel_id: string | null;
+        }[]
+      ).map((row) => ({
+        kind: "file" as const,
+        id: row.id,
+        name: row.name,
+        project: row.project,
+        pageId: row.page_id,
+        messageId: row.message_id,
+        parentId: row.parent_id,
+        channelId: row.channel_id,
+        talk: row.message_id !== null && row.page_id !== null,
       })),
     ];
   });

@@ -1,6 +1,6 @@
 "use client";
 
-import { FileText, Hash } from "lucide-react";
+import { FileText, Hash, Paperclip } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -8,6 +8,7 @@ import { useWorkspace } from "@/components/nav/workspace-context";
 import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { plainMentions } from "@/modules/conversation/view";
+import { placeHref } from "@/modules/files/view";
 import type { SearchHit } from "@/modules/search/service";
 
 const EVENT = "facade:search";
@@ -18,6 +19,7 @@ export function openSearch() {
 
 function hrefOf(hit: SearchHit): string {
   if (hit.kind === "page") return `/pages/${hit.id}`;
+  if (hit.kind === "file") return placeHref(hit) ?? "/home";
   if (hit.pageId) return `/pages/${hit.pageId}?talk=1`;
   const thread = hit.parentId ?? hit.id;
   return `/channels/${hit.channelId}?thread=${thread}`;
@@ -147,6 +149,8 @@ export function SearchPalette() {
               >
                 {hit.kind === "page" ? (
                   <FileText aria-hidden className="text-meta mt-0.5 size-4 shrink-0" />
+                ) : hit.kind === "file" ? (
+                  <Paperclip aria-hidden className="text-meta mt-0.5 size-4 shrink-0" />
                 ) : (
                   <Hash aria-hidden className="text-meta mt-0.5 size-4 shrink-0" />
                 )}
@@ -154,11 +158,13 @@ export function SearchPalette() {
                   <span className="truncate text-sm font-medium">
                     {hit.kind === "page"
                       ? hit.title || tNav("untitled")
-                      : `${hit.author} ${hit.pageId ? t("onPage") : `#${hit.channel}`}`}
+                      : hit.kind === "file"
+                        ? hit.name
+                        : `${hit.author} ${hit.pageId ? t("onPage") : `#${hit.channel}`}`}
                   </span>
-                  {hit.snippet && <Snippet text={hit.snippet} />}
+                  {hit.kind !== "file" && hit.snippet && <Snippet text={hit.snippet} />}
                 </span>
-                {hit.kind === "page" && (
+                {hit.kind !== "message" && hit.project && (
                   <span className="text-label shrink-0 text-xs">{hit.project}</span>
                 )}
               </button>

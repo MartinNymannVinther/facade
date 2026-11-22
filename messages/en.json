@@ -553,6 +553,10 @@
         "title": "A conversation on a page",
         "body": "The Conversation button opens a conversation that belongs to the page. Whoever has taken part hears when others write."
       },
+      "files": {
+        "title": "Files",
+        "body": "Place a file on a page, or attach it to a message; at most 10 MB per file. Files in each project gathers everything shared in it, with who shared it and where it belongs. Files you upload there are shared in the project's channel. ⌘K finds a file by its name."
+      },
       "inbox": {
         "title": "Inbox and search",
         "body": "The inbox gathers what is aimed at you: when somebody mentions or answers you. ⌘K or Ctrl+K searches every page and message from anywhere."
@@ -633,7 +637,8 @@
     "descriptionPlaceholder": "What is the project about?",
     "archive": "Archive project",
     "archiveTitle": "Archive {name}?",
-    "archiveBody": "The project leaves the menu, but nothing is deleted. You find it again under Trash."
+    "archiveBody": "The project leaves the menu, but nothing is deleted. You find it again under Trash.",
+    "files": "Files"
   },
   "page": {
     "saving": "Saving",
@@ -769,5 +774,24 @@
       "invalid": "That did not work. Try again.",
       "unauthorized": "Sign in again."
     }
+  },
+  "files": {
+    "title": "Files",
+    "titleIn": "Files in {name}",
+    "upload": "Share files",
+    "uploading": "Uploading …",
+    "hint": "The files are shared in #{channel}. At most 10 MB per file.",
+    "uploadFailed": "{name} could not be uploaded. At most 10 MB.",
+    "shareFailed": "The files could not be shared. Try again.",
+    "all": "All",
+    "images": "Images",
+    "other": "Other",
+    "empty": "Nothing has been shared in this project yet. Files placed on a page or sent in a conversation gather here.",
+    "emptyKind": "No files of that kind yet.",
+    "onPage": "on {title}",
+    "inTalk": "in the conversation about {title}",
+    "inChannel": "in #{channel}",
+    "someone": "a former colleague",
+    "open": "Open {name}"
   }
 }

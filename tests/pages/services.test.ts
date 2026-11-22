@@ -262,7 +262,7 @@ describe("search", () => {
     expect(byTitle.some((h) => h.kind === "page" && h.id === id)).toBe(true);
     const byText = await search(a, "lampeskær");
     const hit = byText.find((h) => h.kind === "page" && h.id === id);
-    expect(hit?.snippet).toContain("⟦");
+    expect(hit?.kind === "page" && hit.snippet).toContain("⟦");
     expect(await search(b, "lampeskær")).toEqual([]);
     expect(await search(a, "' OR 1=1 --")).toBeInstanceOf(Array);
   });

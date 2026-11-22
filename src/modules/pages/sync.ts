@@ -11,7 +11,16 @@ import {
 } from "@/core/db/schema";
 import { withOrgContext, type AppTransaction, type OrgContext } from "@/core/db/tenant";
 import { publishToPage, publishToUser } from "@/modules/live/hub";
-import { buildDoc, docToJson, encodeDoc, isValidUpdate, mentionsOf, textOf } from "./document";
+import { placeFiles } from "@/modules/files/places";
+import {
+  buildDoc,
+  docToJson,
+  encodeDoc,
+  filesOf,
+  isValidUpdate,
+  mentionsOf,
+  textOf,
+} from "./document";
 
 /**
  * Where the words go when they leave the browser (docs/adr/0011).
@@ -158,6 +167,11 @@ export async function settlePage(
       const seqs = `{${parts.updates.map((u) => u.seq).join(",")}}`;
       await tx.delete(pageUpdates).where(sql`${pageUpdates.seq} = any(${seqs}::bigint[])`);
     }
+    const [page] = await tx
+      .select({ projectId: pages.projectId })
+      .from(pages)
+      .where(eq(pages.id, pageId));
+    if (page) await placeFiles(tx, filesOf(json), { projectId: page.projectId, pageId });
     await cutVersion(tx, ctx, pageId, state, reason);
     const known = new Set(before?.mentions ?? []);
     const fresh = mentions.filter((id) => !known.has(id) && id !== ctx.userId);

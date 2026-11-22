@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0 — 2026-11-22
+
+Files: every project has a list of what was shared in it, from its pages and its
+conversations, with who shared it and a link to where it belongs. Files dropped
+there are shared in the project's channel, and ⌘K finds a file by its name
+(ADR 0016).
+
 ## 1.3.0 — 2026-11-06
 
 In the demo, Anna writes a line on the plan with her own cursor the first time

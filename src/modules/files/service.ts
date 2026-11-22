@@ -10,10 +10,16 @@ export const MAX_WORKSPACE_FILE_BYTES = 2 * 1024 * 1024 * 1024;
 export const MAX_DEMO_FILE_BYTES = 10 * 1024 * 1024;
 
 /** Raster images a browser may draw in place. SVG can carry script: it downloads. */
-const INLINE = new Set(["image/png", "image/jpeg", "image/gif", "image/webp", "image/avif"]);
+export const INLINE_MIMES: ReadonlySet<string> = new Set([
+  "image/png",
+  "image/jpeg",
+  "image/gif",
+  "image/webp",
+  "image/avif",
+]);
 
 export function mayShowInline(mime: string): boolean {
-  return INLINE.has(mime);
+  return INLINE_MIMES.has(mime);
 }
 
 export async function storeFile(

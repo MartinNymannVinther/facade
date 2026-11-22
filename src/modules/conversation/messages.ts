@@ -11,6 +11,7 @@ import {
   users,
 } from "@/core/db/schema";
 import { withOrgContext, type AppTransaction, type OrgContext } from "@/core/db/tenant";
+import { placeFiles } from "@/modules/files/places";
 import { publish, publishToUser } from "@/modules/live/hub";
 import { mentionIds, REACTIONS, type MessageView } from "./view";
 
@@ -192,6 +193,11 @@ export async function sendMessage(
         attachments,
       })
       .returning({ id: messages.id });
+    await placeFiles(tx, input.fileIds, {
+      projectId: channel.projectId,
+      pageId: channel.pageId,
+      messageId: row!.id,
+    });
 
     // On a page, everybody who has spoken there hears the next word.
     const followers =
