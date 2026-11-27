@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, Ellipsis, FileText, Plus } from "lucide-react";
+import { ChevronRight, Ellipsis, FileText, Paperclip, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -194,9 +194,33 @@ export function PageTree({
     );
   }
 
+  // The project's files sit first under it, where a person looks for them.
+  const filesHref = `/projects/${projectId}/files`;
+  const filesActive = pathname === filesHref;
   return (
     <>
-      <ul>{childrenOf(null).map((node) => row(node, 1))}</ul>
+      <ul>
+        <li>
+          <Link
+            href={filesHref}
+            onClick={onNavigate}
+            aria-current={filesActive ? "page" : undefined}
+            style={{ paddingLeft: 4 + 14 }}
+            className={cn(
+              ROW,
+              "gap-1.5",
+              filesActive
+                ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+                : "hover:bg-sidebar-hover",
+            )}
+          >
+            <span aria-hidden className="size-6 shrink-0" />
+            <Paperclip aria-hidden className="text-meta size-3.5 shrink-0" />
+            <span className="truncate">{t("files")}</span>
+          </Link>
+        </li>
+        {childrenOf(null).map((node) => row(node, 1))}
+      </ul>
       {moving && <MovePageDialog page={moving} onClose={() => setMoving(null)} />}
     </>
   );

@@ -618,7 +618,8 @@
     "cannotMove": "The page cannot be moved there.",
     "generalChannel": "general",
     "settings": "Settings",
-    "agent": "agent"
+    "agent": "agent",
+    "files": "Files"
   },
   "home": {
     "title": "Home",
@@ -663,7 +664,8 @@
     "reason": {
       "restore": "before a restore",
       "ai": "before an AI change"
-    }
+    },
+    "projectFiles": "Files in the project"
   },
   "editor": {
     "label": "Page content",

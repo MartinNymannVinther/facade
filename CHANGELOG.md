@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.1 — 2026-11-27
+
+A project's files are easier to find: Files is the first row under every
+project in the menu, and a page's menu (⋯) opens the files of its project.
+
 ## 1.4.0 — 2026-11-22
 
 Files: every project has a list of what was shared in it, from its pages and its

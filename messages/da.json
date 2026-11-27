@@ -618,7 +618,8 @@
     "cannotMove": "Siden kan ikke flyttes dertil.",
     "generalChannel": "generelt",
     "settings": "Indstillinger",
-    "agent": "agent"
+    "agent": "agent",
+    "files": "Filer"
   },
   "home": {
     "title": "Hjem",
@@ -663,7 +664,8 @@
     "reason": {
       "restore": "før gendannelse",
       "ai": "før AI-ændring"
-    }
+    },
+    "projectFiles": "Filer i projektet"
   },
   "editor": {
     "label": "Sidens indhold",

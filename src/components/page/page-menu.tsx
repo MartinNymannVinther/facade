@@ -43,6 +43,9 @@ export function PageMenu({
         <Ellipsis aria-hidden className="size-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
+        <DropdownMenuItem onClick={() => router.push(`/projects/${projectId}/files`)}>
+          {t("projectFiles")}
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={onMove}>{tNav("move")}</DropdownMenuItem>
         <DropdownMenuItem render={<a href={`/api/pages/${pageId}/markdown`} download />}>
           {t("downloadMarkdown")}
